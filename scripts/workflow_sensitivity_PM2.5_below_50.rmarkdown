@@ -1,0 +1,1757 @@
+---
+title: "Sensitivity analysis of workflow with SPS30 readings below 50 ug/m3 and above 5 ug/m3"
+author: "Asbjørn Kloppenborg"
+format: html
+editor: visual
+---
+
+
+
+This workflow quarto document is for the study regarding validation of the ARMIE sensor node.
+
+
+
+```{r, setup}
+#| echo: false
+#| message: false
+#| warning: false
+library(here)
+library(rprojroot)
+library(tidyverse)
+library(gt)
+library(patchwork)
+
+root <- rprojroot::find_root(rprojroot::is_rstudio_project)
+knitr::opts_knit$set(root.dir = here::here())
+
+source(here("scripts", "functions_main_analysis.R"))
+
+# Load merged dataset
+load(here::here("clean_data", "all_data_main_analysis.rda"))
+# Find the RStudio project root
+root <- rprojroot::find_root(rprojroot::is_rstudio_project)
+
+# Add 'sensitivity' as a subdirectory of the project root
+sensitivity_root <- file.path(root, "sensitivity")
+
+# Set the knitting root directory to the 'sensitivity' folder
+knitr::opts_knit$set(root.dir = sensitivity_root)
+
+# Save intermediate figures in a known location
+knitr::opts_chunk$set(fig.path = "figures/")
+
+#exclude all data with SPS30 reading > 50 ug/m3 and < 5 ug/m3
+
+test <- all_data |> filter((PM1_SMPS_SPS30 + PM25_APS_valid) <= 50 & (PM1_SMPS_SPS30 + PM25_APS_valid) >= 5) |> mutate(
+  Pm25_ref = PM1_SMPS_SPS30 + PM25_APS_valid
+)
+```
+
+```{r}
+#| label: make-reference SMPS + APS and raw SPS30
+#| fig-cap: "Reference PM2.5 is constructed as PM1_SMPS + PM2.5_APS_valid (µg/m³)."
+all_data_ref <- make_reference_pm25(
+  all_data,
+  ref_col = "PM2.5_ref",
+  ref_measurements = PM1_SMPS_SPS30 + PM25_APS_valid,
+  reference = "SMPS + APS"
+)
+
+all_data_ref |> group_by(source) |> summarise(min = min(PM2.5_ref), max = max(PM2.5_ref), mean = mean(PM2.5_ref), median = median(PM2.5_ref), n = n())
+
+```
+
+```{r}
+
+#| label: prepare SMPS + APS and raw SPS30
+#| fig-cap: "Data preparation and log-transform scaffolding."
+dat <- prepare_for_modeling(all_data_ref, ref_col = "PM2.5_ref")
+
+# Quick glimpse
+dplyr::glimpse(dat)
+
+```
+
+```{r}
+#| label: loso-sensor SMPS + APS and raw SPS30
+#| fig-cap: "Leave-one-sensor-out: per-sensor performance."
+loso_sens_SMPS_APS_raw <- loso_by_sensor(dat, ref_col = "PM2.5_ref", method = "raw")
+loso_sens_SMPS_APS_raw$per_sensor %>% arrange(desc(R))
+loso_sens_SMPS_APS_raw$per_sensor
+
+```
+
+```{r}
+#| label: loso-sensor-plots SMPS + APS and raw SPS30
+#| fig-cap: "Pred vs ref scatter, residuals vs RH, and log-scale Bland–Altman for all LOSO predictions."
+p_scatter <- plot_scatter(loso_sens_SMPS_APS_raw$predictions,
+                                 ref_col = "PM2.5_ref", pred_col = "PM2.5_pred",
+                                 title = "LOSO by Sensor: Calibrated SPS30 vs Reference (log-log)",
+                          facet_factor = "holdout_sensor")
+
+p_resid <- plot_residuals_vs_rh(loso_sens_SMPS_APS_raw$predictions,
+                                ref_col = "PM2.5_ref", pred_col = "PM2.5_pred",
+                                title = "LOSO by Sensor: Residuals vs RH",
+                                facet_factor = "holdout_sensor") # Sensor 145 did not have the external RH sensor working
+
+p_ba <- plot_bland_altman(loso_sens_SMPS_APS_raw$predictions,
+                              ref_col = "PM2.5_ref", pred_col = "PM2.5_pred",
+                              title = "LOSO by Sensor: Bland–Altman ",
+                          facet_factor = "holdout_sensor")
+
+p_scatter
+p_resid
+p_ba
+
+```
+
+```{r}
+#| label: loso-source SMPS + APS and raw SPS30
+#| fig-cap: "Leave-one-source-out: per-source performance."
+loso_src_SMPS_APS_raw <- loso_by_source(dat, ref_col = "PM2.5_ref", method = "raw")
+loso_src_SMPS_APS_raw$per_source %>% arrange(desc(R))
+```
+
+```{r}
+#| label: loso-source-plots SMPS + APS and raw SPS30
+#| fig-cap: "Pred vs ref scatter, residuals vs RH, and log-scale Bland–Altman for all LOSO predictions."
+p_scatter_src <- plot_scatter(loso_src_SMPS_APS_raw$predictions,
+                                     ref_col = "PM2.5_ref", pred_col = "PM2.5_pred",
+                                     title = "LOSO by Source: Calibrated SPS30 vs Reference",
+                              facet_factor = "source")
+
+p_resid_src <- plot_residuals_vs_rh(loso_src_SMPS_APS_raw$predictions,
+                                    ref_col = "PM2.5_ref", pred_col = "PM2.5_pred",
+                                    title = "LOSO by Source: Residuals vs RH",
+                                    facet_factor = "source")
+
+p_ba_src <- plot_bland_altman(loso_src_SMPS_APS_raw$predictions,
+                                  ref_col = "PM2.5_ref", pred_col = "PM2.5_pred",
+                                  title = "LOSO by Source: Bland–Altman",
+                              facet_factor = "source")
+
+p_scatter_src
+p_resid_src
+p_ba_src
+
+```
+
+```{r}
+#| label: summary-tables SMPS + APS and raw SPS30
+#| tbl-cap: "Performance summaries across LOSO schemes."
+loso_sens_SMPS_APS_raw$per_sensor %>%
+ select(holdout_sensor, n, R, R2, MAE, RMSE, cv,
+        MeanError, MeanErrorPct, mean_ref, LoA_Low, LoA_High) %>%
+  arrange(holdout_sensor)
+
+loso_src_SMPS_APS_raw$per_source %>%
+  select(holdout_source, n, R, R2, MAE, RMSE, cv,
+        MeanError, MeanErrorPct, mean_ref, LoA_Low, LoA_High) %>%
+  arrange(holdout_source)
+
+```
+
+
+
+########### 
+
+This section uses data from the SMPS and APS as reference, as these are the most accurate instruments available in the chamber. And calibrated measurements from the SPS30. The SMPS is truncated to include bins \>0.3 um. This is done to align the measurements to the claim arange for the SPS30.
+
+
+
+```{r}
+# all_data_reference |>
+#   mutate(source_day = paste(source, as.Date(timestamp_rounded_1min))) |>
+#   ggplot() +
+#   geom_line(aes(x = timestamp_rounded_1min, y = (PM1_SMPS_SPS30 + PM25_APS_valid), color = "PM2.5")) +
+#   facet_wrap(~source_day, scales = "free") +
+#   labs(
+#     title = "PM2.5 APS Valid and SMPS (>0.3 um) Over Time by Source",
+#     x = "Time since start",
+#     y = "PM2.5 (µg/m³)"
+#   ) +
+#   theme_minimal()
+# 
+
+```
+
+```{r}
+#| label: make-reference SMPS + APS and calibrated SPS30
+#| fig-cap: "Reference PM2.5 is constructed as PM1_SMPS + PM2.5_APS_valid (µg/m³)."
+all_data_ref <- make_reference_pm25(
+  all_data,
+  ref_col = "PM2.5_ref",
+  ref_measurements = PM1_SMPS_SPS30 + PM25_APS_valid,
+  reference = "SMPS + APS"
+)
+
+
+all_data_ref |> group_by(source) |> summarise(min = min(PM2.5_ref), max = max(PM2.5_ref), mean = mean(PM2.5_ref), median = median(PM2.5_ref), n = n())
+
+```
+
+```{r}
+
+#| label: prepare SMPS + APS and calibrated SPS30
+#| fig-cap: "Data preparation and log-transform scaffolding."
+
+dat <- prepare_for_modeling(all_data_ref, ref_col = "PM2.5_ref")
+
+# Quick glimpse
+dplyr::glimpse(dat)
+
+```
+
+```{r}
+#| label: loso-sensor SMPS + APS and calibrated SPS30
+#| fig-cap: "Leave-one-sensor-out: per-sensor performance."
+loso_sens_SMPS_APS_lm <- loso_by_sensor(dat, ref_col = "PM2.5_ref", method = "lm")
+loso_sens_SMPS_APS_lm$per_sensor %>% arrange(desc(n))
+
+```
+
+```{r}
+#| label: loso-sensor-plots SMPS + APS and calibrated SPS30
+#| fig-cap: "Pred vs ref scatter, residuals vs RH, and log-scale Bland–Altman for all LOSO predictions."
+p_scatter <- plot_scatter(loso_sens_SMPS_APS_lm$predictions,
+                                 ref_col = "PM2.5_ref", pred_col = "PM2.5_pred",
+                                 title = "LOSO by Sensor: Calibrated SPS30 vs Reference (log-log)",
+                          facet_factor = "holdout_sensor")
+
+p_resid <- plot_residuals_vs_rh(loso_sens_SMPS_APS_lm$predictions,
+                                ref_col = "PM2.5_ref", pred_col = "PM2.5_pred",
+                                title = "LOSO by Sensor: Residuals vs RH",
+                                facet_factor = "holdout_sensor") # Sensor 145 did not have the external RH sensor working
+
+p_ba <- plot_bland_altman(loso_sens_SMPS_APS_lm$predictions,
+                              ref_col = "PM2.5_ref", pred_col = "PM2.5_pred",
+                              title = "LOSO by Sensor: Bland–Altman ",
+                          facet_factor = "holdout_sensor")
+
+p_scatter
+p_resid
+p_ba
+
+```
+
+```{r}
+#| label: loso-source SMPS + APS and calibrated SPS30
+#| fig-cap: "Leave-one-source-out: per-source performance."
+loso_src_SMPS_APS_lm <- loso_by_source(dat, ref_col = "PM2.5_ref", method = "lm")
+loso_src_SMPS_APS_lm$per_source %>% arrange(desc(n))
+```
+
+```{r,}
+#| label: loso-source-plots SMPS + APS and calibrated SPS30
+#| fig-cap: "Pred vs ref scatter, residuals vs RH, and log-scale Bland–Altman for all LOSO predictions."
+p_scatter_src <- plot_scatter(loso_src_SMPS_APS_lm$predictions,
+                                     ref_col = "PM2.5_ref", pred_col = "PM2.5_pred",
+                                     title = "LOSO by Source: Calibrated SPS30 vs Reference",
+                              facet_factor = "source")
+
+p_resid_src <- plot_residuals_vs_rh(loso_src_SMPS_APS_lm$predictions,
+                                    ref_col = "PM2.5_ref", pred_col = "PM2.5_pred",
+                                    title = "LOSO by Source: Residuals vs RH",
+                                    facet_factor = "source")
+
+p_ba_src <- plot_bland_altman(loso_src_SMPS_APS_lm$predictions,
+                                  ref_col = "PM2.5_ref", pred_col = "PM2.5_pred",
+                                  title = "LOSO by Source: Bland–Altman",
+                              facet_factor = "source")
+
+p_scatter_src
+p_resid_src
+p_ba_src
+
+```
+
+```{r, summary-tables SMPS + APS and calibrated SPS30}
+#| tbl-cap: "Performance summaries across LOSO schemes."
+loso_sens_SMPS_APS_lm$per_sensor %>%
+          select(holdout_sensor,n, R, R2, MAE, RMSE, cv,
+        MeanError, MeanErrorPct, mean_ref, LoA_Low, LoA_High) %>%
+  arrange(holdout_sensor)
+
+loso_src_SMPS_APS_lm$per_source %>%
+   select(holdout_source, n, R, R2, MAE, RMSE, cv,
+        MeanError, MeanErrorPct, mean_ref, LoA_Low, LoA_High) %>%
+  arrange(holdout_source)
+
+```
+
+
+
+# This section uses the data from the Dusttrak as reference. And raw measurements from the SPS30.
+
+
+
+```{r, initial plotting dusttrak}
+# all_data_reference |>
+#   mutate(source_day = paste(source, as.Date(timestamp_rounded_1min))) |>
+#   ggplot() +
+#   geom_line(aes(x = timestamp_rounded_1min, y = (PM25_dusttrak * 1000), color = "PM2.5")) +
+#   facet_wrap(~source_day, scales = "free") +
+#   labs(
+#     title = "PM2.5 Dusttrak Over Time by Source",
+#     x = "Time since start",
+#     y = "PM2.5 (µg/m³)"
+#   ) +
+#   theme_minimal()
+
+
+```
+
+```{r, make-reference dusttrak and raw SPS30}
+#| fig-cap: "Reference PM2.5 is constructed as Dusttrak (µg/m³)."
+all_data_ref <- make_reference_pm25(all_data, ref_col = "PM2.5_ref", 
+                                    ref_measurements = PM25_dusttrak * 1000,  # Dusttrak is in mg/m3, convert to ug/m3
+                                    reference = "Dusttrak")
+
+all_data_ref |> group_by(source) |> summarise(min = min(PM2.5_ref), max = max(PM2.5_ref), mean = mean(PM2.5_ref), median = median(PM2.5_ref), n = n())
+
+```
+
+```{r}
+
+#| label: prepare dusttrak and raw SPS30
+#| fig-cap: "Data preparation and log-transform scaffolding."
+dat <- prepare_for_modeling(all_data_ref, ref_col = "PM2.5_ref")
+
+# Quick glimpse
+dplyr::glimpse(dat)
+
+```
+
+```{r}
+#| label: loso-sensor dusttrak and raw SPS30
+#| fig-cap: "Leave-one-sensor-out: per-sensor performance."
+loso_sens_dusttrak_raw <- loso_by_sensor(dat, ref_col = "PM2.5_ref", method = "raw")
+loso_sens_dusttrak_raw$per_sensor %>% arrange(desc(n))
+
+```
+
+```{r}
+#| label: loso-sensor-plots dusttrak and raw SPS30
+#| fig-cap: "Pred vs ref scatter, residuals vs RH, and log-scale Bland–Altman for all LOSO predictions."
+p_scatter <- plot_scatter(loso_sens_dusttrak_raw$predictions,
+                                 ref_col = "PM2.5_ref", pred_col = "PM2.5_pred",
+                                 title = "LOSO by Sensor: Calibrated SPS30 vs Reference (log-log)",
+                          facet_factor = "holdout_sensor")
+
+p_resid <- plot_residuals_vs_rh(loso_sens_dusttrak_raw$predictions,
+                                ref_col = "PM2.5_ref", pred_col = "PM2.5_pred",
+                                title = "LOSO by Sensor: Residuals vs RH",
+                                facet_factor = "holdout_sensor") # Sensor 145 did not have the external RH sensor working
+
+p_ba <- plot_bland_altman(loso_sens_dusttrak_raw$predictions,
+                              ref_col = "PM2.5_ref", pred_col = "PM2.5_pred",
+                              title = "LOSO by Sensor: Bland–Altman ",
+                          facet_factor = "holdout_sensor")
+
+p_scatter
+p_resid
+p_ba
+
+```
+
+```{r}
+#| label: loso-source dusttrak and raw SPS30
+#| fig-cap: "Leave-one-source-out: per-source performance."
+loso_src_dusttrak_raw <- loso_by_source(dat, ref_col = "PM2.5_ref", method = "raw")
+loso_src_dusttrak_raw$per_source %>% arrange(desc(n))
+```
+
+```{r}
+#| label: loso-source-plots and raw SPS30
+#| fig-cap: "Pred vs ref scatter, residuals vs RH, and log-scale Bland–Altman for all LOSO predictions."
+p_scatter_src <- plot_scatter(loso_src_dusttrak_raw$predictions,
+                                     ref_col = "PM2.5_ref", pred_col = "PM2.5_pred",
+                                     title = "LOSO by Source: Calibrated SPS30 vs Reference",
+                              facet_factor = "source")
+
+p_resid_src <- plot_residuals_vs_rh(loso_src_dusttrak_raw$predictions,
+                                    ref_col = "PM2.5_ref", pred_col = "PM2.5_pred",
+                                    title = "LOSO by Source: Residuals vs RH",
+                                    facet_factor = "source")
+
+p_ba_src <- plot_bland_altman(loso_src_dusttrak_raw$predictions,
+                                  ref_col = "PM2.5_ref", pred_col = "PM2.5_pred",
+                                  title = "LOSO by Source: Bland–Altman",
+                              facet_factor = "source")
+
+p_scatter_src
+p_resid_src
+p_ba_src
+
+```
+
+```{r}
+#| label: summary-tables dusttrak and raw SPS30
+#| tbl-cap: "Performance summaries across LOSO schemes."
+loso_sens_dusttrak_raw$per_sensor %>%
+  select(holdout_sensor, n, R, R2, MAE, RMSE, cv,
+        MeanError, MeanErrorPct, mean_ref, LoA_Low, LoA_High) %>%
+  arrange(holdout_sensor)
+
+loso_src_dusttrak_raw$per_source %>%
+   select(holdout_source, n, R, R2, MAE, RMSE, cv,
+        MeanError, MeanErrorPct, mean_ref, LoA_Low, LoA_High) %>%
+  arrange(holdout_source)
+
+```
+
+
+
+# This section uses the data from the Dusttrak as reference. And calibrated measurements from the SPS30.
+
+
+
+```{r}
+#| label: make-reference dusttrak and calibrated SPS30
+#| fig-cap: "Reference PM2.5 is constructed as Dusttrak (µg/m³)."
+all_data_ref <- make_reference_pm25(all_data, ref_col = "PM2.5_ref", 
+                                    ref_measurements = PM25_dusttrak * 1000,  # Dusttrak is in mg/m3, convert to ug/m3
+                                    reference = "Dusttrak")
+
+all_data_ref |> group_by(source) |> summarise(min = min(PM2.5_ref), max = max(PM2.5_ref), mean = mean(PM2.5_ref), median = median(PM2.5_ref), n = n())
+
+```
+
+```{r}
+
+#| label: prepare dusttrak and calibrated SPS30
+#| fig-cap: "Data preparation and log-transform scaffolding."
+dat <- prepare_for_modeling(all_data_ref, ref_col = "PM2.5_ref")
+
+# Quick glimpse
+dplyr::glimpse(dat)
+
+```
+
+```{r}
+#| label: loso-sensor dusttrak and calibrated SPS30
+#| fig-cap: "Leave-one-sensor-out: per-sensor performance."
+loso_sens_dusttrak_lm <- loso_by_sensor(dat, ref_col = "PM2.5_ref", method = "lm")
+loso_sens_dusttrak_lm$per_sensor %>% arrange(desc(n))
+
+```
+
+```{r}
+#| label: loso-sensor-plots dusttrak and calibrated SPS30
+#| fig-cap: "Pred vs ref scatter, residuals vs RH, and log-scale Bland–Altman for all LOSO predictions."
+p_scatter <- plot_scatter(loso_sens_dusttrak_lm$predictions,
+                                 ref_col = "PM2.5_ref", pred_col = "PM2.5_pred",
+                                 title = "LOSO by Sensor: Calibrated SPS30 vs Reference (log-log)",
+                          facet_factor = "holdout_sensor")
+
+p_resid <- plot_residuals_vs_rh(loso_sens_dusttrak_lm$predictions,
+                                ref_col = "PM2.5_ref", pred_col = "PM2.5_pred",
+                                title = "LOSO by Sensor: Residuals vs RH",
+                                facet_factor = "holdout_sensor") # Sensor 145 did not have the external RH sensor working
+
+p_ba <- plot_bland_altman(loso_sens_dusttrak_lm$predictions,
+                              ref_col = "PM2.5_ref", pred_col = "PM2.5_pred",
+                              title = "LOSO by Sensor: Bland–Altman ",
+                          facet_factor = "holdout_sensor")
+
+p_scatter
+p_resid
+p_ba
+
+```
+
+```{r}
+#| label: loso-source dusttrak and calibrated SPS30
+#| fig-cap: "Leave-one-source-out: per-source performance."
+loso_src_dusttrak_lm <- loso_by_source(dat, ref_col = "PM2.5_ref", method = "lm")
+loso_src_dusttrak_lm$per_source %>% arrange(desc(n))
+```
+
+```{r}
+#| label: loso-source-plots dusttrak and calibrated SPS30
+#| fig-cap: "Pred vs ref scatter, residuals vs RH, and log-scale Bland–Altman for all LOSO predictions."
+p_scatter_src <- plot_scatter(loso_src_dusttrak_lm$predictions,
+                                     ref_col = "PM2.5_ref", pred_col = "PM2.5_pred",
+                                     title = "LOSO by Source: Calibrated SPS30 vs Reference",
+                              facet_factor = "source")
+
+p_resid_src <- plot_residuals_vs_rh(loso_src_dusttrak_lm$predictions,
+                                    ref_col = "PM2.5_ref", pred_col = "PM2.5_pred",
+                                    title = "LOSO by Source: Residuals vs RH",
+                                    facet_factor = "source")
+
+p_ba_src <- plot_bland_altman(loso_src_dusttrak_lm$predictions,
+                                  ref_col = "PM2.5_ref", pred_col = "PM2.5_pred",
+                                  title = "LOSO by Source: Bland–Altman",
+                              facet_factor = "source")
+
+p_scatter_src
+p_resid_src
+p_ba_src
+
+```
+
+```{r}
+#| label: summary-tables dusttrak and calibrated SPS30
+#| tbl-cap: "Performance summaries across LOSO schemes."
+loso_sens_dusttrak_lm$per_sensor %>%
+   select(holdout_sensor, n, R, R2, MAE, RMSE, cv,
+        MeanError, MeanErrorPct, mean_ref, LoA_Low, LoA_High) %>%
+  arrange(holdout_sensor)
+
+loso_src_dusttrak_lm$per_source %>%
+  select(holdout_source, n, R, R2, MAE, RMSE, cv,
+        MeanError, MeanErrorPct, mean_ref, LoA_Low, LoA_High) %>%
+  arrange(holdout_source)
+
+```
+
+
+
+#Prepare data before plotting figure 1
+
+
+
+```{r, prepare figure 1}
+
+figure1_long <- all_data |> select(timestamp_rounded_5min, source, sensor, SPS30_PM2.5, PM25_dusttrak, PM1_SMPS_SPS30, PM25_APS_valid) %>%
+  mutate(
+    SMPS_APS = PM1_SMPS_SPS30 + PM25_APS_valid,
+    Dusttrak = PM25_dusttrak * 1000
+  ) %>%
+  pivot_longer(
+    cols = c(Dusttrak, SMPS_APS),
+    names_to = "instrument",
+    values_to = "PM25"
+  ) %>%
+  mutate(
+    instrument = case_when(
+      instrument == "SPS30_PM2.5" ~paste("Sensor", sensor),
+      TRUE ~ instrument
+    ),
+    instrument = factor(instrument),
+    instrument = fct_recode(
+      instrument,
+      "SMPS + APS" = "SMPS_APS",
+      "DustTrak"   = "Dusttrak"
+    ),
+    instrument = fct_relevel(
+      instrument,
+      "SMPS + APS",
+      "DustTrak"
+    ),
+    source = factor(source),
+    source = fct_recode(
+      source,
+      "Candles" = "candles",
+      "Candles High RH"   = "candles_high_RH",
+      "Cigarette Smoke" = "cigarette",
+      "Clean Air" = "clean_air",
+      "Cooking" = "cooking",
+      "Cooking High RH" = "cooking_high_RH")
+  )
+```
+
+
+
+#Plot figure 1
+
+
+
+```{r, figure 1}
+
+#| label: figure1
+#| # Make sure folder exists
+if (!dir.exists("plots")) dir.create("plots")
+# Make sure folder exists
+if (!dir.exists("plots/supplementary")) dir.create("plots/supplementary")
+
+figure1_long_elapsed <- figure1_long %>%
+  group_by(source) %>%
+  arrange(timestamp_rounded_5min, .by_group = TRUE) %>%
+  mutate(
+    elapsed_min = as.numeric(difftime(timestamp_rounded_5min, 
+                                      first(timestamp_rounded_5min), 
+                                      units = "mins"))
+  ) %>%
+  ungroup()
+
+figure1 <- ggplot(
+  figure1_long_elapsed,
+  aes(x = elapsed_min, y = PM25, group = instrument, color = instrument, 
+      alpha = instrument, linewidth = instrument)) +  
+  geom_line() +
+  # ylim(0, 750) +
+  facet_wrap(~source, scales = "free") +
+  theme_minimal() +
+  labs(
+    # title = "PM2.5 concentrations over time (elapsed minutes per source)",
+    x = "Elapsed time (minutes)",
+    y = "PM2.5 (µg/m³)",
+    color = "Instrument"
+  ) +
+  scale_color_manual(values = c(
+    "DustTrak" = "#E69F00",
+    "SMPS + APS" = "#56B4E9"
+    # "Sensor 1" = "grey70",
+    # "Sensor 2" = "grey70",
+    # "Sensor 3" = "grey70",
+    # "Sensor 4" = "grey70",
+    # "Sensor 5" = "grey70",
+    # "Sensor 6" = "grey70",
+    # "Sensor 7" = "grey70",
+    # "Sensor 8" = "grey70",
+    # "Sensor 9" = "grey70"
+  )) +
+  scale_alpha_manual(values = c(
+    "DustTrak" = 1,
+    "SMPS + APS" = 1
+    # "Sensor 1" = 0.3,
+    # "Sensor 2" = 0.3,
+    # "Sensor 3" = 0.3,
+    # "Sensor 4" = 0.3,
+    # "Sensor 5" = 0.3,
+    # "Sensor 6" = 0.3,
+    # "Sensor 7" = 0.3,
+    # "Sensor 8" = 0.3,
+    # "Sensor 9" = 0.3
+  )) +
+  scale_linewidth_manual(values = c(
+    "DustTrak" = 1,
+    "SMPS + APS" = 1
+    # "Sensor 1" = 0.3,
+    # "Sensor 2" = 0.3,
+    # "Sensor 3" = 0.3,
+    # "Sensor 4" = 0.3,
+    # "Sensor 5" = 0.3,
+    # "Sensor 6" = 0.3,
+    # "Sensor 7" = 0.3,
+    # "Sensor 8" = 0.3,
+    # "Sensor 9" = 0.3
+  )) +
+  guides(alpha = "none", linewidth = "none")
+
+
+#Print figure 1
+figure1
+
+#save figure 1
+ggsave("plots/figure1.png", plot = figure1, width = 8, height = 6, dpi = 600, bg = "white")
+```
+
+
+
+
+#Prepare data before plotting using data from the LOSO by sensor analyses
+
+
+```{r, prepare data with loso by sensor}
+loso_sens_SMPS_APS_raw_figure2 <- loso_sens_SMPS_APS_raw$predictions |> 
+  mutate(method = "Uncalibrated",
+          reference = "SMPS + APS")
+
+loso_sens_SMPS_APS_lm_figure2 <- loso_sens_SMPS_APS_lm$predictions |>
+  mutate(method = "Calibrated",
+         reference = "SMPS + APS")
+
+loso_sens_dusttrak_raw_figure2 <- loso_sens_dusttrak_raw$predictions |>
+  mutate(method = "Uncalibrated",
+         reference = "Dusttrak")
+
+loso_sens_dusttrak_lm_figure2 <- loso_sens_dusttrak_lm$predictions |>
+  mutate(method = "Calibrated",
+         reference = "Dusttrak")
+
+by_sensor_data <- bind_rows(
+  loso_sens_SMPS_APS_raw_figure2,
+  loso_sens_SMPS_APS_lm_figure2,
+  loso_sens_dusttrak_raw_figure2,
+  loso_sens_dusttrak_lm_figure2
+) |> mutate(
+  error = PM2.5_pred - PM2.5_ref,
+  relative_error = error / PM2.5_ref * 100,
+  source = factor(source),
+  source = fct_recode(
+      source,
+      "Candles" = "candles",
+      "Candles\nHigh RH"   = "candles_high_RH",
+      "Cigarette\nSmoke" = "cigarette",
+      "Clean Air" = "clean_air",
+      "Cooking" = "cooking",
+      "Cooking\nHigh RH" = "cooking_high_RH"),
+  reference = factor(reference),
+  reference = fct_recode(
+    reference,
+    "SMPS + APS" = "SMPS + APS",
+    "DustTrak" = "Dusttrak"
+  )
+)
+```
+
+
+
+# Scatter plots with SPS30 PM2.5 readings and comparision instruments (For supplementary)
+
+
+
+```{r, figure 2 fixed axis with loso by sensor}
+# Make sure folder exists
+if (!dir.exists("plots")) dir.create("plots")
+
+p_uncal_AE <- by_sensor_data |>
+  filter(method == "Uncalibrated") |>
+  ggplot(aes(x = PM2.5_ref, y = PM2.5_pred, color = reference)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", se = TRUE, fullrange = TRUE) +
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "red") +
+  ylim(0, 350) +
+  xlim(0, 850) +
+  facet_wrap( ~ source) +
+  labs(
+    title = "SPS30 vs Reference PM2.5 Concentrations",
+    subtitle = "Uncalibrated values from the SPS30 sensor",
+    x = "Reference PM2.5 (µg/m³)",
+    y = "SPS30 PM2.5 (µg/m³)",
+    color = "Comparison"
+  ) +
+  theme(legend.position = "bottom",           
+    legend.box = "horizontal" ) +
+  scale_color_manual(values = c(
+    "DustTrak" = "#E69F00",
+    "SMPS + APS" = "#56B4E9"))
+
+p_cal_AE <- by_sensor_data |>
+  filter(method == "Calibrated") |>
+  ggplot(aes(x = PM2.5_ref, y = PM2.5_pred, color = reference)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", se = TRUE,  fullrange = TRUE) +
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "red") +
+  ylim(0, 350) +
+  xlim(0, 850) +
+  facet_wrap(~source) +
+  labs(
+    title = "SPS30 vs Reference PM2.5 Concentrations",
+    subtitle = "Calibrated values from the SPS30 sensor",
+    x = "Reference PM2.5 (µg/m³)",
+    y = "SPS30 PM2.5 (µg/m³)",
+    color = "Comparison"
+  ) +
+  theme(legend.position = "bottom",           
+    legend.box = "horizontal" ) +
+  scale_color_manual(values = c(
+    "DustTrak" = "#E69F00",
+    "SMPS + APS" = "#56B4E9"))
+
+p_scatter <- (p_uncal_AE | p_cal_AE) 
+
+p_scatter
+# Save them
+ggsave("plots/supplementary/scatter.png", plot = p_scatter, width = 8, height = 6, dpi = 600, bg = "white")
+
+```
+
+
+
+
+plot figure RE_scatter with relative error between SPS30 and comparison instrument (For supplementary)
+
+
+
+```{r, figure x with loso by sensor}
+p_uncal_RE <- by_sensor_data |>
+  filter(method == "Uncalibrated") |>
+  ggplot(aes(x = PM2.5_ref, y = relative_error, color = reference)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "loess", se = TRUE, fullrange = TRUE) +
+  # geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "red") +
+  ylim(0, 400) +
+  xlim(0, 300) +
+  facet_wrap(~ source) +
+  labs(
+    title = "Relative error of SPS30 vs Reference PM2.5 Concentrations",
+    subtitle = "Uncalibrated values from the SPS30 sensor",
+    x = "Reference PM2.5 (µg/m³)",
+    y = "Relative error (%)",
+    color = "Comparison"
+  ) +
+  theme(legend.position = "bottom",           
+    legend.box = "horizontal" ) +
+  scale_color_manual(values = c(
+    "DustTrak" = "#E69F00",
+    "SMPS + APS" = "#56B4E9"))
+
+p_cal_RE <- by_sensor_data |>
+  filter(method == "Calibrated") |>
+  ggplot(aes(x = PM2.5_ref, y = relative_error, color = reference)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "loess", se = TRUE,  fullrange = TRUE) +
+  # geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "red") +
+  ylim(0, 400) +
+  xlim(0, 300) +
+  facet_wrap(~ source) +
+  labs(
+    title = "Relative error of SPS30 vs Reference PM2.5 Concentrations",
+    subtitle = "Calibrated values from the SPS30 sensor",
+    x = "Reference PM2.5 (µg/m³)",
+    y = "Relative error (%)",
+    color = "Comparison"
+  ) +
+  theme(legend.position = "bottom",           
+    legend.box = "horizontal" ) +
+  scale_color_manual(values = c(
+    "DustTrak" = "#E69F00",
+    "SMPS + APS" = "#56B4E9"))
+
+p_scatter_RE <- (p_uncal_RE | p_cal_RE)
+
+p_scatter_RE
+
+# Save them
+ggsave("plots/supplementary/RE_scatter.png", plot = p_uncal_RE, width = 8, height = 6, dpi = 600, bg = "white")
+
+by_sensor_data %>%
+  filter(!is.finite(relative_error))
+
+```
+
+```{r, table sumarizing mean and sd from Bland Altman plot with loso by sensor}
+
+
+##################################################
+bland_altman_data_summarised <- by_sensor_data |>
+  filter(PM2.5_pred >=5) |> 
+  mutate(
+    PM2.5_ref = ifelse(PM2.5_ref == 0, 0.001, PM2.5_ref)  # avoid division by zero
+  ) |>
+  group_by(reference, method) |>
+  summarise(
+    # core error terms 
+    mae = mean(abs(error), na.rm = TRUE), 
+    rmse = sqrt(mean(error^2, na.rm = TRUE)), 
+    mean_error = mean(error, na.rm = TRUE), 
+    sd_error = sd(error, na.rm = TRUE), 
+
+    # relative measures
+    mean_ref = mean(PM2.5_ref, na.rm = TRUE), 
+    mean_sps30 = mean(PM2.5_pred, na.rm = TRUE), 
+    err_pct = mean(error / PM2.5_ref * 100, na.rm = TRUE), 
+
+    # correlation and variation
+    r = cor(PM2.5_pred, PM2.5_ref, use = "complete.obs"),
+    r2 = r^2,
+    cv = sd(error, na.rm = TRUE) / mean(error, na.rm = TRUE),
+
+    # limits of agreement
+    loa_low    = mean_error - 1.96 * sd_error,
+    loa_high   = mean_error + 1.96 * sd_error,
+
+    .groups = "drop"
+  )
+##############################################################
+
+# Build grouped GT table
+table_1 <- bland_altman_data_summarised  |>
+  select(reference, method, r, err_pct, mean_error, loa_low, loa_high ) |> 
+  gt(groupname_col = "Reference") |>
+  tab_header(
+    title = "Data from Bland altman plot",
+    # subtitle = "Against reference instruments (SMPS + APS, DustTrak), stratified by source type and calibration method"
+  ) |>
+  cols_label(
+    reference = "Reference",
+    method = "Method",
+    r = "Pearson's r",
+    err_pct = "Mean Relative Error (%)",
+    mean_error = "Mean Error (µg/m³)",
+    loa_low = "LoA Low (µg/m³)",
+    loa_high = "LoA High (µg/m³)"
+    # SD_Error = "SD of Error (µg/m³)"
+  ) |>
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_row_groups()
+  )
+
+# Save table as word document
+gtsave(table_1, "tables/table1.docx", overwrite = TRUE)
+
+table_1
+```
+
+
+
+
+#Bland-altman plots for main text. (Figure 2)
+
+
+```{r, Bland altman plot with per-facet stats with loso by sensor without source specific LoA by sensor data}
+bland_altman_data <- by_sensor_data |>
+  filter(PM2.5_pred >=5) |>
+  group_by(reference, method) |>
+  mutate(
+    ref_val = PM2.5_ref,
+    diff_val = error,
+    mean_diff = mean(diff_val, na.rm = TRUE),
+    sd_diff = sd(diff_val, na.rm = TRUE),
+    holdout_sensor = factor(holdout_sensor)
+  )
+
+BA_plot_uncal <- bland_altman_data |>
+  filter(method == "Uncalibrated") |>
+  ggplot(aes(x = ref_val, y = diff_val)) +
+  geom_point(alpha = 0.4) +
+  geom_smooth(method = "loess", color = "black", se = TRUE) +
+  geom_hline(aes(yintercept = mean_diff), color = "#E69F00") +
+  geom_hline(aes(yintercept = mean_diff + 1.96 * sd_diff), linetype = 3) +
+  geom_hline(aes(yintercept = mean_diff - 1.96 * sd_diff), linetype = 3) +
+  geom_hline(yintercept = 0, linetype = 2) +
+  xlim(0, 400) +
+  ylim(-200, 200) +
+  facet_wrap(~ reference) +
+  labs(
+    # title = "Bland–Altman Plot of SPS30 vs Reference PM2.5 Concentrations",
+    subtitle = "Uncalibrated",
+    x = "Reference PM2.5 (µg/m³)",
+    y = "SPS30 PM2.5 − Reference PM2.5 (µg/m³)"
+  ) +
+  theme_minimal()
+
+
+BA_plot_cal <- bland_altman_data |>
+  filter(method == "Calibrated") |>
+  ggplot(aes(x = ref_val, y = diff_val)) +
+  geom_point(alpha = 0.4) +
+  geom_smooth(method = "loess", color = "black", se = TRUE, fullrange = TRUE ) +
+  geom_hline(aes(yintercept = mean_diff), color = "#E69F00") +
+  geom_hline(aes(yintercept = mean_diff + 1.96 * sd_diff), linetype = 3) +
+  geom_hline(aes(yintercept = mean_diff - 1.96 * sd_diff), linetype = 3) +
+  geom_hline(yintercept = 0, linetype = 2) +
+  xlim(0, 400) +
+  ylim(-200, 200) +
+  facet_wrap(~reference) +
+  labs(
+    # title = "Bland–Altman Plot of SPS30 vs Reference PM2.5 Concentrations",
+    subtitle = "Calibrated",
+    x = "Reference PM2.5 (µg/m³)",
+    y = "SPS30 PM2.5 − Reference PM2.5 (µg/m³)"
+  ) +
+  theme_minimal()
+
+BA_plot <- (BA_plot_uncal | BA_plot_cal)
+
+BA_plot
+
+ggsave("plots/blandaltman_figure2.png", plot = BA_plot, width = 10, height = 6)
+
+```
+
+
+
+#Bland-altman plots for supplementary.
+These plots are faceted by source and method, with LoA and mean error calculated per source using the by_sensor data
+
+
+
+```{r, Bland altman plot with per-facet stats with loso by sensor with source specific LoA}
+bland_altman_data_spec_loa <- by_sensor_data %>% 
+  mutate(
+    ref_val = PM2.5_ref, 
+    diff_val = PM2.5_pred - PM2.5_ref)
+
+summary_stats <- bland_altman_data_spec_loa %>%
+  group_by(source, reference, method) %>% 
+  summarise(
+    mean_diff = mean(diff_val, na.rm = TRUE),
+    sd_diff   = sd(diff_val, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+bland_altman_plot_spec_loa_uncal <- bland_altman_data_spec_loa %>%
+  left_join(summary_stats, by = c("source", "reference", "method")) %>%
+  filter(method == "Uncalibrated") %>%
+  ggplot(aes(x = ref_val, y = diff_val, color = reference)) +
+    geom_point(alpha = 0.4) +
+    geom_smooth(method = "lm",  se = TRUE) +
+    geom_hline(aes(yintercept = mean_diff, color = reference), linetype = 1) +
+    geom_hline(aes(yintercept = mean_diff + 1.96 * sd_diff, color = reference), linetype = 3) +
+    geom_hline(aes(yintercept = mean_diff - 1.96 * sd_diff, color = reference), linetype = 3) +
+    geom_hline(yintercept = 0, linetype = 2) +
+  xlim(0, 400) +
+  ylim(-200, 200) +
+    facet_wrap(source ~ method) +
+    labs(
+    #   title = "Bland–Altman Plot of SPS30 vs Reference PM2.5 Concentrations",
+    #   subtitle = "Calibrated SPS30 measurements (Leave one sensor out)",
+      x = "Reference PM2.5 (µg/m³)",
+      y = "SPS30 PM2.5 − Reference PM2.5 (µg/m³)"
+    ) +
+    theme_minimal()+
+  scale_color_manual(values = c(
+    "DustTrak" = "#E69F00",
+    "SMPS + APS" = "#56B4E9"))
+
+bland_altman_plot_spec_loa_cal <- bland_altman_data_spec_loa %>%
+  left_join(summary_stats, by = c("source", "reference", "method")) %>%
+  filter(method == "Calibrated") %>%
+  ggplot(aes(x = ref_val, y = diff_val, color = reference)) +
+    geom_point(alpha = 0.4) +
+    geom_smooth(method = "lm",  se = TRUE) +
+    geom_hline(aes(yintercept = mean_diff, color = reference), linetype = 1) +
+    geom_hline(aes(yintercept = mean_diff + 1.96 * sd_diff, color = reference), linetype = 3) +
+    geom_hline(aes(yintercept = mean_diff - 1.96 * sd_diff, color = reference), linetype = 3) +
+    geom_hline(yintercept = 0, linetype = 2) +
+  xlim(0, 400) +
+  ylim(-200, 200) +
+    facet_wrap(source ~ method) +
+    labs(
+      # title = "Bland–Altman Plot of SPS30 vs Reference PM2.5 Concentrations",
+      # subtitle = "Calibrated SPS30 measurements (Leave one sensor out)",
+      x = "Reference PM2.5 (µg/m³)",
+      y = "SPS30 PM2.5 − Reference PM2.5 (µg/m³)"
+    ) +
+    theme_minimal()+
+  scale_color_manual(values = c(
+    "DustTrak" = "#E69F00",
+    "SMPS + APS" = "#56B4E9"))
+
+BA_plot_source_by_sensor <- (bland_altman_plot_spec_loa_uncal | bland_altman_plot_spec_loa_cal) + 
+  plot_layout(guides = "collect") &
+  theme(legend.position = "bottom") &
+   labs(x = "Reference PM2.5 (µg/m³)",
+        y = "SPS30 PM2.5 − Reference PM2.5 (µg/m³)"
+        )
+
+
+BA_plot_source_by_sensor
+#Save them in supplementary
+ggsave("plots/supplementary/bland_altman_source_specific_Loa_by_sensor.png", plot = BA_plot_source_by_sensor, width = 8, height = 6, dpi = 600, bg = "white")
+
+```
+
+
+
+#Plot boxplot with relative errors (Figure 3) not including clean air and non-finite relative errors
+
+
+
+```{r, boxplot with relative errors}
+# Create a variable splitting PM2.5_ref into two groups
+boxplot_data <- by_sensor_data|> filter(source != "Clean Air") |>
+  mutate(
+    PM25_group = if_else(PM2.5_pred <= 5, "PM2.5 =< 5 µg/m³", "PM2.5 > 5 µg/m³")
+  )
+
+# Combined boxplot for uncalibrated and calibrated
+p_box_RE <- boxplot_data |>
+  ggplot(aes(x = source, y = relative_error, fill = PM25_group)) +
+  geom_boxplot(outlier.alpha = 0.3) +
+  facet_wrap(reference~ method) +
+  scale_fill_manual(
+    values = c("PM2.5 =< 5 µg/m³" = "#009E73", "PM2.5 > 5 µg/m³" = "#CC79A7")
+  ) +
+  coord_cartesian(ylim = c(-200,600)) +
+  theme_minimal () + 
+  theme(axis.text.x = element_text(hjust = 0.5, vjust = 1),
+    legend.position = "bottom",           
+    legend.box = "horizontal" )+
+  labs(
+    # title = "Distribution of Relative Error by Source and PM2.5 Concentration Range",
+    # subtitle = "Comparison of uncalibrated and calibrated SPS30 measurements",
+    x = "Source type",
+    y = "Relative error (%)",
+    fill = "SPS30 PM2.5"
+  )
+
+p_box_RE
+# save the combined boxplot
+ggsave("plots/figure3_RE_boxplot_combined.png", plot = p_box_RE, width = 10, height = 8, dpi = 600, bg = "white")
+
+```
+
+
+# Supplementary table describing those points of relative error not included in the Box plot 
+
+
+
+```{r}
+table_2S_data <- by_sensor_data %>%
+  filter(source == "Clean Air" | !is.finite(relative_error)) %>%
+  arrange(source, reference, method, PM2.5_ref, PM2.5_pred) %>%
+  select(source, reference, method, sensor, timestamp_rounded_1min, PM2.5_ref, PM2.5_pred, relative_error)
+
+df <- table_2S_data |> count(source, reference, method)
+
+
+table_2S <- df |>
+  arrange(source, reference, method) |>
+  gt(groupname_col = "source") |>
+  tab_header(
+    title = "Number of Observations Excluded or in 'Clean Air' Category",
+    subtitle = "Grouped by comparison instrument and calibration method"
+  ) |>
+  cols_label(
+    reference = "Comparison",
+    method    = "Method",
+    n         = "Number of Observations"
+  ) |>
+  fmt_number(
+    columns = n,
+    decimals = 0,
+    use_seps = TRUE
+  ) |>
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_row_groups()
+  )
+
+table_2S
+
+gtsave(table_2S, "tables/supplementary/table_2S.docx")
+```
+
+
+
+#Boxplot with relative errors including clean air for supplementary
+
+
+
+```{r, boxplot with relative errors including clean air for supplementary}
+# Create a variable splitting PM2.5_ref into two groups
+boxplot_data <- by_sensor_data |>
+  mutate(
+    PM25_group = if_else(PM2.5_pred <= 5, "PM2.5 =< 5 µg/m³", "PM2.5 > 5 µg/m³")
+  )
+
+# Combined boxplot for uncalibrated and calibrated
+p_box_RE_sup <- boxplot_data |>
+  ggplot(aes(x = source, y = relative_error, fill = PM25_group)) +
+  geom_boxplot(outlier.alpha = 0.3) +
+  facet_wrap(reference~ method) +
+  scale_fill_manual(
+    values = c("PM2.5 =< 5 µg/m³" = "#009E73", "PM2.5 > 5 µg/m³" = "#CC79A7")
+  ) +
+  coord_cartesian(ylim = c(-200, 600)) +
+  theme_minimal () + 
+  theme(axis.text.x = element_text(hjust = 0.5, vjust = 1),
+    legend.position = "bottom",           
+    legend.box = "horizontal" )+
+  labs(
+    title = "Distribution of Relative Error by Source and PM2.5 Concentration Range",
+    subtitle = "Comparison of uncalibrated and calibrated SPS30 measurements",
+    x = "Source type",
+    y = "Relative error (%)",
+    fill = "SPS30 PM2.5"
+  )
+
+p_box_RE_sup
+# save the combined boxplot
+ggsave("plots/supplementary/RE_boxplot_supplementary.png", plot = p_box_RE_sup, width = 10, height = 8, dpi = 600, bg = "white")
+
+```
+
+
+
+
+#Prepare data before plotting using data from the LOSO by source analyses
+
+
+```{r, prepare data with loso by source}
+loso_src_SMPS_APS_raw_figure2 <- loso_src_SMPS_APS_raw$predictions |> 
+  mutate(method = "Uncalibrated",
+          reference = "SMPS + APS")
+
+loso_src_SMPS_APS_lm_figure2 <- loso_src_SMPS_APS_lm$predictions |>
+  mutate(method = "Calibrated",
+         reference = "SMPS + APS")
+
+loso_src_dusttrak_raw_figure2 <- loso_src_dusttrak_raw$predictions |>
+  mutate(method = "Uncalibrated",
+         reference = "Dusttrak")
+
+loso_src_dusttrak_lm_figure2 <- loso_src_dusttrak_lm$predictions |>
+  mutate(method = "Calibrated",
+         reference = "Dusttrak")
+
+by_source_data <- bind_rows(
+  loso_src_SMPS_APS_raw_figure2,
+  loso_src_SMPS_APS_lm_figure2,
+  loso_src_dusttrak_raw_figure2,
+  loso_src_dusttrak_lm_figure2
+) |> mutate(
+  error = PM2.5_pred - PM2.5_ref,
+  relative_error = error / PM2.5_ref * 100,
+  source = factor(source),
+  source = fct_recode(
+      source,
+      "Candles" = "candles",
+      "Candles\nHigh RH"   = "candles_high_RH",
+      "Cigarette\nSmoke" = "cigarette",
+      "Clean Air" = "clean_air",
+      "Cooking" = "cooking",
+      "Cooking\nHigh RH" = "cooking_high_RH"),
+  reference = factor(reference),
+  reference = fct_recode(
+    reference,
+    "SMPS + APS" = "SMPS + APS",
+    "DustTrak" = "Dusttrak"
+  )
+)
+```
+
+
+
+#Generate Table 2 summarizing mean and sd from Bland Altman plot with loso by source data
+
+
+
+```{r, Table 2}
+
+table2_data <- by_source_data |>
+  filter(PM2.5_pred >=5) |> 
+  mutate(
+    PM2.5_ref = ifelse(PM2.5_ref == 0, 0.001, PM2.5_ref)  # avoid division by zero
+  ) |>
+  group_by(reference, method, source) |>
+  summarise(
+    # core error terms 
+    mae = mean(abs(error), na.rm = TRUE), 
+    rmse = sqrt(mean(error^2, na.rm = TRUE)), 
+    mean_error = mean(error, na.rm = TRUE), 
+    sd_error = sd(error, na.rm = TRUE), 
+
+    # relative measures
+    mean_ref = mean(PM2.5_ref, na.rm = TRUE), 
+    mean_sps30 = mean(PM2.5_pred, na.rm = TRUE), 
+    err_pct = mean(error / PM2.5_ref * 100, na.rm = TRUE), 
+
+    # correlation and variation
+    r = cor(PM2.5_pred, PM2.5_ref, use = "complete.obs"),
+    r2 = r^2,
+    cv = sd(error, na.rm = TRUE) / mean(error, na.rm = TRUE),
+
+    # limits of agreement
+    loa_low    = mean_error - 1.96 * sd_error,
+    loa_high   = mean_error + 1.96 * sd_error,
+
+    .groups = "drop"
+  )
+
+
+# Build grouped GT table
+table_2 <- table2_data |>
+  select(source, reference, method, r, err_pct, mean_error, loa_low, loa_high) |>
+  arrange(source, reference, method) |>
+  gt(groupname_col = "source") |>
+  tab_header(title = "Table 2") |>
+  cols_label(
+    reference  = "Comparison",
+    method     = "Method",
+    r          = "Pearson's r",
+    err_pct    = "Mean Relative Error (%)",
+    mean_error = "Mean Error (µg/m³)",
+    loa_low    = "LoA Low (µg/m³)",
+    loa_high   = "LoA High (µg/m³)"
+  ) |>
+  # format all numeric columns nicely
+  fmt_number(
+    columns = c(r, err_pct, mean_error, loa_low, loa_high),
+    decimals = 2,              # choose decimals you want
+    use_seps = TRUE,           # adds thousand separators
+    drop_trailing_zeros = TRUE # keeps it neat
+  ) |>
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_row_groups()
+  )
+# Save table as word document
+gtsave(table_2, "tables/table2.docx", overwrite = TRUE)
+
+table_2
+```
+
+
+
+#Bland-altman plots (Figure4) for main text using loso by source data with source specific LoA and mean error
+
+
+
+```{r, bland-Altman based on by source data}
+# Make Bland–Altman data match the summarised table
+bland_altman_data_spec_loa_by_source <- by_source_data %>%
+  filter(PM2.5_pred >= 5) %>%                          # same cutoff as in table
+  mutate(
+    PM2.5_ref = ifelse(PM2.5_ref == 0, 0.001, PM2.5_ref),  # same zero handling
+    ref_val = PM2.5_ref
+  )
+
+# Summarise to match table metrics exactly
+summary_stats <- bland_altman_data_spec_loa_by_source %>%
+  group_by(source, reference, method) %>%
+  summarise(
+    mean_diff = mean(error, na.rm = TRUE),
+    sd_diff   = sd(error, na.rm = TRUE),
+    loa_low   = mean_diff - 1.96 * sd_diff,
+    loa_high  = mean_diff + 1.96 * sd_diff,
+    .groups = "drop"
+  )
+
+# Check that this summary now aligns 1:1 with the GT table
+# (each combination of source x reference x method should appear once)
+print(summary_stats)
+
+bland_altman_data_spec_loa_by_source_uncal <- bland_altman_data_spec_loa_by_source %>%
+  left_join(summary_stats, by = c("source", "reference", "method")) %>%
+  filter(method == "Uncalibrated") %>%
+  ggplot(aes(x = ref_val, y = error, color = reference)) +
+  geom_point(alpha = 0.4) +
+  geom_smooth(method = "lm", se = TRUE) +
+  geom_hline(aes(yintercept = mean_diff, color = reference), linetype = 1) +
+  geom_hline(aes(yintercept = loa_high, color = reference), linetype = 3) +
+  geom_hline(aes(yintercept = loa_low, color = reference), linetype = 3) +
+  geom_hline(yintercept = 0, linetype = 2) +
+  xlim(0, 400) +
+  ylim(-200, 200) +
+  facet_wrap(source ~ method) +
+  labs(
+    x = "Reference PM2.5 (µg/m³)",
+    y = "SPS30 PM2.5 − Reference PM2.5 (µg/m³)",
+    color = "Comparison"
+  ) +
+  theme_minimal() +
+  scale_color_manual(values = c(
+    "DustTrak" = "#E69F00",
+    "SMPS + APS" = "#56B4E9"
+  ))
+
+bland_altman_data_spec_loa_by_source_cal <- bland_altman_data_spec_loa_by_source %>%
+  left_join(summary_stats, by = c("source", "reference", "method")) %>%
+  filter(method == "Calibrated") %>%
+  ggplot(aes(x = ref_val, y = error, color = reference)) +
+  geom_point(alpha = 0.4) +
+  geom_smooth(method = "lm", se = TRUE) +
+  geom_hline(aes(yintercept = mean_diff, color = reference), linetype = 1) +
+  geom_hline(aes(yintercept = loa_high, color = reference), linetype = 3) +
+  geom_hline(aes(yintercept = loa_low, color = reference), linetype = 3) +
+  geom_hline(yintercept = 0, linetype = 2) +
+  xlim(0, 400) +
+  ylim(-200, 200) +
+  facet_wrap(source ~ method) +
+  labs(
+    x = "Reference PM2.5 (µg/m³)",
+    y = "SPS30 PM2.5 − Reference PM2.5 (µg/m³)",
+    color = "Comparison"
+  ) +
+  theme_minimal() +
+  scale_color_manual(values = c(
+    "DustTrak" = "#E69F00",
+    "SMPS + APS" = "#56B4E9"
+  ))
+
+BA_plot_source <- (
+  bland_altman_data_spec_loa_by_source_uncal | bland_altman_data_spec_loa_by_source_cal
+) +
+  plot_layout(guides = "collect") &
+  theme(legend.position = "bottom") &
+  labs(
+    x = "Reference PM2.5 (µg/m³)",
+    y = "SPS30 PM2.5 − Reference PM2.5 (µg/m³)"
+  )
+
+
+BA_plot_source
+
+ggsave("plots/figure4_bland_altman_source_specific_Loa_by_source.png", plot = BA_plot_source, width = 8, height = 6, dpi = 600, bg = "white")
+```
+
+
+
+
+### Supplementary
+
+
+
+
+```{r, investigate the fan observed in the Bland-Altman plot with loso by sensor}
+bland_altman_data |> filter(reference == "DustTrak" & method == "Uncalibrated") |> 
+  ggplot(aes(x = ref_val, y = abs(diff_val))) +
+  geom_point(alpha = 0.4) +
+  geom_smooth(method = "lm", se = TRUE, color = "#E69F00") +
+  labs(
+    title = "Data from Bland-Altman Plot: Uncalibrated SPS30 vs DustTrak",
+    x = "Reference PM2.5 (µg/m³)", y = "|Difference| (µg/m³)") 
+
+bland_altman_data |> filter(reference == "DustTrak" & method == "Calibrated") |> 
+  ggplot(aes(x = ref_val, y = abs(diff_val))) +
+  geom_point(alpha = 0.4) +
+  geom_smooth(method = "loess", color = "#E69F00") +
+  labs(
+    title = "Data from Bland-Altman Plot: Calibrated SPS30 vs DustTrak",
+    x = "Reference PM2.5 (µg/m³)", y = "|Difference| (µg/m³)")
+
+bland_altman_data |> filter(reference == "SMPS + APS" & method == "Uncalibrated") |> 
+  ggplot(aes(x = ref_val, y = abs(diff_val))) +
+  geom_point(alpha = 0.4) +
+  geom_smooth(method = "loess", color = "#56B4E9") +
+  labs(
+    title = "Data from Bland-Altman Plot: Uncalibrated SPS30 vs SMPS + APS",
+    x = "Reference PM2.5 (µg/m³)", y = "|Difference| (µg/m³)")
+
+bland_altman_data |> filter(reference == "SMPS + APS" & method == "Calibrated") |> 
+  ggplot(aes(x = ref_val, y = abs(diff_val))) +
+  geom_point(alpha = 0.4) +
+  geom_smooth(method = "loess", color = "#56B4E9") +
+  labs(
+    title = "Data from Bland-Altman Plot: Calibrated SPS30 vs SMPS + APS",
+    x = "Reference PM2.5 (µg/m³)", y = "|Difference| (µg/m³)")
+
+```
+
+```{r, prepare table 1s}
+#inspect the number of observations per sensor per exposure source:
+table1s_data_clean <- all_data |> count(sensor, source) |>
+  mutate(
+    # hours = n*5/60,
+    source = case_when(
+      source == "candles_high_RH"   ~ "Candles (high RH)",
+      source == "cooking_high_RH"   ~ "Cooking (high RH)",
+      source == "candles"           ~ "Candles",
+      source == "cooking"           ~ "Cooking",
+      source == "cigarette"         ~ "Cigarette",
+      source == "clean_air"         ~ "Clean air",
+      TRUE ~ source
+    )) |> 
+  pivot_wider(names_from = source, values_from = n, values_fill = 0) |> rowwise() |>
+  mutate(
+    Sensor = as.character(sensor),
+    Total = sum(c_across(where(is.numeric) | where(is.integer))))
+```
+
+```{r, table 1 output}
+# Build grouped GT table
+table1s_gt <- table1s_data_clean |>
+  gt() |>
+  tab_header(
+    title = "Observations per sensor per source"
+  ) 
+
+#To view in RStudio
+table1s_gt
+
+# To save as Word/HTML/PDF if needed
+gtsave(table1s_gt, "tables/supplementary/table1s.docx", overwrite = TRUE)   # Word
+```
+
+```{r, prepare table 2}
+# #| tbl-cap: "Performance summaries across LOSO schemes."
+# 
+# loso_src_SMPS_APS_raw_table2 <- loso_src_SMPS_APS_raw$per_source |> 
+#   mutate(method = "Uncalibrated",
+#           reference = "SMPS + APS")
+# 
+# loso_src_SMPS_APS_lm_table2 <- loso_src_SMPS_APS_lm$per_source |> 
+#   mutate(method = "Calibrated",
+#           reference = "SMPS + APS")
+# 
+# loso_src_dusttrak_raw_table2 <- loso_src_dusttrak_raw$per_source |> 
+#   mutate(method = "Uncalibrated",
+#           reference = "Dusttrak")
+# 
+# loso_src_dusttrak_lm_table2 <- loso_src_dusttrak_lm$per_source |> 
+#   mutate(method = "Calibrated",
+#           reference = "Dusttrak")
+# 
+# table2_data <- bind_rows(
+#   loso_src_SMPS_APS_raw_table2,
+#   loso_src_SMPS_APS_lm_table2,
+#   loso_src_dusttrak_raw_table2,
+#   loso_src_dusttrak_lm_table2
+# )
+# 
+# ```
+# 
+# ```{r, table 2 output}}
+# # Clean up labels and roundin
+# table2_data_clean <- table2_data |>
+#   mutate(
+#     holdout_source = case_when(
+#       holdout_source == "candles_high_RH"   ~ "Candles (high RH)",
+#       holdout_source == "cooking_high_RH"   ~ "Cooking (high RH)",
+#       holdout_source == "candles"           ~ "Candles",
+#       holdout_source == "cooking"           ~ "Cooking",
+#       holdout_source == "cigarette"         ~ "Cigarette",
+#       holdout_source == "clean_air"         ~ "Clean air",
+#       TRUE ~ holdout_source
+#     ),
+#     R        = round(R, 2),
+#     MAE      = round(MAE, 1),
+#     RMSE     = round(RMSE, 1),
+#     cv       = round(cv, 2),
+#     MeanError = round(MeanError, 1),
+#     LoA_Low  = round(LoA_Low, 1),
+#     LoA_High = round(LoA_High, 1)
+#   ) |>
+#   select(
+#     Source = holdout_source,
+#     Reference = reference,
+#     Method = method,
+#     R, 
+#     MeanErrorPct, 
+#     `Mean Error` = MeanError,
+#     `LoA Low` = LoA_Low,
+#     `LoA High` = LoA_High
+#   ) |>
+#   arrange(Source, Reference, Method)
+# 
+# # Build grouped GT table
+# table2_gt <- table2_data_clean |>
+#   gt(groupname_col = "Source") |>
+#   tab_header(
+#     title = "Performance metrics for SPS30 sensor PM₂.₅ concentrations",
+#     subtitle = "Against reference instruments (SMPS + APS, DustTrak), stratified by source type and calibration method"
+#   ) |>
+#   cols_label(
+#     Reference = "Reference",
+#     Method = "Method",
+#     R = "Pearson´s r",
+#     # MAE = "MAE (µg/m³)",
+#     # RMSE = "RMSE (µg/m³)",
+#     # cv = "CV",
+#     MeanErrorPct = "Mean Relative Error (%)",
+#     `Mean Error` = "Mean Error (µg/m³)",
+#     `LoA Low` = "LoA Low (µg/m³)",
+#     `LoA High` = "LoA High (µg/m³)"
+#   ) |>
+#   tab_style(
+#     style = cell_text(weight = "bold"),
+#     locations = cells_row_groups()
+#   )
+# 
+# 
+# # To view in RStudio
+# table2_gt
+# 
+# # To save as Word/HTML/PDF if needed
+# gtsave(table2_gt, "tables/table2.docx", overwrite = TRUE)   # Word
+
+```
+
+```{r, table 3s supplementary output}
+
+table3s_data <- by_source_data |>
+  filter(PM2.5_pred >=5) |> 
+  mutate(
+    PM2.5_ref = ifelse(PM2.5_ref == 0, 0.001, PM2.5_ref)  # avoid division by zero
+  ) |>
+  group_by(reference, method, source) |>
+  summarise(
+    # core error terms 
+    MAE = mean(abs(error), na.rm = TRUE), 
+    RMSE = sqrt(mean(error^2, na.rm = TRUE)), 
+    MeanError = mean(error, na.rm = TRUE), 
+    sd_error = sd(error, na.rm = TRUE), 
+
+    # relative measures
+    mean_ref = mean(PM2.5_ref, na.rm = TRUE), 
+    mean_sps30 = mean(PM2.5_pred, na.rm = TRUE), 
+    err_pct = mean(error / PM2.5_ref * 100, na.rm = TRUE), 
+
+    # correlation and variation
+    r = cor(PM2.5_pred, PM2.5_ref, use = "complete.obs"),
+    r2 = r^2,
+    cv = sd(error, na.rm = TRUE) / mean(error, na.rm = TRUE),
+
+    # limits of agreement
+    LoA_Low    = MeanError - 1.96 * sd_error,
+    LoA_High   = MeanError + 1.96 * sd_error,
+
+    .groups = "drop"
+  )
+
+
+# Clean up labels and rounding
+table3S_data_clean <- table3s_data |>
+  mutate(
+    # holdout_source = case_when(
+    #   holdout_source == "candles_high_RH"   ~ "Candles (high RH)",
+    #   holdout_source == "cooking_high_RH"   ~ "Cooking (high RH)",
+    #   holdout_source == "candles"           ~ "Candles",
+    #   holdout_source == "cooking"           ~ "Cooking",
+    #   holdout_source == "cigarette"         ~ "Cigarette",
+    #   holdout_source == "clean_air"         ~ "Clean air",
+    #   TRUE ~ source
+    # ),
+    r        = round(r, 2),
+    MAE      = round(MAE, 1),
+    RMSE     = round(RMSE, 1),
+    cv       = round(cv, 2),
+    MeanError = round(MeanError, 1),
+    LoA_Low  = round(LoA_Low, 1),
+    LoA_High = round(LoA_High, 1)
+  ) |>
+  select(
+    Source = source,
+    Reference = reference,
+    Method = method,
+    r, 
+    MAE, 
+    RMSE, 
+    err_pct, 
+    `Mean Error` = MeanError,
+    `LoA Low` = LoA_Low,
+    `LoA High` = LoA_High
+  ) |>
+  arrange(Source, Reference, Method)
+
+# Build grouped GT table
+table3S_gt <- table3S_data_clean |>
+  gt(groupname_col = "Source") |>
+  tab_header(
+    title = "Performance metrics for SPS30 sensor PM₂.₅ concentrations",
+    subtitle = "Against reference instruments (SMPS + APS, DustTrak), stratified by source type and calibration method"
+  ) |>
+  cols_label(
+    Reference = "Reference",
+    Method = "Method",
+    r = "Pearson´s r",
+    MAE = "MAE (µg/m³)",
+    RMSE = "RMSE (µg/m³)",
+    err_pct = "Mean Relative Error (%)",
+    `Mean Error` = "Mean Error (µg/m³)",
+    `LoA Low` = "LoA Low (µg/m³)",
+    `LoA High` = "LoA High (µg/m³)"
+  ) |>
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_row_groups()
+  )
+
+
+# To view in RStudio
+table3S_gt
+
+# To save as Word/HTML/PDF if needed
+gtsave(table3S_gt, "tables/supplementary/table3S.docx", overwrite = TRUE)   # Word
+
+```
+
+```{r, prepare table 4S}
+#| tbl-cap: "Performance summaries across LOSO schemes."
+
+# loso_sens_SMPS_APS_raw_table3 <- loso_sens_SMPS_APS_raw$per_sensor |> 
+#   mutate(method = "Uncalibrated",
+#           reference = "SMPS + APS")
+# 
+# loso_sens_SMPS_APS_lm_table3 <- loso_sens_SMPS_APS_lm$per_sensor |> 
+#   mutate(method = "Calibrated",
+#           reference = "SMPS + APS")
+# 
+# loso_sens_dusttrak_raw_table3 <- loso_sens_dusttrak_raw$per_sensor |> 
+#   mutate(method = "Uncalibrated",
+#           reference = "Dusttrak")
+# 
+# loso_sens_dusttrak_lm_table3 <- loso_sens_dusttrak_lm$per_sensor |> 
+#   mutate(method = "Calibrated",
+#           reference = "Dusttrak")
+# 
+# table4S_data <- bind_rows(
+#   loso_sens_SMPS_APS_raw_table3,
+#   loso_sens_SMPS_APS_lm_table3,
+#   loso_sens_dusttrak_raw_table3,
+#   loso_sens_dusttrak_lm_table3
+# )
+
+```
+
+```{r, table 4S output}
+
+table4s_data <- by_sensor_data |>
+  filter(PM2.5_pred >=5) |> 
+  mutate(
+    PM2.5_ref = ifelse(PM2.5_ref == 0, 0.001, PM2.5_ref)  # avoid division by zero
+  ) |>
+  group_by(reference, method, sensor) |>
+  summarise(
+    # core error terms 
+    MAE = mean(abs(error), na.rm = TRUE), 
+    RMSE = sqrt(mean(error^2, na.rm = TRUE)), 
+    MeanError = mean(error, na.rm = TRUE), 
+    sd_error = sd(error, na.rm = TRUE), 
+
+    # relative measures
+    mean_ref = mean(PM2.5_ref, na.rm = TRUE), 
+    mean_sps30 = mean(PM2.5_pred, na.rm = TRUE), 
+    err_pct = mean(error / PM2.5_ref * 100, na.rm = TRUE), 
+
+    # correlation and variation
+    r = cor(PM2.5_pred, PM2.5_ref, use = "complete.obs"),
+    r2 = r^2,
+    cv = sd(error, na.rm = TRUE) / mean(error, na.rm = TRUE),
+
+    # limits of agreement
+    LoA_Low    = MeanError - 1.96 * sd_error,
+    LoA_High   = MeanError + 1.96 * sd_error,
+
+    .groups = "drop"
+  )
+
+# Clean up labels and rounding
+table4S_data_clean <- table4s_data |>
+  mutate(
+    # holdout_source = case_when(
+    #   holdout_source == "candles_high_RH"   ~ "Candles (high RH)",
+    #   holdout_source == "cooking_high_RH"   ~ "Cooking (high RH)",
+    #   holdout_source == "candles"           ~ "Candles",
+    #   holdout_source == "cooking"           ~ "Cooking",
+    #   holdout_source == "cigarette"         ~ "Cigarette",
+    #   holdout_source == "clean_air"         ~ "Clean air",
+    #   TRUE ~ holdout_source
+    # ),
+    r        = round(r, 2),
+    MAE      = round(MAE, 1),
+    RMSE     = round(RMSE, 1),
+    cv       = round(cv, 2),
+    MeanError = round(MeanError, 1),
+    LoA_Low  = round(LoA_Low, 1),
+    LoA_High = round(LoA_High, 1)
+  ) |>
+  select(
+    Sensor = sensor,
+    Reference = reference,
+    Method = method,
+    r, MAE, RMSE, err_pct,
+    `Mean Error` = MeanError,
+    `LoA Low` = LoA_Low,
+    `LoA High` = LoA_High
+  ) |>
+  arrange(Sensor, Reference, Method)
+
+# Build grouped GT table
+table4S_gt <- table4S_data_clean |>
+  gt(groupname_col = "Sensor") |>
+  tab_header(
+    title = "Performance metrics for SPS30 sensor PM₂.₅ concentrations",
+    subtitle = "Against reference instruments (SMPS + APS, DustTrak), stratified by sensor node and calibration method"
+  ) |>
+  cols_label(
+    Reference = "Reference",
+    Method = "Method",
+    r = "r",
+    MAE = "MAE (µg/m³)",
+    # cv = "Coefficient of variation",
+    `Mean Error` = "Mean Error (µg/m³)",
+    `LoA Low` = "LoA Low (µg/m³)",
+    `LoA High` = "LoA High (µg/m³)"
+  ) |>
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_row_groups()
+  )
+
+
+# To view in RStudio
+table4S_gt
+
+# To save as Word/HTML/PDF if needed
+gtsave(table4S_gt, "tables/supplementary/table4S.docx", overwrite = TRUE)   # Word
+```
+
