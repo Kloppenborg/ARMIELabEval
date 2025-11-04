@@ -1,0 +1,15 @@
+Time Stamp	continuousMessages	LIS2DH12_X	LIS2DH12_Y	LIS2DH12_Z	LIS2DH12_T	SHTC3_T	SHTC3_RH	SPS30_PM1	SPS30_PM2.5	SPS30_PM4	SPS30_PM10	VEML6040_RED	VEML6040_Green	VEML6040_Blue	VEML6040_White	VEML6040_AL	VEML6040_ColorTemp	GNSS_LAT	GNSS_LON	ClientTS	RulechainTS	dTS_RC_Cli	SPS30_PN0.5	SPS30_PN1	SPS30_PN2.5	SPS30_PN4	SPS30_PN10	millis_ts	isRtcSynced	signalQuality	loopCount	SHTC3_T_last	SHTC3_RH_last	SHTC3_messureCount	SPS30_PM1_last	SPS30_PM2.5_last	SPS30_PM4_last	SPS30_PM10_last	SPS30_PN0.5_last	SPS30_PN1_last	SPS30_PN2.5_last	SPS30_PN4_last	SPS30_PN10_last	SPS30_messureCount	SHTC3Ext_T	SHTC3Ext_RH	SHTC3Ext_T_last	SHTC3Ext_RH_last	SHTC3Ext_messureCount	HttpTest	resetReason	BatmV	isVin
+23-05-2025 09:23:24	1747985004764	1747985004769	5	1																																																	
+23-05-2025 09:23:22	1747985002277	1747985002303	26	1																																																	
+23-05-2025 09:17:23	1747984643929	1747984643933	4	1																																																	
+23-05-2025 09:17:21	1747984641440	1747984641465	25	1																																																	
+23-05-2025 08:18:32	1747981112333	1747981112339	6	1																																																	
+23-05-2025 08:18:29	1747981109819	1747981109844	25	1																																																	
+23-05-2025 07:31:35	1747978295219	1747978295223	4	1																																																	
+23-05-2025 07:31:32	1747978292704	1747978292730	26	1																																																	
+23-05-2025 07:27:52	1747978072130	1747978072148	18	1																																																	
+23-05-2025 07:27:49	1747978069541	1747978069567	26	1																																																	
+23-05-2025 07:16:58	1747977418798	1747977418818	20	1																																																	
+23-05-2025 07:16:56	1747977416283	1747977416309	26	1																																																	
+23-05-2025 07:09:42	1747976982235	1747976982244	9	1																																																	
+23-05-2025 07:09:39	1747976979468	1747976979494	26	1																																																	
