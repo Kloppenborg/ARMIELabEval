@@ -24,8 +24,6 @@ source(here("scripts", "functions_main_analysis.R"))
 
 # Load merged dataset
 load(here::here("clean_data", "all_data_main_analysis.rda"))
-# Find the RStudio project root
-root <- rprojroot::find_root(rprojroot::is_rstudio_project)
 
 # Add 'sensitivity' as a subdirectory of the project root
 sensitivity_root <- file.path(root, "sensitivity")
@@ -36,8 +34,29 @@ knitr::opts_knit$set(root.dir = sensitivity_root)
 # Save intermediate figures in a known location
 knitr::opts_chunk$set(fig.path = "figures/")
 
-#exclude all data with SPS30 reading > 50 ug/m3 and < 5 ug/m3
+# Define subfolders
+folders <- c(
+  "Sensitivity",
+  "Sensitivity/plots",
+  "Sensitivity/plots/supplementary",
+  "Sensitivity/tables",
+  "Sensitivity/tables/supplementary"
+)
 
+# Create or reset folders
+for (f in folders) {
+  full_path <- file.path(root, f)
+
+  if (dir.exists(full_path)) {
+    unlink(full_path, recursive = TRUE, force = TRUE)
+    message("Deleted existing folder: ", full_path)
+  }
+
+  dir.create(full_path, recursive = TRUE)
+  message("Created folder: ", full_path)
+}
+
+#exclude all data with SPS30 reading > 50 ug/m3 and < 5 ug/m3
 all_data <- all_data |> filter(SPS30_PM2.5 <= 50 & SPS30_PM2.5 >= 5) 
 ```
 
