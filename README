@@ -1,0 +1,173 @@
+# ARMIE Sensor Calibration and Validation Study
+
+This repository contains all code and workflows for the **ARMIE laboratory sensor evaluation study**, conducted at **Lund University (Division of Ergonomics & Aerosol Technology)** in collaboration with **Aarhus University, Department of Public Health (Research Unit for Environment, Work & Health – MiAS)**.
+
+The study evaluates the performance of **ARMIE sensor-nodes** equipped with **Sensirion SPS30** optical PM₂․₅ sensors against reference instruments (**DustTrak DRX**, **SMPS + APS**) under controlled chamber experiments with different aerosol sources: *candles, cigarette smoke, cooking, clean air,* and *high-humidity conditions*.
+All analysis and visualization code is written in **R** with reproducibility as a central principle.
+
+---
+
+## 📘 Overview
+
+The purpose of this repository is to:
+
+* Document and share the reproducible R-based analysis pipeline for the ARMIE sensor evaluation.
+* Enable transparency in data processing, model computation, and figure generation.
+* Provide an example of sensor calibration and validation workflow for low-cost PM₂․₅ sensors in environmental research.
+
+The repository does **not** include raw measurement data due to privacy and institutional data-handling agreements.
+Synthetic or reduced example data may be added for demonstration.
+
+---
+
+## ⚙️ Installation & Requirements
+
+This project runs in **R (≥ 4.3)** and relies on the following packages:
+
+```r
+install.packages(c(
+  "tidyverse", "gt", "patchwork", "lubridate",
+  "broom", "nlme", "scales", "forcats",
+  "here", "readr", "ggtext"
+))
+```
+
+Optional but recommended:
+
+```r
+install.packages("quarto")  # for rendering .qmd files
+```
+
+---
+
+## 🦯 How to Use
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/<your-username>/ARMIE-Lab-Eval.git
+   ```
+2. Open the `.Rproj` file in RStudio.
+3. Install dependencies as listed above.
+4. Run the main analysis pipeline by rendering the Quarto document:
+
+   ```r
+   quarto::quarto_render("workflow.qmd")
+   ```
+
+   or source individual scripts in the `scripts/` directory.
+
+Figures and summary tables will be saved automatically to `figures/` and `results/`.
+
+---
+
+## 🔍 Analytical Workflow
+
+The workflow proceeds in five main steps:
+
+1. **Data import and cleaning**
+   Harmonize timestamps, remove invalid values, and align sensor–reference data.
+
+2. **Exploratory analysis**
+   Visualize temporal PM₂․₅ variation per source and instrument.
+
+3. **Computation of performance metrics**
+   Mean error (ME), RMSE, MAE, MPE, and MAPE.
+
+4. **Bland–Altman analysis**
+   Calculate mean bias and 95% limits of agreement (LoA) for each method.
+
+5. **Visualization**
+   Publication-ready plots via `ggplot2` and `patchwork`, including:
+
+   * Source-specific relative error distributions
+   * Bland–Altman plots with LoA and regression lines
+   * Step-wise LoA visualization across reference PM₂․₅ bins
+
+---
+
+## 🧪 Experimental Setup Summary
+
+| Source Type     | Relative Humidity | Reference Instrument(s) |
+| --------------- | ----------------: | ----------------------- |
+| Candles         |               40% | DustTrak, SMPS + APS    |
+| Candles High RH |            70–80% | DustTrak, SMPS + APS    |
+| Cigarette Smoke |               40% | DustTrak, SMPS + APS    |
+| Cooking         |               40% | DustTrak, SMPS + APS    |
+| Cooking High RH |            70–80% | DustTrak, SMPS + APS    |
+| Clean Air       |               40% | DustTrak, SMPS + APS    |
+
+---
+
+## 📊 Outputs
+
+* **Descriptive statistics** for each pollution source and calibration condition
+* **Bland–Altman plots** illustrating systematic bias and agreement limits
+* **Relative error boxplots** comparing performance by PM₂․₅ concentration range
+* **Summary tables** formatted via `gt` for manuscript inclusion
+
+---
+
+## 🕺 License (MIT)
+
+```
+MIT License
+
+Copyright (c) 2025 Asbjørn Kloppenborg
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
+---
+
+## 📚 Citation
+
+If you use this repository or adapt its methods, please cite:
+
+> Kloppenborg, A., Löndahl, J., Nielsen, R., Sigsgaard, T., Cedeno Laurent, J. G., Sabel, C., Skallgaard, T., & Frederickson, L. (2025).
+> *Laboratory Evaluation of ARMIE, a Portable SPS30-Based Sensor-Node for PM₂․₅ Monitoring.*
+> Aarhus University / Lund University.
+> DOI forthcoming.
+
+---
+
+## 🤝 Code of Conduct
+
+### Contributor Pledge
+
+Participants in this project pledge to foster an open and welcoming environment. Discrimination or harassment based on gender, identity, disability, ethnicity, or any personal characteristic will not be tolerated.
+
+### Standards
+
+* Use respectful and inclusive language.
+* Critique ideas, not people.
+* Accept constructive feedback gracefully.
+* Focus on collaboration and reproducibility.
+
+Violations may be reported confidentially to the repository maintainer.
+
+---
+
+## 📞 Contact
+
+**Project Lead:**
+Asbjørn Kloppenborg
+Department of Public Health, Aarhus University
+📧 [ask@ph.au.dk](mailto:ask@ph.au.dk)
+🌍 [https://ph.au.dk](https://ph.au.dk)
