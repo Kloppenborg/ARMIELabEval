@@ -7,7 +7,7 @@ library(stringr)
 library(labelled)
 # Extract ID from file name
 
-folder_path <- "lab_test/data/raw"
+folder_path <- "lab_test/data/sensor"
 
 extract_id <- function(file_name) {
   base_name <- basename(file_name)
