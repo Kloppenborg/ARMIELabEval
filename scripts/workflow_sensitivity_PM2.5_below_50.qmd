@@ -57,6 +57,7 @@ for (f in folders) {
 #exclude all data with SPS30 reading > 50 ug/m3 and < 5 ug/m3
 all_data <- all_data |> filter(SPS30_PM2.5 <= 50 & SPS30_PM2.5 >= 5) 
 ```
+# This section will investigate all metrics based on the raw measurements from the SPS30, without any calibration. First the SMPS data truncated at a lower limit of 0.3 um and A
 
 ```{r}
 #| label: make-reference SMPS + APS and raw SPS30
@@ -170,7 +171,7 @@ loso_src_SMPS_APS_raw$per_source %>%
 # This section uses data from the SMPS and APS as reference, as these are the most accurate instruments available in the chamber. And calibrated measurements from the SPS30. The SMPS is truncated to include bins \>0.3 um. This is done to align the measurements to the claim arange for the SPS30.
 
 ```{r}
-all_data_reference |>
+all_data_ref |>
   mutate(source_day = paste(source, as.Date(timestamp_rounded_1min))) |>
   ggplot() +
   geom_line(aes(x = timestamp_rounded_1min, y = (PM1_SMPS_SPS30 + PM25_APS_valid), color = "PM2.5")) +
@@ -294,20 +295,6 @@ loso_src_SMPS_APS_lm$per_source %>%
 
 # This section uses the data from the Dusttrak as reference. And raw measurements from the SPS30.
 
-```{r, initial plotting dusttrak}
-all_data_reference |>
-  mutate(source_day = paste(source, as.Date(timestamp_rounded_1min))) |>
-  ggplot() +
-  geom_line(aes(x = timestamp_rounded_1min, y = (PM25_dusttrak * 1000), color = "PM2.5")) +
-  facet_wrap(~source_day, scales = "free") +
-  labs(
-    title = "PM2.5 Dusttrak Over Time by Source",
-    x = "Time since start",
-    y = "PM2.5 (µg/m³)"
-  ) +
-  theme_minimal()
-```
-
 ```{r, make-reference dusttrak and raw SPS30}
 #| fig-cap: "Reference PM2.5 is constructed as Dusttrak (µg/m³)."
 all_data_ref <- make_reference_pm25(all_data,
@@ -319,6 +306,20 @@ all_data_ref <- make_reference_pm25(all_data,
 all_data_ref |>
   group_by(source) |>
   summarise(min = min(PM2.5_ref), max = max(PM2.5_ref), mean = mean(PM2.5_ref), median = median(PM2.5_ref), n = n())
+```
+
+```{r}
+all_data_ref |>
+  mutate(source_day = paste(source, as.Date(timestamp_rounded_1min))) |>
+  ggplot() +
+  geom_line(aes(x = timestamp_rounded_1min, y = (PM25_dusttrak * 1000), color = "PM2.5")) +
+  facet_wrap(~source_day, scales = "free") +
+  labs(
+    title = "PM2.5 Dusttrak Over Time by Source",
+    x = "Time since start",
+    y = "PM2.5 (µg/m³)"
+  ) +
+  theme_minimal()
 ```
 
 ```{r}
@@ -1498,36 +1499,6 @@ bland_altman_data |>
     title = "Data from Bland-Altman Plot: Calibrated SPS30 vs SMPS + APS",
     x = "Reference PM2.5 (µg/m³)", y = "|Difference| (µg/m³)"
   )
-```
-
-
-
-```{r, investigating the effect of calibration on clean air figure 2 with loso by sensor}
-#| warning: false
-
-p_clean_air <- by_sensor_data |>
-  filter(source == "Clean Air") |>
-  ggplot(aes(x = PM2.5_ref, y = PM2.5_pred)) +
-  geom_point(alpha = 0.5) +
-  geom_smooth(method = "lm", color = "black", se = TRUE, fullrange = TRUE) +
-  geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "red") +
-  facet_wrap(method ~ reference) +
-  xlim(0, 20) +
-  ylim(0, 20) +
-  labs(
-    title = "SPS30 vs Reference PM2.5 Concentrations",
-    subtitle = "Calibrated values from the SPS30 sensor",
-    x = "Reference PM2.5 (µg/m³)",
-    y = "SPS30 PM2.5 (µg/m³)"
-  ) +
-  theme_minimal()
-
-ggsave("plots/supplementary/scatter_clean_air.png",
-  plot = p_clean_air,
-  width = 8, height = 6, dpi = 600, bg = "white"
-)
-
-p_clean_air
 ```
 
 ```{r, prepare table 1s}
