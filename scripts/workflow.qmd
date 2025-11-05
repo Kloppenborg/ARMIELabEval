@@ -30,15 +30,17 @@ folders <- c(
   "tables/supplementary"
 )
 
-# Create folders if they don't exist
+# Create or reset folders
 for (f in folders) {
   full_path <- file.path(root, f)
-  if (!dir.exists(full_path)) {
-    dir.create(full_path, recursive = TRUE)
-    message("Created folder: ", full_path)
-  } else {
-    message("Folder already exists: ", full_path)
+
+  if (dir.exists(full_path)) {
+    unlink(full_path, recursive = TRUE, force = TRUE)
+    message("Deleted existing folder: ", full_path)
   }
+
+  dir.create(full_path, recursive = TRUE)
+  message("Created folder: ", full_path)
 }
 ```
 
