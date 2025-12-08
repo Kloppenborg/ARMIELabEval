@@ -57,6 +57,7 @@ for (f in folders) {
 #exclude all data with SPS30 reading > 50 ug/m3 and < 5 ug/m3
 all_data <- all_data |> filter(SPS30_PM2.5 <= 50 & SPS30_PM2.5 >= 5) 
 ```
+
 # This section will investigate all metrics based on the raw measurements from the SPS30, without any calibration. First the SMPS data truncated at a lower limit of 0.3 um and A
 
 ```{r}
@@ -525,6 +526,7 @@ loso_src_dusttrak_lm$per_source %>%
 ```
 
 #Generate a (new) table 1 with range, median, mean and SD for PM2.5 and PN2.5 concentration from SMPS+APS and PM2.5 for Dusttrak
+
 ```{r}
 table1_data <- all_data |>
   select(
@@ -715,8 +717,8 @@ figure1
 ggsave("plots/figure1.png", plot = figure1, width = 8, height = 6, dpi = 600, bg = "white")
 ```
 
-
 #Prepare data before plotting using data from the LOSO by sensor analyses
+
 ```{r, prepare data with loso by sensor}
 loso_sens_SMPS_APS_raw_figure2 <- loso_sens_SMPS_APS_raw$predictions |>
   mutate(
@@ -827,7 +829,6 @@ p_scatter
 ggsave("plots/supplementary/scatter.png", plot = p_scatter, width = 8, height = 6, dpi = 600, bg = "white")
 ```
 
-
 plot figure RE_scatter with relative error between SPS30 and comparison instrument (For supplementary)
 
 ```{r, figure x with loso by sensor}
@@ -889,8 +890,6 @@ ggsave("plots/supplementary/RE_scatter.png", plot = p_scatter_RE, width = 8, hei
 by_sensor_data %>%
   filter(!is.finite(relative_error))
 ```
-
-
 
 ```{r, table sumarizing mean and sd from Bland Altman plot with loso by sensor}
 #| warning: false
@@ -958,8 +957,8 @@ table_2
 gtsave(table_2, "tables/table2.docx", overwrite = TRUE)
 ```
 
-
 # Bland-altman plots for main text. (Figure 2)
+
 ```{r, Bland altman plot with per-facet stats with loso by sensor without source specific LoA by sensor data}
 bland_altman_data <- by_sensor_data |>
   filter(PM2.5_ref >= 5) |>
@@ -1041,7 +1040,9 @@ BA_plot
 
 ggsave("plots/blandaltman_figure2.png", plot = BA_plot, width = 10, height = 6, dpi = 600, bg = "white")
 ```
+
 # Bland-altman plots for supplementary.
+
 These plots are faceted by source and method, with LoA and mean error calculated per source using the by_sensor data
 
 ```{r, Bland altman plot with per-facet stats with loso by sensor with source specific LoA}
@@ -1162,6 +1163,7 @@ p_box_RE
 # save the combined boxplot
 ggsave("plots/figure3_RE_boxplot_combined.png", plot = p_box_RE, width = 10, height = 8, dpi = 600, bg = "white")
 ```
+
 # Boxplot with relative errors including clean air for supplementary
 
 ```{r, boxplot with relative errors including clean air for supplementary}
@@ -1199,8 +1201,7 @@ p_box_RE_sup
 ggsave("plots/supplementary/RE_boxplot_supplementary.png", plot = p_box_RE_sup, width = 10, height = 8, dpi = 600, bg = "white")
 ```
 
-
-# Supplementary table describing those points of relative error not included in the Box plot 
+# Supplementary table describing those points of relative error not included in the Box plot
 
 ```{r}
 #| warning: false
@@ -1241,6 +1242,7 @@ gtsave(table_2S, "tables/supplementary/table_2S.docx")
 ```
 
 # Prepare data before plotting using data from the LOSO by source analyses
+
 ```{r, prepare data with loso by source}
 loso_src_SMPS_APS_raw_figure2 <- loso_src_SMPS_APS_raw$predictions |>
   mutate(
@@ -1292,10 +1294,10 @@ by_source_data <- bind_rows(
   )
 )
 ```
- 
-# Generate Table 2 summarizing mean and sd from Bland Altman plot with loso by source data
 
-```{r, Table 2}
+# Generate Table 3 summarizing mean and sd from Bland Altman plot with loso by source data
+
+```{r, Table 3}
 table3_data <- by_source_data |>
   filter(PM2.5_ref >= 5) |>
   mutate(
@@ -1453,9 +1455,7 @@ BA_plot_source
 ggsave("plots/figure4_bland_altman_source_specific_Loa_by_source.png", plot = BA_plot_source, width = 8, height = 6, dpi = 600, bg = "white")
 ```
 
-
 ### Supplementary
-
 
 ```{r, investigate the fan observed in the Bland-Altman plot with loso by sensor}
 #| warning: false
@@ -1540,8 +1540,6 @@ table1s_gt
 # To save as Word/HTML/PDF if needed
 gtsave(table1s_gt, "tables/supplementary/table1s.docx", overwrite = TRUE) # Word
 ```
-
-
 
 ```{r, table 3s supplementary output}
 table4s_data <- by_source_data |>
@@ -1629,6 +1627,7 @@ table4S_gt
 # To save as Word/HTML/PDF if needed
 gtsave(table4S_gt, "tables/supplementary/table4S.docx", overwrite = TRUE) # Word
 ```
+
 # Generate Table 3S summarizing mean and sd from Bland Altman plot with loso by sensor data
 
 ```{r, table 3S output}

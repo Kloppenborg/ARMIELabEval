@@ -910,10 +910,10 @@ p_uncal_AE <- by_sensor_data |>
   xlim(0, 850) +
   facet_wrap(~source) +
   labs(
-    title = "SPS30 vs Reference PM2.5 Concentrations",
-    subtitle = "Uncalibrated values from the SPS30 sensor",
+    title = "ARMIE vs Reference PM2.5 Concentrations",
+    subtitle = "Uncalibrated values from the ARMIE sensor-node",
     x = "Reference PM2.5 (µg/m³)",
-    y = "SPS30 PM2.5 (µg/m³)",
+    y = "ARMIE PM2.5 (µg/m³)",
     color = "Comparison"
   ) +
   theme_minimal() +
@@ -932,10 +932,10 @@ p_cal_AE <- by_sensor_data |>
   xlim(0, 850) +
   facet_wrap(~source) +
   labs(
-    title = "SPS30 vs Reference PM2.5 Concentrations",
-    subtitle = "Calibrated values from the SPS30 sensor",
+    title = "ARMIE PM2.5 vs Reference PM2.5 Concentrations",
+    subtitle = "Calibrated values from the ARMIE sensor-node",
     x = "Reference PM2.5 (µg/m³)",
-    y = "SPS30 PM2.5 (µg/m³)",
+    y = "ARMIE PM2.5 (µg/m³)",
     color = "Comparison"
   ) +
   theme_minimal() +
@@ -969,8 +969,8 @@ p_uncal_RE <- by_sensor_data |>
   xlim(0, 300) +
   facet_wrap(~source) +
   labs(
-    title = "Relative error of SPS30 vs Reference PM2.5",
-    subtitle = "Uncalibrated values from the SPS30 sensor",
+    title = "Relative error of ARMIE vs Reference PM2.5",
+    subtitle = "Uncalibrated values from the ARMIE sensor-node",
     x = "Reference PM2.5 (µg/m³)",
     y = "Relative error (%)",
     color = "Comparison"
@@ -991,8 +991,8 @@ p_cal_RE <- by_sensor_data |>
   xlim(0, 300) +
   facet_wrap(~source) +
   labs(
-    title = "Relative error of SPS30 vs Reference PM2.5",
-    subtitle = "Calibrated values from the SPS30 sensor",
+    title = "Relative error of ARMIE vs Reference PM2.5",
+    subtitle = "Calibrated values from the ARMIE sensor-node",
     x = "Reference PM2.5 (µg/m³)",
     y = "Relative error (%)",
     color = "Comparison"
@@ -1115,7 +1115,7 @@ BA_plot_uncal <- bland_altman_data |>
     # title = "Bland–Altman Plot of SPS30 vs Reference PM2.5 Concentrations",
     subtitle = "Uncalibrated",
     x = "Reference PM2.5 (µg/m³)",
-    y = "SPS30 PM2.5 − Reference PM2.5 (µg/m³)"
+    y = "ARMIE PM2.5 − Reference PM2.5 (µg/m³)"
   ) +
   theme_minimal()
 
@@ -1136,7 +1136,7 @@ BA_plot_cal <- bland_altman_data |>
     # title = "Bland–Altman Plot of SPS30 vs Reference PM2.5 Concentrations",
     subtitle = "Calibrated",
     x = "Reference PM2.5 (µg/m³)",
-    y = "SPS30 PM2.5 − Reference PM2.5 (µg/m³)"
+    y = "ARMIE PM2.5 − Reference PM2.5 (µg/m³)"
   ) +
   theme_minimal()
 
@@ -1199,10 +1199,10 @@ bland_altman_plot_spec_loa_uncal <- bland_altman_data_spec_loa %>%
   ylim(-200, 200) +
   facet_wrap(source ~ method) +
   labs(
-    #   title = "Bland–Altman Plot of SPS30 vs Reference PM2.5 Concentrations",
-    #   subtitle = "Calibrated SPS30 measurements (Leave one sensor out)",
+    #   title = "Bland–Altman Plot of ARMIE vs Reference PM2.5 Concentrations",
+    #   subtitle = "Calibrated ARMIE measurements (Leave one sensor out)",
     x = "Reference PM2.5 (µg/m³)",
-    y = "SPS30 PM2.5 − Reference PM2.5 (µg/m³)"
+    y = "ARMIE PM2.5 − Reference PM2.5 (µg/m³)"
   ) +
   theme_minimal() +
   scale_color_manual(values = c(
@@ -1224,10 +1224,10 @@ bland_altman_plot_spec_loa_cal <- bland_altman_data_spec_loa %>%
   ylim(-200, 200) +
   facet_wrap(source ~ method) +
   labs(
-    # title = "Bland–Altman Plot of SPS30 vs Reference PM2.5 Concentrations",
-    # subtitle = "Calibrated SPS30 measurements (Leave one sensor out)",
+    # title = "Bland–Altman Plot of ARMIE vs Reference PM2.5 Concentrations",
+    # subtitle = "Calibrated ARMIE measurements (Leave one sensor out)",
     x = "Reference PM2.5 (µg/m³)",
-    y = "SPS30 PM2.5 − Reference PM2.5 (µg/m³)"
+    y = "ARMIE PM2.5 − Reference PM2.5 (µg/m³)"
   ) +
   theme_minimal() +
   scale_color_manual(values = c(
@@ -1240,7 +1240,7 @@ BA_plot_source_by_sensor <- (bland_altman_plot_spec_loa_uncal | bland_altman_plo
   theme(legend.position = "bottom") &
   labs(
     x = "Reference PM2.5 (µg/m³)",
-    y = "SPS30 PM2.5 − Reference PM2.5 (µg/m³)"
+    y = "ARMIE PM2.5 − Reference PM2.5 (µg/m³)"
   )
 
 
@@ -1278,10 +1278,10 @@ p_box_RE <- boxplot_data |>
   ) +
   labs(
     # title = "Distribution of Relative Error by Source and PM2.5 Concentration Range",
-    # subtitle = "Comparison of uncalibrated and calibrated SPS30 measurements",
+    # subtitle = "Comparison of uncalibrated and calibrated ARMIE measurements",
     x = "Source type",
     y = "Relative error (%)",
-    fill = "SPS30 PM2.5"
+    fill = "ARMIE"
   )
 
 p_box_RE
@@ -1314,10 +1314,10 @@ p_box_RE_sup <- boxplot_data |>
   ) +
   labs(
     title = "Distribution of Relative Error by Source and PM2.5 Concentration Range",
-    subtitle = "Comparison of uncalibrated and calibrated SPS30 measurements",
+    subtitle = "Comparison of uncalibrated and calibrated ARMIE measurements",
     x = "Source type",
     y = "Relative error (%)",
-    fill = "SPS30 PM2.5"
+    fill = "ARMIE PM2.5"
   )
 
 p_box_RE_sup
@@ -1529,7 +1529,7 @@ bland_altman_data_spec_loa_by_source_uncal <- bland_altman_data_spec_loa_by_sour
   labs(
     subtitle = "Uncalibrated",
     x = "Reference PM2.5 (µg/m³)",
-    y = "SPS30 PM2.5 − Reference PM2.5 (µg/m³)",
+    y = "ARMIE PM2.5 − Reference PM2.5 (µg/m³)",
     color = "Comparison"
   ) +
   theme_minimal() +
@@ -1554,7 +1554,7 @@ bland_altman_data_spec_loa_by_source_cal <- bland_altman_data_spec_loa_by_source
   labs(
     subtitle = "Calibrated",
     x = "Reference PM2.5 (µg/m³)",
-    y = "SPS30 PM2.5 − Reference PM2.5 (µg/m³)",
+    y = "ARMIE PM2.5 − Reference PM2.5 (µg/m³)",
     color = "Comparison"
   ) +
   theme_minimal() +
@@ -1570,7 +1570,7 @@ BA_plot_source <- (
   theme(legend.position = "bottom") &
   labs(
     x = "Reference PM2.5 (µg/m³)",
-    y = "SPS30 PM2.5 − Reference PM2.5 (µg/m³)"
+    y = "ARMIE PM2.5 − Reference PM2.5 (µg/m³)"
   )
 
 
@@ -1592,7 +1592,7 @@ bland_altman_data |>
   geom_point(alpha = 0.4) +
   geom_smooth(method = "lm", se = TRUE, color = "#E69F00") +
   labs(
-    title = "Data from Bland-Altman Plot: Uncalibrated SPS30 vs DustTrak",
+    title = "Data from Bland-Altman Plot: Uncalibrated ARMIE vs DustTrak",
     x = "Reference PM2.5 (µg/m³)", y = "|Difference| (µg/m³)"
   )
 
@@ -1602,7 +1602,7 @@ bland_altman_data |>
   geom_point(alpha = 0.4) +
   geom_smooth(method = "loess", color = "#E69F00") +
   labs(
-    title = "Data from Bland-Altman Plot: Calibrated SPS30 vs DustTrak",
+    title = "Data from Bland-Altman Plot: Calibrated ARMIE vs DustTrak",
     x = "Reference PM2.5 (µg/m³)", y = "|Difference| (µg/m³)"
   )
 
@@ -1612,7 +1612,7 @@ bland_altman_data |>
   geom_point(alpha = 0.4) +
   geom_smooth(method = "loess", color = "#56B4E9") +
   labs(
-    title = "Data from Bland-Altman Plot: Uncalibrated SPS30 vs SMPS + APS",
+    title = "Data from Bland-Altman Plot: Uncalibrated ARMIE vs SMPS + APS",
     x = "Reference PM2.5 (µg/m³)", y = "|Difference| (µg/m³)"
   )
 
@@ -1622,7 +1622,7 @@ bland_altman_data |>
   geom_point(alpha = 0.4) +
   geom_smooth(method = "loess", color = "#56B4E9") +
   labs(
-    title = "Data from Bland-Altman Plot: Calibrated SPS30 vs SMPS + APS",
+    title = "Data from Bland-Altman Plot: Calibrated ARMIE vs SMPS + APS",
     x = "Reference PM2.5 (µg/m³)", y = "|Difference| (µg/m³)"
   )
 ```
@@ -1642,10 +1642,10 @@ p_clean_air <- by_sensor_data |>
   xlim(0, 20) +
   ylim(0, 20) +
   labs(
-    title = "SPS30 vs Reference PM2.5 Concentrations",
-    subtitle = "Calibrated values from the SPS30 sensor",
+    title = "ARMIE vs Reference PM2.5 Concentrations",
+    subtitle = "Calibrated values from the ARMIE sensor-node",
     x = "Reference PM2.5 (µg/m³)",
-    y = "SPS30 PM2.5 (µg/m³)"
+    y = "ARMIE PM2.5 (µg/m³)"
   ) +
   theme_minimal()
 
@@ -1759,7 +1759,7 @@ table4S_data_clean <- table4s_data |>
 table4S_gt <- table4S_data_clean |>
   gt(groupname_col = "Source") |>
   tab_header(
-    title = "Performance metrics for SPS30 sensor PM₂.₅ concentrations",
+    title = "Performance metrics for ARMIE sensor PM₂.₅ concentrations",
     subtitle = "Against reference instruments (SMPS + APS, DustTrak), stratified by source type and calibration method"
   ) |>
   cols_label(
@@ -1843,7 +1843,7 @@ table3S_data_clean <- table3s_data |>
 table3S_gt <- table3S_data_clean |>
   gt(groupname_col = "Sensor") |>
   tab_header(
-    title = "Performance metrics for SPS30 sensor PM₂.₅ concentrations",
+    title = "Performance metrics for ARMIE sensor PM₂.₅ concentrations",
     subtitle = "Against reference instruments (SMPS + APS, DustTrak), stratified by sensor node and calibration method"
   ) |>
   cols_label(
