@@ -895,7 +895,7 @@ by_sensor_data <- bind_rows(
 )
 ```
 
-# Scatter plots with SPS30 PM2.5 readings and comparision instruments (For supplementary)
+# Scatter plots with ARMIE PM2.5 readings and comparision instruments (For supplementary)
 
 ```{r, figure 2 fixed axis with loso by sensor}
 #| warning: false
@@ -1264,7 +1264,7 @@ boxplot_data <- by_sensor_data |>
 # Combined boxplot for uncalibrated and calibrated
 p_box_RE <- boxplot_data |>
   ggplot(aes(x = source, y = relative_error, fill = PM25_group)) +
-  geom_boxplot(outlier.alpha = 0.3) +
+  geom_boxplot(outlier.alpha = 0.5) +
   facet_wrap(reference ~ method) +
   scale_fill_manual(
     values = c("PM2.5 =< 5 µg/m³" = "#009E73", "PM2.5 > 5 µg/m³" = "#CC79A7")
@@ -1274,7 +1274,8 @@ p_box_RE <- boxplot_data |>
   theme(
     axis.text.x = element_text(hjust = 0.5, vjust = 1),
     legend.position = "bottom",
-    legend.box = "horizontal"
+    legend.box = "horizontal",
+    panel.spacing.x = unit(1, "cm")
   ) +
   labs(
     # title = "Distribution of Relative Error by Source and PM2.5 Concentration Range",
