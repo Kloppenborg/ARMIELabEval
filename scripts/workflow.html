@@ -666,14 +666,14 @@ $ reference              &lt;chr&gt; "SMPS + APS", "SMPS + APS", "SMPS + APS", "
   holdout_sensor     n     R    R2   MAE  RMSE       cv MeanError MeanErrorPct
            &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;        &lt;dbl&gt;
 1              5   366 0.629 0.396  38.6  78.6   -20.3    -3.87           658.
-2              8   365 0.636 0.404  40.9  78.3    41.6     1.88           959.
-3              9   365 0.630 0.397  40.8  77.4    56.6     1.37           970.
-4              2   363 0.617 0.381  40.7  80.4   -12.3    -6.53           751.
-5              3   357 0.636 0.405  41.2  79.0    32.9     2.40           886.
-6              6   352 0.629 0.395  36.4  76.6   -27.1    -2.83           740.
-7              7   352 0.633 0.401  42.8  79.6 -1770.     -0.0451        1006.
-8              4   334 0.647 0.419  35.5  70.3   -48.9    -1.44           807.
-9              1   322 0.655 0.430  30.3  56.6     5.62    9.93           847.
+2              8   365 0.636 0.404  40.9  78.3    41.6     1.88           962.
+3              9   365 0.630 0.397  40.9  77.5    57.1     1.36           993.
+4              2   363 0.617 0.380  40.7  80.4   -12.3    -6.52           759.
+5              3   357 0.636 0.405  41.2  79.0    32.9     2.40           891.
+6              6   352 0.629 0.395  36.4  76.6   -27.0    -2.84           742.
+7              7   352 0.633 0.401  42.8  79.6 -1655.     -0.0482        1009.
+8              4   334 0.647 0.419  35.5  70.3   -49.0    -1.44           807.
+9              1   322 0.653 0.426  30.3  56.7     5.69    9.82           836.
 # ℹ 5 more variables: mean_sps30 &lt;dbl&gt;, mean_ref &lt;dbl&gt;, LoA_Low &lt;dbl&gt;,
 #   LoA_High &lt;dbl&gt;, method &lt;chr&gt;</code></pre>
 </div>
@@ -732,12 +732,12 @@ $ reference              &lt;chr&gt; "SMPS + APS", "SMPS + APS", "SMPS + APS", "
 <pre><code># A tibble: 6 × 14
   holdout_source      n     R     R2   MAE  RMSE     cv MeanError MeanErrorPct
   &lt;chr&gt;           &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;        &lt;dbl&gt;
-1 cooking_high_RH   693 0.944 0.891   28.2  37.3  0.888      27.9        937. 
-2 candles_high_RH   669 0.828 0.686   36.2  68.8 -1.79      -33.6        -45.1
-3 cigarette         576 0.882 0.778   42.3  54.9  0.828      42.3       2656. 
-4 candles           564 0.800 0.640  115.  175.  -1.15     -115.         -78.4
-5 cooking           351 0.929 0.864  121.  146.   0.680     121.         430. 
-6 clean_air         323 0.188 0.0353  17.0  17.1  0.111      17.0       6242. 
+1 cooking_high_RH   693 0.940 0.884   24.1  41.1  1.49       22.9        235. 
+2 candles_high_RH   669 0.838 0.702   46.7  83.3 -1.57      -44.7        -12.1
+3 cigarette         576 0.882 0.778   41.9  55.0  0.848      41.9       2587. 
+4 candles           564 0.780 0.608  121.  186.  -1.16     -121.         -42.3
+5 cooking           351 0.920 0.846  150.  185.   0.745     148.         248. 
+6 clean_air         323 0.186 0.0345  17.8  17.9  0.118      17.8       6543. 
 # ℹ 5 more variables: mean_sps30 &lt;dbl&gt;, mean_ref &lt;dbl&gt;, LoA_Low &lt;dbl&gt;,
 #   LoA_High &lt;dbl&gt;, method &lt;chr&gt;</code></pre>
 </div>
@@ -800,15 +800,15 @@ $ reference              &lt;chr&gt; "SMPS + APS", "SMPS + APS", "SMPS + APS", "
 <pre><code># A tibble: 9 × 12
   holdout_sensor     n     R    R2   MAE  RMSE       cv MeanError MeanErrorPct
            &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;        &lt;dbl&gt;
-1              1   322 0.655 0.430  30.3  56.6     5.62    9.93           847.
-2              2   363 0.617 0.381  40.7  80.4   -12.3    -6.53           751.
-3              3   357 0.636 0.405  41.2  79.0    32.9     2.40           886.
-4              4   334 0.647 0.419  35.5  70.3   -48.9    -1.44           807.
+1              1   322 0.653 0.426  30.3  56.7     5.69    9.82           836.
+2              2   363 0.617 0.380  40.7  80.4   -12.3    -6.52           759.
+3              3   357 0.636 0.405  41.2  79.0    32.9     2.40           891.
+4              4   334 0.647 0.419  35.5  70.3   -49.0    -1.44           807.
 5              5   366 0.629 0.396  38.6  78.6   -20.3    -3.87           658.
-6              6   352 0.629 0.395  36.4  76.6   -27.1    -2.83           740.
-7              7   352 0.633 0.401  42.8  79.6 -1770.     -0.0451        1006.
-8              8   365 0.636 0.404  40.9  78.3    41.6     1.88           959.
-9              9   365 0.630 0.397  40.8  77.4    56.6     1.37           970.
+6              6   352 0.629 0.395  36.4  76.6   -27.0    -2.84           742.
+7              7   352 0.633 0.401  42.8  79.6 -1655.     -0.0482        1009.
+8              8   365 0.636 0.404  40.9  78.3    41.6     1.88           962.
+9              9   365 0.630 0.397  40.9  77.5    57.1     1.36           993.
 # ℹ 3 more variables: mean_ref &lt;dbl&gt;, LoA_Low &lt;dbl&gt;, LoA_High &lt;dbl&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>loso_src_SMPS_APS_lm<span class="sc">$</span>per_source <span class="sc">%&gt;%</span></span>
@@ -821,12 +821,12 @@ $ reference              &lt;chr&gt; "SMPS + APS", "SMPS + APS", "SMPS + APS", "
 <pre><code># A tibble: 6 × 12
   holdout_source      n     R     R2   MAE  RMSE     cv MeanError MeanErrorPct
   &lt;chr&gt;           &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;        &lt;dbl&gt;
-1 candles           564 0.800 0.640  115.  175.  -1.15     -115.         -78.4
-2 candles_high_RH   669 0.828 0.686   36.2  68.8 -1.79      -33.6        -45.1
-3 cigarette         576 0.882 0.778   42.3  54.9  0.828      42.3       2656. 
-4 clean_air         323 0.188 0.0353  17.0  17.1  0.111      17.0       6242. 
-5 cooking           351 0.929 0.864  121.  146.   0.680     121.         430. 
-6 cooking_high_RH   693 0.944 0.891   28.2  37.3  0.888      27.9        937. 
+1 candles           564 0.780 0.608  121.  186.  -1.16     -121.         -42.3
+2 candles_high_RH   669 0.838 0.702   46.7  83.3 -1.57      -44.7        -12.1
+3 cigarette         576 0.882 0.778   41.9  55.0  0.848      41.9       2587. 
+4 clean_air         323 0.186 0.0345  17.8  17.9  0.118      17.8       6543. 
+5 cooking           351 0.920 0.846  150.  185.   0.745     148.         248. 
+6 cooking_high_RH   693 0.940 0.884   24.1  41.1  1.49       22.9        235. 
 # ℹ 3 more variables: mean_ref &lt;dbl&gt;, LoA_Low &lt;dbl&gt;, LoA_High &lt;dbl&gt;</code></pre>
 </div>
 </div>
@@ -1144,15 +1144,15 @@ $ reference              &lt;chr&gt; "Dusttrak", "Dusttrak", "Dusttrak", "Dusttr
 <pre><code># A tibble: 9 × 14
   holdout_sensor     n     R    R2   MAE  RMSE     cv MeanError MeanErrorPct
            &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;        &lt;dbl&gt;
-1              5   366 0.967 0.936  6.78 13.5  -35.0     -0.386       44716.
-2              8   365 0.975 0.950  7.83 12.5    4.89     2.50        62508.
-3              9   365 0.968 0.938  7.23 13.4   11.4      1.17        63330.
-4              2   363 0.955 0.912  8.16 16.7   -4.80    -3.41        47809.
-5              3   357 0.960 0.922  7.46 15.8    4.46     3.46        53757.
-6              6   352 0.962 0.926  7.28 14.3   -7.89    -1.80        48945.
-7              7   352 0.976 0.952  7.59 11.8   11.1      1.07        68916.
-8              4   334 0.962 0.926  6.83 15.5   -4.15    -3.64        51729.
-9              1   322 0.984 0.968  5.36  9.01   9.09     0.987       53675.
+1              5   366 0.968 0.938  6.94 13.4  -26.6     -0.503       40602.
+2              8   365 0.976 0.952  7.65 12.3    4.75     2.55        39640.
+3              9   365 0.970 0.941  7.21 13.1   10.8      1.21        41125.
+4              2   363 0.957 0.915  8.05 16.5   -4.75    -3.41        36781.
+5              3   357 0.961 0.924  7.27 15.7    4.39     3.49        37745.
+6              6   352 0.963 0.928  7.21 14.2   -8.41    -1.68        39886.
+7              7   352 0.975 0.952  7.65 12.0   10.2      1.17        42106.
+8              4   334 0.963 0.927  6.68 15.4   -4.06    -3.70        40951.
+9              1   322 0.984 0.968  5.43  8.91  10.7      0.832       43102.
 # ℹ 5 more variables: mean_sps30 &lt;dbl&gt;, mean_ref &lt;dbl&gt;, LoA_Low &lt;dbl&gt;,
 #   LoA_High &lt;dbl&gt;, method &lt;chr&gt;</code></pre>
 </div>
@@ -1214,12 +1214,12 @@ $ reference              &lt;chr&gt; "Dusttrak", "Dusttrak", "Dusttrak", "Dusttr
 <pre><code># A tibble: 6 × 14
   holdout_source      n      R     R2   MAE  RMSE      cv MeanError MeanErrorPct
   &lt;chr&gt;           &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;        &lt;dbl&gt;
-1 cooking_high_RH   693  0.980  0.960  4.14  8.60   9.65      0.887      4940.  
-2 candles_high_RH   669  0.943  0.889  6.80 15.3  -13.4      -1.14          2.55
-3 cigarette         576  0.974  0.949  7.35 11.1    1.29      6.79     164583.  
-4 candles           564  0.979  0.958 15.9  23.3   -1.15    -15.3        3423.  
-5 cooking           351  0.964  0.929 13.7  22.2    1.90     10.4       27289.  
-6 clean_air         323 NA     NA      3.78  3.80   0.120     3.78     377501.  
+1 cooking_high_RH   693  0.980  0.960  5.27  8.27  3.55        2.25      27063. 
+2 candles_high_RH   669  0.945  0.892  7.30 15.2  -5.72       -2.62         19.4
+3 cigarette         576  0.974  0.949  6.59 11.2   1.56        6.05     120331. 
+4 candles           564  0.979  0.958 15.9  23.4  -1.15      -15.3        3994. 
+5 cooking           351  0.963  0.927 18.2  28.1   1.41       16.3         904. 
+6 clean_air         323 NA     NA      2.51  2.52  0.0690      2.51     251111. 
 # ℹ 5 more variables: mean_sps30 &lt;dbl&gt;, mean_ref &lt;dbl&gt;, LoA_Low &lt;dbl&gt;,
 #   LoA_High &lt;dbl&gt;, method &lt;chr&gt;</code></pre>
 </div>
@@ -1282,15 +1282,15 @@ $ reference              &lt;chr&gt; "Dusttrak", "Dusttrak", "Dusttrak", "Dusttr
 <pre><code># A tibble: 9 × 12
   holdout_sensor     n     R    R2   MAE  RMSE     cv MeanError MeanErrorPct
            &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;        &lt;dbl&gt;
-1              1   322 0.984 0.968  5.36  9.01   9.09     0.987       53675.
-2              2   363 0.955 0.912  8.16 16.7   -4.80    -3.41        47809.
-3              3   357 0.960 0.922  7.46 15.8    4.46     3.46        53757.
-4              4   334 0.962 0.926  6.83 15.5   -4.15    -3.64        51729.
-5              5   366 0.967 0.936  6.78 13.5  -35.0     -0.386       44716.
-6              6   352 0.962 0.926  7.28 14.3   -7.89    -1.80        48945.
-7              7   352 0.976 0.952  7.59 11.8   11.1      1.07        68916.
-8              8   365 0.975 0.950  7.83 12.5    4.89     2.50        62508.
-9              9   365 0.968 0.938  7.23 13.4   11.4      1.17        63330.
+1              1   322 0.984 0.968  5.43  8.91  10.7      0.832       43102.
+2              2   363 0.957 0.915  8.05 16.5   -4.75    -3.41        36781.
+3              3   357 0.961 0.924  7.27 15.7    4.39     3.49        37745.
+4              4   334 0.963 0.927  6.68 15.4   -4.06    -3.70        40951.
+5              5   366 0.968 0.938  6.94 13.4  -26.6     -0.503       40602.
+6              6   352 0.963 0.928  7.21 14.2   -8.41    -1.68        39886.
+7              7   352 0.975 0.952  7.65 12.0   10.2      1.17        42106.
+8              8   365 0.976 0.952  7.65 12.3    4.75     2.55        39640.
+9              9   365 0.970 0.941  7.21 13.1   10.8      1.21        41125.
 # ℹ 3 more variables: mean_ref &lt;dbl&gt;, LoA_Low &lt;dbl&gt;, LoA_High &lt;dbl&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>loso_src_dusttrak_lm<span class="sc">$</span>per_source <span class="sc">%&gt;%</span></span>
@@ -1303,12 +1303,12 @@ $ reference              &lt;chr&gt; "Dusttrak", "Dusttrak", "Dusttrak", "Dusttr
 <pre><code># A tibble: 6 × 12
   holdout_source      n      R     R2   MAE  RMSE      cv MeanError MeanErrorPct
   &lt;chr&gt;           &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;        &lt;dbl&gt;
-1 candles           564  0.979  0.958 15.9  23.3   -1.15    -15.3        3423.  
-2 candles_high_RH   669  0.943  0.889  6.80 15.3  -13.4      -1.14          2.55
-3 cigarette         576  0.974  0.949  7.35 11.1    1.29      6.79     164583.  
-4 clean_air         323 NA     NA      3.78  3.80   0.120     3.78     377501.  
-5 cooking           351  0.964  0.929 13.7  22.2    1.90     10.4       27289.  
-6 cooking_high_RH   693  0.980  0.960  4.14  8.60   9.65      0.887      4940.  
+1 candles           564  0.979  0.958 15.9  23.4  -1.15      -15.3        3994. 
+2 candles_high_RH   669  0.945  0.892  7.30 15.2  -5.72       -2.62         19.4
+3 cigarette         576  0.974  0.949  6.59 11.2   1.56        6.05     120331. 
+4 clean_air         323 NA     NA      2.51  2.52  0.0690      2.51     251111. 
+5 cooking           351  0.963  0.927 18.2  28.1   1.41       16.3         904. 
+6 cooking_high_RH   693  0.980  0.960  5.27  8.27  3.55        2.25      27063. 
 # ℹ 3 more variables: mean_ref &lt;dbl&gt;, LoA_Low &lt;dbl&gt;, LoA_High &lt;dbl&gt;</code></pre>
 </div>
 </div>
@@ -1401,23 +1401,23 @@ Caused by warning:
 <span id="cb96-27"><a href="#cb96-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb96-28"><a href="#cb96-28" aria-hidden="true" tabindex="-1"></a>table1_gt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="zbtotgaznq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#zbtotgaznq table {
+<div id="sfvhkioufp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#sfvhkioufp table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#zbtotgaznq thead, #zbtotgaznq tbody, #zbtotgaznq tfoot, #zbtotgaznq tr, #zbtotgaznq td, #zbtotgaznq th {
+#sfvhkioufp thead, #sfvhkioufp tbody, #sfvhkioufp tfoot, #sfvhkioufp tr, #sfvhkioufp td, #sfvhkioufp th {
   border-style: none;
 }
 
-#zbtotgaznq p {
+#sfvhkioufp p {
   margin: 0;
   padding: 0;
 }
 
-#zbtotgaznq .gt_table {
+#sfvhkioufp .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1443,12 +1443,12 @@ Caused by warning:
   border-left-color: #D3D3D3;
 }
 
-#zbtotgaznq .gt_caption {
+#sfvhkioufp .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#zbtotgaznq .gt_title {
+#sfvhkioufp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1460,7 +1460,7 @@ Caused by warning:
   border-bottom-width: 0;
 }
 
-#zbtotgaznq .gt_subtitle {
+#sfvhkioufp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1472,7 +1472,7 @@ Caused by warning:
   border-top-width: 0;
 }
 
-#zbtotgaznq .gt_heading {
+#sfvhkioufp .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1484,13 +1484,13 @@ Caused by warning:
   border-right-color: #D3D3D3;
 }
 
-#zbtotgaznq .gt_bottom_border {
+#sfvhkioufp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zbtotgaznq .gt_col_headings {
+#sfvhkioufp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1505,7 +1505,7 @@ Caused by warning:
   border-right-color: #D3D3D3;
 }
 
-#zbtotgaznq .gt_col_heading {
+#sfvhkioufp .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1525,7 +1525,7 @@ Caused by warning:
   overflow-x: hidden;
 }
 
-#zbtotgaznq .gt_column_spanner_outer {
+#sfvhkioufp .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1537,15 +1537,15 @@ Caused by warning:
   padding-right: 4px;
 }
 
-#zbtotgaznq .gt_column_spanner_outer:first-child {
+#sfvhkioufp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zbtotgaznq .gt_column_spanner_outer:last-child {
+#sfvhkioufp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zbtotgaznq .gt_column_spanner {
+#sfvhkioufp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1557,11 +1557,11 @@ Caused by warning:
   width: 100%;
 }
 
-#zbtotgaznq .gt_spanner_row {
+#sfvhkioufp .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#zbtotgaznq .gt_group_heading {
+#sfvhkioufp .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1587,7 +1587,7 @@ Caused by warning:
   text-align: left;
 }
 
-#zbtotgaznq .gt_empty_group_heading {
+#sfvhkioufp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1602,15 +1602,15 @@ Caused by warning:
   vertical-align: middle;
 }
 
-#zbtotgaznq .gt_from_md > :first-child {
+#sfvhkioufp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zbtotgaznq .gt_from_md > :last-child {
+#sfvhkioufp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zbtotgaznq .gt_row {
+#sfvhkioufp .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1629,7 +1629,7 @@ Caused by warning:
   overflow-x: hidden;
 }
 
-#zbtotgaznq .gt_stub {
+#sfvhkioufp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1642,7 +1642,7 @@ Caused by warning:
   padding-right: 5px;
 }
 
-#zbtotgaznq .gt_stub_row_group {
+#sfvhkioufp .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1656,15 +1656,15 @@ Caused by warning:
   vertical-align: top;
 }
 
-#zbtotgaznq .gt_row_group_first td {
+#sfvhkioufp .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#zbtotgaznq .gt_row_group_first th {
+#sfvhkioufp .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#zbtotgaznq .gt_summary_row {
+#sfvhkioufp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1674,16 +1674,16 @@ Caused by warning:
   padding-right: 5px;
 }
 
-#zbtotgaznq .gt_first_summary_row {
+#sfvhkioufp .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#zbtotgaznq .gt_first_summary_row.thick {
+#sfvhkioufp .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#zbtotgaznq .gt_last_summary_row {
+#sfvhkioufp .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1693,7 +1693,7 @@ Caused by warning:
   border-bottom-color: #D3D3D3;
 }
 
-#zbtotgaznq .gt_grand_summary_row {
+#sfvhkioufp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1703,7 +1703,7 @@ Caused by warning:
   padding-right: 5px;
 }
 
-#zbtotgaznq .gt_first_grand_summary_row {
+#sfvhkioufp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1713,7 +1713,7 @@ Caused by warning:
   border-top-color: #D3D3D3;
 }
 
-#zbtotgaznq .gt_last_grand_summary_row_top {
+#sfvhkioufp .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1723,11 +1723,11 @@ Caused by warning:
   border-bottom-color: #D3D3D3;
 }
 
-#zbtotgaznq .gt_striped {
+#sfvhkioufp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#zbtotgaznq .gt_table_body {
+#sfvhkioufp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1736,7 +1736,7 @@ Caused by warning:
   border-bottom-color: #D3D3D3;
 }
 
-#zbtotgaznq .gt_footnotes {
+#sfvhkioufp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1750,7 +1750,7 @@ Caused by warning:
   border-right-color: #D3D3D3;
 }
 
-#zbtotgaznq .gt_footnote {
+#sfvhkioufp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1759,7 +1759,7 @@ Caused by warning:
   padding-right: 5px;
 }
 
-#zbtotgaznq .gt_sourcenotes {
+#sfvhkioufp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1773,7 +1773,7 @@ Caused by warning:
   border-right-color: #D3D3D3;
 }
 
-#zbtotgaznq .gt_sourcenote {
+#sfvhkioufp .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1781,72 +1781,72 @@ Caused by warning:
   padding-right: 5px;
 }
 
-#zbtotgaznq .gt_left {
+#sfvhkioufp .gt_left {
   text-align: left;
 }
 
-#zbtotgaznq .gt_center {
+#sfvhkioufp .gt_center {
   text-align: center;
 }
 
-#zbtotgaznq .gt_right {
+#sfvhkioufp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zbtotgaznq .gt_font_normal {
+#sfvhkioufp .gt_font_normal {
   font-weight: normal;
 }
 
-#zbtotgaznq .gt_font_bold {
+#sfvhkioufp .gt_font_bold {
   font-weight: bold;
 }
 
-#zbtotgaznq .gt_font_italic {
+#sfvhkioufp .gt_font_italic {
   font-style: italic;
 }
 
-#zbtotgaznq .gt_super {
+#sfvhkioufp .gt_super {
   font-size: 65%;
 }
 
-#zbtotgaznq .gt_footnote_marks {
+#sfvhkioufp .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#zbtotgaznq .gt_asterisk {
+#sfvhkioufp .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#zbtotgaznq .gt_indent_1 {
+#sfvhkioufp .gt_indent_1 {
   text-indent: 5px;
 }
 
-#zbtotgaznq .gt_indent_2 {
+#sfvhkioufp .gt_indent_2 {
   text-indent: 10px;
 }
 
-#zbtotgaznq .gt_indent_3 {
+#sfvhkioufp .gt_indent_3 {
   text-indent: 15px;
 }
 
-#zbtotgaznq .gt_indent_4 {
+#sfvhkioufp .gt_indent_4 {
   text-indent: 20px;
 }
 
-#zbtotgaznq .gt_indent_5 {
+#sfvhkioufp .gt_indent_5 {
   text-indent: 25px;
 }
 
-#zbtotgaznq .katex-display {
+#sfvhkioufp .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#zbtotgaznq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#sfvhkioufp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2414,23 +2414,23 @@ Caused by warning:
 <span id="cb107-57"><a href="#cb107-57" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb107-58"><a href="#cb107-58" aria-hidden="true" tabindex="-1"></a>table_2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="uzqiveoalp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#uzqiveoalp table {
+<div id="hrkvxflqlx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hrkvxflqlx table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#uzqiveoalp thead, #uzqiveoalp tbody, #uzqiveoalp tfoot, #uzqiveoalp tr, #uzqiveoalp td, #uzqiveoalp th {
+#hrkvxflqlx thead, #hrkvxflqlx tbody, #hrkvxflqlx tfoot, #hrkvxflqlx tr, #hrkvxflqlx td, #hrkvxflqlx th {
   border-style: none;
 }
 
-#uzqiveoalp p {
+#hrkvxflqlx p {
   margin: 0;
   padding: 0;
 }
 
-#uzqiveoalp .gt_table {
+#hrkvxflqlx .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2456,12 +2456,12 @@ Caused by warning:
   border-left-color: #D3D3D3;
 }
 
-#uzqiveoalp .gt_caption {
+#hrkvxflqlx .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#uzqiveoalp .gt_title {
+#hrkvxflqlx .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2473,7 +2473,7 @@ Caused by warning:
   border-bottom-width: 0;
 }
 
-#uzqiveoalp .gt_subtitle {
+#hrkvxflqlx .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2485,7 +2485,7 @@ Caused by warning:
   border-top-width: 0;
 }
 
-#uzqiveoalp .gt_heading {
+#hrkvxflqlx .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2497,13 +2497,13 @@ Caused by warning:
   border-right-color: #D3D3D3;
 }
 
-#uzqiveoalp .gt_bottom_border {
+#hrkvxflqlx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#uzqiveoalp .gt_col_headings {
+#hrkvxflqlx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2518,7 +2518,7 @@ Caused by warning:
   border-right-color: #D3D3D3;
 }
 
-#uzqiveoalp .gt_col_heading {
+#hrkvxflqlx .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2538,7 +2538,7 @@ Caused by warning:
   overflow-x: hidden;
 }
 
-#uzqiveoalp .gt_column_spanner_outer {
+#hrkvxflqlx .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2550,15 +2550,15 @@ Caused by warning:
   padding-right: 4px;
 }
 
-#uzqiveoalp .gt_column_spanner_outer:first-child {
+#hrkvxflqlx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#uzqiveoalp .gt_column_spanner_outer:last-child {
+#hrkvxflqlx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#uzqiveoalp .gt_column_spanner {
+#hrkvxflqlx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2570,11 +2570,11 @@ Caused by warning:
   width: 100%;
 }
 
-#uzqiveoalp .gt_spanner_row {
+#hrkvxflqlx .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#uzqiveoalp .gt_group_heading {
+#hrkvxflqlx .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2600,7 +2600,7 @@ Caused by warning:
   text-align: left;
 }
 
-#uzqiveoalp .gt_empty_group_heading {
+#hrkvxflqlx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2615,15 +2615,15 @@ Caused by warning:
   vertical-align: middle;
 }
 
-#uzqiveoalp .gt_from_md > :first-child {
+#hrkvxflqlx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#uzqiveoalp .gt_from_md > :last-child {
+#hrkvxflqlx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#uzqiveoalp .gt_row {
+#hrkvxflqlx .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2642,7 +2642,7 @@ Caused by warning:
   overflow-x: hidden;
 }
 
-#uzqiveoalp .gt_stub {
+#hrkvxflqlx .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2655,7 +2655,7 @@ Caused by warning:
   padding-right: 5px;
 }
 
-#uzqiveoalp .gt_stub_row_group {
+#hrkvxflqlx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2669,15 +2669,15 @@ Caused by warning:
   vertical-align: top;
 }
 
-#uzqiveoalp .gt_row_group_first td {
+#hrkvxflqlx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#uzqiveoalp .gt_row_group_first th {
+#hrkvxflqlx .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#uzqiveoalp .gt_summary_row {
+#hrkvxflqlx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2687,16 +2687,16 @@ Caused by warning:
   padding-right: 5px;
 }
 
-#uzqiveoalp .gt_first_summary_row {
+#hrkvxflqlx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#uzqiveoalp .gt_first_summary_row.thick {
+#hrkvxflqlx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#uzqiveoalp .gt_last_summary_row {
+#hrkvxflqlx .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2706,7 +2706,7 @@ Caused by warning:
   border-bottom-color: #D3D3D3;
 }
 
-#uzqiveoalp .gt_grand_summary_row {
+#hrkvxflqlx .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2716,7 +2716,7 @@ Caused by warning:
   padding-right: 5px;
 }
 
-#uzqiveoalp .gt_first_grand_summary_row {
+#hrkvxflqlx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2726,7 +2726,7 @@ Caused by warning:
   border-top-color: #D3D3D3;
 }
 
-#uzqiveoalp .gt_last_grand_summary_row_top {
+#hrkvxflqlx .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2736,11 +2736,11 @@ Caused by warning:
   border-bottom-color: #D3D3D3;
 }
 
-#uzqiveoalp .gt_striped {
+#hrkvxflqlx .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#uzqiveoalp .gt_table_body {
+#hrkvxflqlx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2749,7 +2749,7 @@ Caused by warning:
   border-bottom-color: #D3D3D3;
 }
 
-#uzqiveoalp .gt_footnotes {
+#hrkvxflqlx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2763,7 +2763,7 @@ Caused by warning:
   border-right-color: #D3D3D3;
 }
 
-#uzqiveoalp .gt_footnote {
+#hrkvxflqlx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2772,7 +2772,7 @@ Caused by warning:
   padding-right: 5px;
 }
 
-#uzqiveoalp .gt_sourcenotes {
+#hrkvxflqlx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2786,7 +2786,7 @@ Caused by warning:
   border-right-color: #D3D3D3;
 }
 
-#uzqiveoalp .gt_sourcenote {
+#hrkvxflqlx .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2794,72 +2794,72 @@ Caused by warning:
   padding-right: 5px;
 }
 
-#uzqiveoalp .gt_left {
+#hrkvxflqlx .gt_left {
   text-align: left;
 }
 
-#uzqiveoalp .gt_center {
+#hrkvxflqlx .gt_center {
   text-align: center;
 }
 
-#uzqiveoalp .gt_right {
+#hrkvxflqlx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#uzqiveoalp .gt_font_normal {
+#hrkvxflqlx .gt_font_normal {
   font-weight: normal;
 }
 
-#uzqiveoalp .gt_font_bold {
+#hrkvxflqlx .gt_font_bold {
   font-weight: bold;
 }
 
-#uzqiveoalp .gt_font_italic {
+#hrkvxflqlx .gt_font_italic {
   font-style: italic;
 }
 
-#uzqiveoalp .gt_super {
+#hrkvxflqlx .gt_super {
   font-size: 65%;
 }
 
-#uzqiveoalp .gt_footnote_marks {
+#hrkvxflqlx .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#uzqiveoalp .gt_asterisk {
+#hrkvxflqlx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#uzqiveoalp .gt_indent_1 {
+#hrkvxflqlx .gt_indent_1 {
   text-indent: 5px;
 }
 
-#uzqiveoalp .gt_indent_2 {
+#hrkvxflqlx .gt_indent_2 {
   text-indent: 10px;
 }
 
-#uzqiveoalp .gt_indent_3 {
+#hrkvxflqlx .gt_indent_3 {
   text-indent: 15px;
 }
 
-#uzqiveoalp .gt_indent_4 {
+#hrkvxflqlx .gt_indent_4 {
   text-indent: 20px;
 }
 
-#uzqiveoalp .gt_indent_5 {
+#hrkvxflqlx .gt_indent_5 {
   text-indent: 25px;
 }
 
-#uzqiveoalp .katex-display {
+#hrkvxflqlx .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#uzqiveoalp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#hrkvxflqlx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2884,10 +2884,10 @@ Caused by warning:
 <td class="gt_row gt_center" headers="reference">DustTrak</td>
 <td class="gt_row gt_left" headers="method">Calibrated</td>
 <td class="gt_row gt_right" headers="r">0.95</td>
-<td class="gt_row gt_right" headers="err_pct">4.42</td>
-<td class="gt_row gt_right" headers="mean_error">−1.16</td>
-<td class="gt_row gt_right" headers="loa_low">−34.34</td>
-<td class="gt_row gt_right" headers="loa_high">32.02</td>
+<td class="gt_row gt_right" headers="err_pct">6.12</td>
+<td class="gt_row gt_right" headers="mean_error">−1.11</td>
+<td class="gt_row gt_right" headers="loa_low">−34.08</td>
+<td class="gt_row gt_right" headers="loa_high">31.86</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="reference">DustTrak</td>
@@ -2902,10 +2902,10 @@ Caused by warning:
 <td class="gt_row gt_center" headers="reference">SMPS + APS</td>
 <td class="gt_row gt_left" headers="method">Calibrated</td>
 <td class="gt_row gt_right" headers="r">0.52</td>
-<td class="gt_row gt_right" headers="err_pct">72.9</td>
-<td class="gt_row gt_right" headers="mean_error">−6.19</td>
-<td class="gt_row gt_right" headers="loa_low">−195.14</td>
-<td class="gt_row gt_right" headers="loa_high">182.75</td>
+<td class="gt_row gt_right" headers="err_pct">72.86</td>
+<td class="gt_row gt_right" headers="mean_error">−6.22</td>
+<td class="gt_row gt_right" headers="loa_low">−195.19</td>
+<td class="gt_row gt_right" headers="loa_high">182.74</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="reference">SMPS + APS</td>
@@ -3049,11 +3049,11 @@ Vedhæfter pakke: 'cowplot'</code></pre>
 <pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 99 rows containing non-finite outside the scale range
+<pre><code>Warning: Removed 98 rows containing non-finite outside the scale range
 (`stat_smooth()`).</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 99 rows containing missing values or values outside the scale range
+<pre><code>Warning: Removed 98 rows containing missing values or values outside the scale range
 (`geom_point()`).</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb128"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Add the shared legend underneath</span></span>
@@ -3172,11 +3172,11 @@ Vedhæfter pakke: 'cowplot'</code></pre>
 <pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 99 rows containing non-finite outside the scale range
+<pre><code>Warning: Removed 98 rows containing non-finite outside the scale range
 (`stat_smooth()`).</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 99 rows containing missing values or values outside the scale range
+<pre><code>Warning: Removed 98 rows containing missing values or values outside the scale range
 (`geom_point()`).</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
@@ -3211,11 +3211,11 @@ Vedhæfter pakke: 'cowplot'</code></pre>
 <pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 99 rows containing non-finite outside the scale range
+<pre><code>Warning: Removed 98 rows containing non-finite outside the scale range
 (`stat_smooth()`).</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 99 rows containing missing values or values outside the scale range
+<pre><code>Warning: Removed 98 rows containing missing values or values outside the scale range
 (`geom_point()`).</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
@@ -3355,23 +3355,23 @@ Vedhæfter pakke: 'cowplot'</code></pre>
 <span id="cb154-30"><a href="#cb154-30" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb154-31"><a href="#cb154-31" aria-hidden="true" tabindex="-1"></a>table_2S</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="wtkorjcnfn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#wtkorjcnfn table {
+<div id="yxlrpdzxac" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#yxlrpdzxac table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#wtkorjcnfn thead, #wtkorjcnfn tbody, #wtkorjcnfn tfoot, #wtkorjcnfn tr, #wtkorjcnfn td, #wtkorjcnfn th {
+#yxlrpdzxac thead, #yxlrpdzxac tbody, #yxlrpdzxac tfoot, #yxlrpdzxac tr, #yxlrpdzxac td, #yxlrpdzxac th {
   border-style: none;
 }
 
-#wtkorjcnfn p {
+#yxlrpdzxac p {
   margin: 0;
   padding: 0;
 }
 
-#wtkorjcnfn .gt_table {
+#yxlrpdzxac .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3397,12 +3397,12 @@ Vedhæfter pakke: 'cowplot'</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#wtkorjcnfn .gt_caption {
+#yxlrpdzxac .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#wtkorjcnfn .gt_title {
+#yxlrpdzxac .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3414,7 +3414,7 @@ Vedhæfter pakke: 'cowplot'</code></pre>
   border-bottom-width: 0;
 }
 
-#wtkorjcnfn .gt_subtitle {
+#yxlrpdzxac .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3426,7 +3426,7 @@ Vedhæfter pakke: 'cowplot'</code></pre>
   border-top-width: 0;
 }
 
-#wtkorjcnfn .gt_heading {
+#yxlrpdzxac .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3438,13 +3438,13 @@ Vedhæfter pakke: 'cowplot'</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#wtkorjcnfn .gt_bottom_border {
+#yxlrpdzxac .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#wtkorjcnfn .gt_col_headings {
+#yxlrpdzxac .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3459,7 +3459,7 @@ Vedhæfter pakke: 'cowplot'</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#wtkorjcnfn .gt_col_heading {
+#yxlrpdzxac .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3479,7 +3479,7 @@ Vedhæfter pakke: 'cowplot'</code></pre>
   overflow-x: hidden;
 }
 
-#wtkorjcnfn .gt_column_spanner_outer {
+#yxlrpdzxac .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3491,15 +3491,15 @@ Vedhæfter pakke: 'cowplot'</code></pre>
   padding-right: 4px;
 }
 
-#wtkorjcnfn .gt_column_spanner_outer:first-child {
+#yxlrpdzxac .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#wtkorjcnfn .gt_column_spanner_outer:last-child {
+#yxlrpdzxac .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#wtkorjcnfn .gt_column_spanner {
+#yxlrpdzxac .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3511,11 +3511,11 @@ Vedhæfter pakke: 'cowplot'</code></pre>
   width: 100%;
 }
 
-#wtkorjcnfn .gt_spanner_row {
+#yxlrpdzxac .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#wtkorjcnfn .gt_group_heading {
+#yxlrpdzxac .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3541,7 +3541,7 @@ Vedhæfter pakke: 'cowplot'</code></pre>
   text-align: left;
 }
 
-#wtkorjcnfn .gt_empty_group_heading {
+#yxlrpdzxac .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3556,15 +3556,15 @@ Vedhæfter pakke: 'cowplot'</code></pre>
   vertical-align: middle;
 }
 
-#wtkorjcnfn .gt_from_md > :first-child {
+#yxlrpdzxac .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#wtkorjcnfn .gt_from_md > :last-child {
+#yxlrpdzxac .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#wtkorjcnfn .gt_row {
+#yxlrpdzxac .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3583,7 +3583,7 @@ Vedhæfter pakke: 'cowplot'</code></pre>
   overflow-x: hidden;
 }
 
-#wtkorjcnfn .gt_stub {
+#yxlrpdzxac .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3596,7 +3596,7 @@ Vedhæfter pakke: 'cowplot'</code></pre>
   padding-right: 5px;
 }
 
-#wtkorjcnfn .gt_stub_row_group {
+#yxlrpdzxac .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3610,15 +3610,15 @@ Vedhæfter pakke: 'cowplot'</code></pre>
   vertical-align: top;
 }
 
-#wtkorjcnfn .gt_row_group_first td {
+#yxlrpdzxac .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#wtkorjcnfn .gt_row_group_first th {
+#yxlrpdzxac .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#wtkorjcnfn .gt_summary_row {
+#yxlrpdzxac .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3628,16 +3628,16 @@ Vedhæfter pakke: 'cowplot'</code></pre>
   padding-right: 5px;
 }
 
-#wtkorjcnfn .gt_first_summary_row {
+#yxlrpdzxac .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#wtkorjcnfn .gt_first_summary_row.thick {
+#yxlrpdzxac .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#wtkorjcnfn .gt_last_summary_row {
+#yxlrpdzxac .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3647,7 +3647,7 @@ Vedhæfter pakke: 'cowplot'</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#wtkorjcnfn .gt_grand_summary_row {
+#yxlrpdzxac .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3657,7 +3657,7 @@ Vedhæfter pakke: 'cowplot'</code></pre>
   padding-right: 5px;
 }
 
-#wtkorjcnfn .gt_first_grand_summary_row {
+#yxlrpdzxac .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3667,7 +3667,7 @@ Vedhæfter pakke: 'cowplot'</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#wtkorjcnfn .gt_last_grand_summary_row_top {
+#yxlrpdzxac .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3677,11 +3677,11 @@ Vedhæfter pakke: 'cowplot'</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#wtkorjcnfn .gt_striped {
+#yxlrpdzxac .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#wtkorjcnfn .gt_table_body {
+#yxlrpdzxac .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3690,7 +3690,7 @@ Vedhæfter pakke: 'cowplot'</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#wtkorjcnfn .gt_footnotes {
+#yxlrpdzxac .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3704,7 +3704,7 @@ Vedhæfter pakke: 'cowplot'</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#wtkorjcnfn .gt_footnote {
+#yxlrpdzxac .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3713,7 +3713,7 @@ Vedhæfter pakke: 'cowplot'</code></pre>
   padding-right: 5px;
 }
 
-#wtkorjcnfn .gt_sourcenotes {
+#yxlrpdzxac .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3727,7 +3727,7 @@ Vedhæfter pakke: 'cowplot'</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#wtkorjcnfn .gt_sourcenote {
+#yxlrpdzxac .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3735,72 +3735,72 @@ Vedhæfter pakke: 'cowplot'</code></pre>
   padding-right: 5px;
 }
 
-#wtkorjcnfn .gt_left {
+#yxlrpdzxac .gt_left {
   text-align: left;
 }
 
-#wtkorjcnfn .gt_center {
+#yxlrpdzxac .gt_center {
   text-align: center;
 }
 
-#wtkorjcnfn .gt_right {
+#yxlrpdzxac .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#wtkorjcnfn .gt_font_normal {
+#yxlrpdzxac .gt_font_normal {
   font-weight: normal;
 }
 
-#wtkorjcnfn .gt_font_bold {
+#yxlrpdzxac .gt_font_bold {
   font-weight: bold;
 }
 
-#wtkorjcnfn .gt_font_italic {
+#yxlrpdzxac .gt_font_italic {
   font-style: italic;
 }
 
-#wtkorjcnfn .gt_super {
+#yxlrpdzxac .gt_super {
   font-size: 65%;
 }
 
-#wtkorjcnfn .gt_footnote_marks {
+#yxlrpdzxac .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#wtkorjcnfn .gt_asterisk {
+#yxlrpdzxac .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#wtkorjcnfn .gt_indent_1 {
+#yxlrpdzxac .gt_indent_1 {
   text-indent: 5px;
 }
 
-#wtkorjcnfn .gt_indent_2 {
+#yxlrpdzxac .gt_indent_2 {
   text-indent: 10px;
 }
 
-#wtkorjcnfn .gt_indent_3 {
+#yxlrpdzxac .gt_indent_3 {
   text-indent: 15px;
 }
 
-#wtkorjcnfn .gt_indent_4 {
+#yxlrpdzxac .gt_indent_4 {
   text-indent: 20px;
 }
 
-#wtkorjcnfn .gt_indent_5 {
+#yxlrpdzxac .gt_indent_5 {
   text-indent: 25px;
 }
 
-#wtkorjcnfn .katex-display {
+#yxlrpdzxac .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#wtkorjcnfn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#yxlrpdzxac div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -4040,23 +4040,23 @@ High RH
 <span id="cb157-57"><a href="#cb157-57" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb157-58"><a href="#cb157-58" aria-hidden="true" tabindex="-1"></a>table_3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="rvkamqoyye" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#rvkamqoyye table {
+<div id="htzwqyxudp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#htzwqyxudp table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#rvkamqoyye thead, #rvkamqoyye tbody, #rvkamqoyye tfoot, #rvkamqoyye tr, #rvkamqoyye td, #rvkamqoyye th {
+#htzwqyxudp thead, #htzwqyxudp tbody, #htzwqyxudp tfoot, #htzwqyxudp tr, #htzwqyxudp td, #htzwqyxudp th {
   border-style: none;
 }
 
-#rvkamqoyye p {
+#htzwqyxudp p {
   margin: 0;
   padding: 0;
 }
 
-#rvkamqoyye .gt_table {
+#htzwqyxudp .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -4082,12 +4082,12 @@ High RH
   border-left-color: #D3D3D3;
 }
 
-#rvkamqoyye .gt_caption {
+#htzwqyxudp .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#rvkamqoyye .gt_title {
+#htzwqyxudp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4099,7 +4099,7 @@ High RH
   border-bottom-width: 0;
 }
 
-#rvkamqoyye .gt_subtitle {
+#htzwqyxudp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4111,7 +4111,7 @@ High RH
   border-top-width: 0;
 }
 
-#rvkamqoyye .gt_heading {
+#htzwqyxudp .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -4123,13 +4123,13 @@ High RH
   border-right-color: #D3D3D3;
 }
 
-#rvkamqoyye .gt_bottom_border {
+#htzwqyxudp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#rvkamqoyye .gt_col_headings {
+#htzwqyxudp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4144,7 +4144,7 @@ High RH
   border-right-color: #D3D3D3;
 }
 
-#rvkamqoyye .gt_col_heading {
+#htzwqyxudp .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4164,7 +4164,7 @@ High RH
   overflow-x: hidden;
 }
 
-#rvkamqoyye .gt_column_spanner_outer {
+#htzwqyxudp .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4176,15 +4176,15 @@ High RH
   padding-right: 4px;
 }
 
-#rvkamqoyye .gt_column_spanner_outer:first-child {
+#htzwqyxudp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#rvkamqoyye .gt_column_spanner_outer:last-child {
+#htzwqyxudp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#rvkamqoyye .gt_column_spanner {
+#htzwqyxudp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -4196,11 +4196,11 @@ High RH
   width: 100%;
 }
 
-#rvkamqoyye .gt_spanner_row {
+#htzwqyxudp .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#rvkamqoyye .gt_group_heading {
+#htzwqyxudp .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4226,7 +4226,7 @@ High RH
   text-align: left;
 }
 
-#rvkamqoyye .gt_empty_group_heading {
+#htzwqyxudp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4241,15 +4241,15 @@ High RH
   vertical-align: middle;
 }
 
-#rvkamqoyye .gt_from_md > :first-child {
+#htzwqyxudp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#rvkamqoyye .gt_from_md > :last-child {
+#htzwqyxudp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#rvkamqoyye .gt_row {
+#htzwqyxudp .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4268,7 +4268,7 @@ High RH
   overflow-x: hidden;
 }
 
-#rvkamqoyye .gt_stub {
+#htzwqyxudp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4281,7 +4281,7 @@ High RH
   padding-right: 5px;
 }
 
-#rvkamqoyye .gt_stub_row_group {
+#htzwqyxudp .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4295,15 +4295,15 @@ High RH
   vertical-align: top;
 }
 
-#rvkamqoyye .gt_row_group_first td {
+#htzwqyxudp .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#rvkamqoyye .gt_row_group_first th {
+#htzwqyxudp .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#rvkamqoyye .gt_summary_row {
+#htzwqyxudp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4313,16 +4313,16 @@ High RH
   padding-right: 5px;
 }
 
-#rvkamqoyye .gt_first_summary_row {
+#htzwqyxudp .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#rvkamqoyye .gt_first_summary_row.thick {
+#htzwqyxudp .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#rvkamqoyye .gt_last_summary_row {
+#htzwqyxudp .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4332,7 +4332,7 @@ High RH
   border-bottom-color: #D3D3D3;
 }
 
-#rvkamqoyye .gt_grand_summary_row {
+#htzwqyxudp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4342,7 +4342,7 @@ High RH
   padding-right: 5px;
 }
 
-#rvkamqoyye .gt_first_grand_summary_row {
+#htzwqyxudp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4352,7 +4352,7 @@ High RH
   border-top-color: #D3D3D3;
 }
 
-#rvkamqoyye .gt_last_grand_summary_row_top {
+#htzwqyxudp .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4362,11 +4362,11 @@ High RH
   border-bottom-color: #D3D3D3;
 }
 
-#rvkamqoyye .gt_striped {
+#htzwqyxudp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#rvkamqoyye .gt_table_body {
+#htzwqyxudp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4375,7 +4375,7 @@ High RH
   border-bottom-color: #D3D3D3;
 }
 
-#rvkamqoyye .gt_footnotes {
+#htzwqyxudp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4389,7 +4389,7 @@ High RH
   border-right-color: #D3D3D3;
 }
 
-#rvkamqoyye .gt_footnote {
+#htzwqyxudp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4398,7 +4398,7 @@ High RH
   padding-right: 5px;
 }
 
-#rvkamqoyye .gt_sourcenotes {
+#htzwqyxudp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4412,7 +4412,7 @@ High RH
   border-right-color: #D3D3D3;
 }
 
-#rvkamqoyye .gt_sourcenote {
+#htzwqyxudp .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4420,72 +4420,72 @@ High RH
   padding-right: 5px;
 }
 
-#rvkamqoyye .gt_left {
+#htzwqyxudp .gt_left {
   text-align: left;
 }
 
-#rvkamqoyye .gt_center {
+#htzwqyxudp .gt_center {
   text-align: center;
 }
 
-#rvkamqoyye .gt_right {
+#htzwqyxudp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#rvkamqoyye .gt_font_normal {
+#htzwqyxudp .gt_font_normal {
   font-weight: normal;
 }
 
-#rvkamqoyye .gt_font_bold {
+#htzwqyxudp .gt_font_bold {
   font-weight: bold;
 }
 
-#rvkamqoyye .gt_font_italic {
+#htzwqyxudp .gt_font_italic {
   font-style: italic;
 }
 
-#rvkamqoyye .gt_super {
+#htzwqyxudp .gt_super {
   font-size: 65%;
 }
 
-#rvkamqoyye .gt_footnote_marks {
+#htzwqyxudp .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#rvkamqoyye .gt_asterisk {
+#htzwqyxudp .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#rvkamqoyye .gt_indent_1 {
+#htzwqyxudp .gt_indent_1 {
   text-indent: 5px;
 }
 
-#rvkamqoyye .gt_indent_2 {
+#htzwqyxudp .gt_indent_2 {
   text-indent: 10px;
 }
 
-#rvkamqoyye .gt_indent_3 {
+#htzwqyxudp .gt_indent_3 {
   text-indent: 15px;
 }
 
-#rvkamqoyye .gt_indent_4 {
+#htzwqyxudp .gt_indent_4 {
   text-indent: 20px;
 }
 
-#rvkamqoyye .gt_indent_5 {
+#htzwqyxudp .gt_indent_5 {
   text-indent: 25px;
 }
 
-#rvkamqoyye .katex-display {
+#htzwqyxudp .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#rvkamqoyye div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#htzwqyxudp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -4513,10 +4513,10 @@ High RH
 <td class="gt_row gt_center" headers="Candles  reference">DustTrak</td>
 <td class="gt_row gt_left" headers="Candles  method">Calibrated</td>
 <td class="gt_row gt_right" headers="Candles  r">0.98</td>
-<td class="gt_row gt_right" headers="Candles  err_pct">−20.45</td>
-<td class="gt_row gt_right" headers="Candles  mean_error">−17.26</td>
-<td class="gt_row gt_right" headers="Candles  loa_low">−51.99</td>
-<td class="gt_row gt_right" headers="Candles  loa_high">17.47</td>
+<td class="gt_row gt_right" headers="Candles  err_pct">−20.39</td>
+<td class="gt_row gt_right" headers="Candles  mean_error">−17.33</td>
+<td class="gt_row gt_right" headers="Candles  loa_low">−52.24</td>
+<td class="gt_row gt_right" headers="Candles  loa_high">17.58</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="Candles  reference">DustTrak</td>
@@ -4530,11 +4530,11 @@ High RH
 <tr class="even">
 <td class="gt_row gt_center" headers="Candles  reference">SMPS + APS</td>
 <td class="gt_row gt_left" headers="Candles  method">Calibrated</td>
-<td class="gt_row gt_right" headers="Candles  r">0.78</td>
-<td class="gt_row gt_right" headers="Candles  err_pct">−76.76</td>
-<td class="gt_row gt_right" headers="Candles  mean_error">−124.08</td>
-<td class="gt_row gt_right" headers="Candles  loa_low">−384.37</td>
-<td class="gt_row gt_right" headers="Candles  loa_high">136.22</td>
+<td class="gt_row gt_right" headers="Candles  r">0.76</td>
+<td class="gt_row gt_right" headers="Candles  err_pct">−70.97</td>
+<td class="gt_row gt_right" headers="Candles  mean_error">−130.83</td>
+<td class="gt_row gt_right" headers="Candles  loa_low">−408.84</td>
+<td class="gt_row gt_right" headers="Candles  loa_high">147.19</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="Candles  reference">SMPS + APS</td>
@@ -4562,16 +4562,16 @@ High RH
 (70 - 80%)  r">0.93</td>
 <td class="gt_row gt_right" headers="Candles
 High RH
-(70 - 80%)  err_pct">3.69</td>
+(70 - 80%)  err_pct">4.09</td>
 <td class="gt_row gt_right" headers="Candles
 High RH
-(70 - 80%)  mean_error">−1.3</td>
+(70 - 80%)  mean_error">−3.32</td>
 <td class="gt_row gt_right" headers="Candles
 High RH
-(70 - 80%)  loa_low">−33.78</td>
+(70 - 80%)  loa_low">−35.03</td>
 <td class="gt_row gt_right" headers="Candles
 High RH
-(70 - 80%)  loa_high">31.18</td>
+(70 - 80%)  loa_high">28.39</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="Candles
@@ -4605,19 +4605,19 @@ High RH
 (70 - 80%)  method">Calibrated</td>
 <td class="gt_row gt_right" headers="Candles
 High RH
-(70 - 80%)  r">0.8</td>
+(70 - 80%)  r">0.81</td>
 <td class="gt_row gt_right" headers="Candles
 High RH
-(70 - 80%)  err_pct">−35.81</td>
+(70 - 80%)  err_pct">−37.67</td>
 <td class="gt_row gt_right" headers="Candles
 High RH
-(70 - 80%)  mean_error">−40.38</td>
+(70 - 80%)  mean_error">−55.02</td>
 <td class="gt_row gt_right" headers="Candles
 High RH
-(70 - 80%)  loa_low">−166.38</td>
+(70 - 80%)  loa_low">−199.21</td>
 <td class="gt_row gt_right" headers="Candles
 High RH
-(70 - 80%)  loa_high">85.62</td>
+(70 - 80%)  loa_high">89.17</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="Candles
@@ -4654,13 +4654,13 @@ Smoke  method">Calibrated</td>
 <td class="gt_row gt_right" headers="Cigarette
 Smoke  r">0.96</td>
 <td class="gt_row gt_right" headers="Cigarette
-Smoke  err_pct">37.07</td>
+Smoke  err_pct">32.09</td>
 <td class="gt_row gt_right" headers="Cigarette
-Smoke  mean_error">8.88</td>
+Smoke  mean_error">8.86</td>
 <td class="gt_row gt_right" headers="Cigarette
-Smoke  loa_low">−16.02</td>
+Smoke  loa_low">−17.63</td>
 <td class="gt_row gt_right" headers="Cigarette
-Smoke  loa_high">33.79</td>
+Smoke  loa_high">35.35</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="Cigarette
@@ -4686,13 +4686,13 @@ Smoke  method">Calibrated</td>
 <td class="gt_row gt_right" headers="Cigarette
 Smoke  r">0.78</td>
 <td class="gt_row gt_right" headers="Cigarette
-Smoke  err_pct">398.3</td>
+Smoke  err_pct">396.69</td>
 <td class="gt_row gt_right" headers="Cigarette
-Smoke  mean_error">69.28</td>
+Smoke  mean_error">69.37</td>
 <td class="gt_row gt_right" headers="Cigarette
-Smoke  loa_low">−19.65</td>
+Smoke  loa_low">−20.93</td>
 <td class="gt_row gt_right" headers="Cigarette
-Smoke  loa_high">158.21</td>
+Smoke  loa_high">159.67</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="Cigarette
@@ -4717,10 +4717,10 @@ Smoke  loa_high">130.88</td>
 <td class="gt_row gt_center" headers="Cooking  reference">DustTrak</td>
 <td class="gt_row gt_left" headers="Cooking  method">Calibrated</td>
 <td class="gt_row gt_right" headers="Cooking  r">0.95</td>
-<td class="gt_row gt_right" headers="Cooking  err_pct">13.64</td>
-<td class="gt_row gt_right" headers="Cooking  mean_error">10.93</td>
-<td class="gt_row gt_right" headers="Cooking  loa_low">−29.34</td>
-<td class="gt_row gt_right" headers="Cooking  loa_high">51.2</td>
+<td class="gt_row gt_right" headers="Cooking  err_pct">19.46</td>
+<td class="gt_row gt_right" headers="Cooking  mean_error">17.91</td>
+<td class="gt_row gt_right" headers="Cooking  loa_low">−28.33</td>
+<td class="gt_row gt_right" headers="Cooking  loa_high">64.15</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="Cooking  reference">DustTrak</td>
@@ -4734,11 +4734,11 @@ Smoke  loa_high">130.88</td>
 <tr class="odd">
 <td class="gt_row gt_center" headers="Cooking  reference">SMPS + APS</td>
 <td class="gt_row gt_left" headers="Cooking  method">Calibrated</td>
-<td class="gt_row gt_right" headers="Cooking  r">0.92</td>
-<td class="gt_row gt_right" headers="Cooking  err_pct">223.53</td>
-<td class="gt_row gt_right" headers="Cooking  mean_error">129.31</td>
-<td class="gt_row gt_right" headers="Cooking  loa_low">−26.43</td>
-<td class="gt_row gt_right" headers="Cooking  loa_high">285.05</td>
+<td class="gt_row gt_right" headers="Cooking  r">0.9</td>
+<td class="gt_row gt_right" headers="Cooking  err_pct">267.73</td>
+<td class="gt_row gt_right" headers="Cooking  mean_error">160.89</td>
+<td class="gt_row gt_right" headers="Cooking  loa_low">−47.09</td>
+<td class="gt_row gt_right" headers="Cooking  loa_high">368.86</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="Cooking  reference">SMPS + APS</td>
@@ -4766,16 +4766,16 @@ High RH
 (70 - 80%)  r">0.97</td>
 <td class="gt_row gt_right" headers="Cooking
 High RH
-(70 - 80%)  err_pct">2.38</td>
+(70 - 80%)  err_pct">15.54</td>
 <td class="gt_row gt_right" headers="Cooking
 High RH
-(70 - 80%)  mean_error">1.17</td>
+(70 - 80%)  mean_error">1.58</td>
 <td class="gt_row gt_right" headers="Cooking
 High RH
-(70 - 80%)  loa_low">−20.02</td>
+(70 - 80%)  loa_low">−18.05</td>
 <td class="gt_row gt_right" headers="Cooking
 High RH
-(70 - 80%)  loa_high">22.37</td>
+(70 - 80%)  loa_high">21.21</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="Cooking
@@ -4809,19 +4809,19 @@ High RH
 (70 - 80%)  method">Calibrated</td>
 <td class="gt_row gt_right" headers="Cooking
 High RH
-(70 - 80%)  r">0.92</td>
+(70 - 80%)  r">0.91</td>
 <td class="gt_row gt_right" headers="Cooking
 High RH
-(70 - 80%)  err_pct">194.86</td>
+(70 - 80%)  err_pct">164.73</td>
 <td class="gt_row gt_right" headers="Cooking
 High RH
-(70 - 80%)  mean_error">42.16</td>
+(70 - 80%)  mean_error">43.53</td>
 <td class="gt_row gt_right" headers="Cooking
 High RH
-(70 - 80%)  loa_low">−16.95</td>
+(70 - 80%)  loa_low">−36.3</td>
 <td class="gt_row gt_right" headers="Cooking
 High RH
-(70 - 80%)  loa_high">101.27</td>
+(70 - 80%)  loa_high">123.37</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="Cooking
@@ -4882,25 +4882,25 @@ High RH
 <pre><code># A tibble: 20 × 7
    source                    reference method mean_diff sd_diff loa_low loa_high
    &lt;fct&gt;                     &lt;fct&gt;     &lt;chr&gt;      &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
- 1 "Candles"                 DustTrak  Calib…    -17.3     17.7   -52.0     17.5
+ 1 "Candles"                 DustTrak  Calib…    -17.3     17.8   -52.2     17.6
  2 "Candles"                 DustTrak  Uncal…     -2.96    12.7   -27.9     22.0
- 3 "Candles"                 SMPS + A… Calib…   -124.     133.   -384.     136. 
+ 3 "Candles"                 SMPS + A… Calib…   -131.     142.   -409.     147. 
  4 "Candles"                 SMPS + A… Uncal…    -96.2    122.   -336.     143. 
- 5 "Candles\nHigh RH\n(70 -… DustTrak  Calib…     -1.30    16.6   -33.8     31.2
+ 5 "Candles\nHigh RH\n(70 -… DustTrak  Calib…     -3.32    16.2   -35.0     28.4
  6 "Candles\nHigh RH\n(70 -… DustTrak  Uncal…      9.49    19.5   -28.6     47.6
- 7 "Candles\nHigh RH\n(70 -… SMPS + A… Calib…    -40.4     64.3  -166.      85.6
+ 7 "Candles\nHigh RH\n(70 -… SMPS + A… Calib…    -55.0     73.6  -199.      89.2
  8 "Candles\nHigh RH\n(70 -… SMPS + A… Uncal…    -24.1     63.6  -149.     101. 
- 9 "Cigarette\nSmoke"        DustTrak  Calib…      8.88    12.7   -16.0     33.8
+ 9 "Cigarette\nSmoke"        DustTrak  Calib…      8.86    13.5   -17.6     35.3
 10 "Cigarette\nSmoke"        DustTrak  Uncal…     13.4     18.3   -22.5     49.3
-11 "Cigarette\nSmoke"        SMPS + A… Calib…     69.3     45.4   -19.6    158. 
+11 "Cigarette\nSmoke"        SMPS + A… Calib…     69.4     46.1   -20.9    160. 
 12 "Cigarette\nSmoke"        SMPS + A… Uncal…     44.3     44.2   -42.3    131. 
-13 "Cooking"                 DustTrak  Calib…     10.9     20.5   -29.3     51.2
+13 "Cooking"                 DustTrak  Calib…     17.9     23.6   -28.3     64.1
 14 "Cooking"                 DustTrak  Uncal…     24.3     25.8   -26.4     74.9
-15 "Cooking"                 SMPS + A… Calib…    129.      79.5   -26.4    285. 
+15 "Cooking"                 SMPS + A… Calib…    161.     106.    -47.1    369. 
 16 "Cooking"                 SMPS + A… Uncal…     62.3     46.2   -28.3    153. 
-17 "Cooking\nHigh RH\n(70 -… DustTrak  Calib…      1.17    10.8   -20.0     22.4
+17 "Cooking\nHigh RH\n(70 -… DustTrak  Calib…      1.58    10.0   -18.1     21.2
 18 "Cooking\nHigh RH\n(70 -… DustTrak  Uncal…      9.57    15.9   -21.6     40.8
-19 "Cooking\nHigh RH\n(70 -… SMPS + A… Calib…     42.2     30.2   -17.0    101. 
+19 "Cooking\nHigh RH\n(70 -… SMPS + A… Calib…     43.5     40.7   -36.3    123. 
 20 "Cooking\nHigh RH\n(70 -… SMPS + A… Uncal…     28.3     27.8   -26.1     82.8</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb161"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb161-1"><a href="#cb161-1" aria-hidden="true" tabindex="-1"></a>bland_altman_data_spec_loa_by_source_uncal <span class="ot">&lt;-</span> bland_altman_data_spec_loa_by_source <span class="sc">%&gt;%</span></span>
@@ -5109,23 +5109,23 @@ High RH
 <span id="cb169-8"><a href="#cb169-8" aria-hidden="true" tabindex="-1"></a><span class="co"># To view in RStudio</span></span>
 <span id="cb169-9"><a href="#cb169-9" aria-hidden="true" tabindex="-1"></a>table1s_gt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="jfgcbbfovj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#jfgcbbfovj table {
+<div id="gvgqqbopcq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#gvgqqbopcq table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#jfgcbbfovj thead, #jfgcbbfovj tbody, #jfgcbbfovj tfoot, #jfgcbbfovj tr, #jfgcbbfovj td, #jfgcbbfovj th {
+#gvgqqbopcq thead, #gvgqqbopcq tbody, #gvgqqbopcq tfoot, #gvgqqbopcq tr, #gvgqqbopcq td, #gvgqqbopcq th {
   border-style: none;
 }
 
-#jfgcbbfovj p {
+#gvgqqbopcq p {
   margin: 0;
   padding: 0;
 }
 
-#jfgcbbfovj .gt_table {
+#gvgqqbopcq .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -5151,12 +5151,12 @@ High RH
   border-left-color: #D3D3D3;
 }
 
-#jfgcbbfovj .gt_caption {
+#gvgqqbopcq .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#jfgcbbfovj .gt_title {
+#gvgqqbopcq .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -5168,7 +5168,7 @@ High RH
   border-bottom-width: 0;
 }
 
-#jfgcbbfovj .gt_subtitle {
+#gvgqqbopcq .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -5180,7 +5180,7 @@ High RH
   border-top-width: 0;
 }
 
-#jfgcbbfovj .gt_heading {
+#gvgqqbopcq .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -5192,13 +5192,13 @@ High RH
   border-right-color: #D3D3D3;
 }
 
-#jfgcbbfovj .gt_bottom_border {
+#gvgqqbopcq .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#jfgcbbfovj .gt_col_headings {
+#gvgqqbopcq .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -5213,7 +5213,7 @@ High RH
   border-right-color: #D3D3D3;
 }
 
-#jfgcbbfovj .gt_col_heading {
+#gvgqqbopcq .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5233,7 +5233,7 @@ High RH
   overflow-x: hidden;
 }
 
-#jfgcbbfovj .gt_column_spanner_outer {
+#gvgqqbopcq .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5245,15 +5245,15 @@ High RH
   padding-right: 4px;
 }
 
-#jfgcbbfovj .gt_column_spanner_outer:first-child {
+#gvgqqbopcq .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#jfgcbbfovj .gt_column_spanner_outer:last-child {
+#gvgqqbopcq .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#jfgcbbfovj .gt_column_spanner {
+#gvgqqbopcq .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -5265,11 +5265,11 @@ High RH
   width: 100%;
 }
 
-#jfgcbbfovj .gt_spanner_row {
+#gvgqqbopcq .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#jfgcbbfovj .gt_group_heading {
+#gvgqqbopcq .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5295,7 +5295,7 @@ High RH
   text-align: left;
 }
 
-#jfgcbbfovj .gt_empty_group_heading {
+#gvgqqbopcq .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -5310,15 +5310,15 @@ High RH
   vertical-align: middle;
 }
 
-#jfgcbbfovj .gt_from_md > :first-child {
+#gvgqqbopcq .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#jfgcbbfovj .gt_from_md > :last-child {
+#gvgqqbopcq .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#jfgcbbfovj .gt_row {
+#gvgqqbopcq .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5337,7 +5337,7 @@ High RH
   overflow-x: hidden;
 }
 
-#jfgcbbfovj .gt_stub {
+#gvgqqbopcq .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5350,7 +5350,7 @@ High RH
   padding-right: 5px;
 }
 
-#jfgcbbfovj .gt_stub_row_group {
+#gvgqqbopcq .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5364,15 +5364,15 @@ High RH
   vertical-align: top;
 }
 
-#jfgcbbfovj .gt_row_group_first td {
+#gvgqqbopcq .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#jfgcbbfovj .gt_row_group_first th {
+#gvgqqbopcq .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#jfgcbbfovj .gt_summary_row {
+#gvgqqbopcq .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5382,16 +5382,16 @@ High RH
   padding-right: 5px;
 }
 
-#jfgcbbfovj .gt_first_summary_row {
+#gvgqqbopcq .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#jfgcbbfovj .gt_first_summary_row.thick {
+#gvgqqbopcq .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#jfgcbbfovj .gt_last_summary_row {
+#gvgqqbopcq .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5401,7 +5401,7 @@ High RH
   border-bottom-color: #D3D3D3;
 }
 
-#jfgcbbfovj .gt_grand_summary_row {
+#gvgqqbopcq .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5411,7 +5411,7 @@ High RH
   padding-right: 5px;
 }
 
-#jfgcbbfovj .gt_first_grand_summary_row {
+#gvgqqbopcq .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5421,7 +5421,7 @@ High RH
   border-top-color: #D3D3D3;
 }
 
-#jfgcbbfovj .gt_last_grand_summary_row_top {
+#gvgqqbopcq .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5431,11 +5431,11 @@ High RH
   border-bottom-color: #D3D3D3;
 }
 
-#jfgcbbfovj .gt_striped {
+#gvgqqbopcq .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#jfgcbbfovj .gt_table_body {
+#gvgqqbopcq .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -5444,7 +5444,7 @@ High RH
   border-bottom-color: #D3D3D3;
 }
 
-#jfgcbbfovj .gt_footnotes {
+#gvgqqbopcq .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5458,7 +5458,7 @@ High RH
   border-right-color: #D3D3D3;
 }
 
-#jfgcbbfovj .gt_footnote {
+#gvgqqbopcq .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -5467,7 +5467,7 @@ High RH
   padding-right: 5px;
 }
 
-#jfgcbbfovj .gt_sourcenotes {
+#gvgqqbopcq .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5481,7 +5481,7 @@ High RH
   border-right-color: #D3D3D3;
 }
 
-#jfgcbbfovj .gt_sourcenote {
+#gvgqqbopcq .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -5489,72 +5489,72 @@ High RH
   padding-right: 5px;
 }
 
-#jfgcbbfovj .gt_left {
+#gvgqqbopcq .gt_left {
   text-align: left;
 }
 
-#jfgcbbfovj .gt_center {
+#gvgqqbopcq .gt_center {
   text-align: center;
 }
 
-#jfgcbbfovj .gt_right {
+#gvgqqbopcq .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#jfgcbbfovj .gt_font_normal {
+#gvgqqbopcq .gt_font_normal {
   font-weight: normal;
 }
 
-#jfgcbbfovj .gt_font_bold {
+#gvgqqbopcq .gt_font_bold {
   font-weight: bold;
 }
 
-#jfgcbbfovj .gt_font_italic {
+#gvgqqbopcq .gt_font_italic {
   font-style: italic;
 }
 
-#jfgcbbfovj .gt_super {
+#gvgqqbopcq .gt_super {
   font-size: 65%;
 }
 
-#jfgcbbfovj .gt_footnote_marks {
+#gvgqqbopcq .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#jfgcbbfovj .gt_asterisk {
+#gvgqqbopcq .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#jfgcbbfovj .gt_indent_1 {
+#gvgqqbopcq .gt_indent_1 {
   text-indent: 5px;
 }
 
-#jfgcbbfovj .gt_indent_2 {
+#gvgqqbopcq .gt_indent_2 {
   text-indent: 10px;
 }
 
-#jfgcbbfovj .gt_indent_3 {
+#gvgqqbopcq .gt_indent_3 {
   text-indent: 15px;
 }
 
-#jfgcbbfovj .gt_indent_4 {
+#gvgqqbopcq .gt_indent_4 {
   text-indent: 20px;
 }
 
-#jfgcbbfovj .gt_indent_5 {
+#gvgqqbopcq .gt_indent_5 {
   text-indent: 25px;
 }
 
-#jfgcbbfovj .katex-display {
+#gvgqqbopcq .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#jfgcbbfovj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#gvgqqbopcq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -5784,23 +5784,23 @@ High RH
 <span id="cb171-80"><a href="#cb171-80" aria-hidden="true" tabindex="-1"></a><span class="co"># To view in RStudio</span></span>
 <span id="cb171-81"><a href="#cb171-81" aria-hidden="true" tabindex="-1"></a>table4S_gt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="lbundneqgb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#lbundneqgb table {
+<div id="dagckuzszc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#dagckuzszc table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#lbundneqgb thead, #lbundneqgb tbody, #lbundneqgb tfoot, #lbundneqgb tr, #lbundneqgb td, #lbundneqgb th {
+#dagckuzszc thead, #dagckuzszc tbody, #dagckuzszc tfoot, #dagckuzszc tr, #dagckuzszc td, #dagckuzszc th {
   border-style: none;
 }
 
-#lbundneqgb p {
+#dagckuzszc p {
   margin: 0;
   padding: 0;
 }
 
-#lbundneqgb .gt_table {
+#dagckuzszc .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -5826,12 +5826,12 @@ High RH
   border-left-color: #D3D3D3;
 }
 
-#lbundneqgb .gt_caption {
+#dagckuzszc .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#lbundneqgb .gt_title {
+#dagckuzszc .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -5843,7 +5843,7 @@ High RH
   border-bottom-width: 0;
 }
 
-#lbundneqgb .gt_subtitle {
+#dagckuzszc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -5855,7 +5855,7 @@ High RH
   border-top-width: 0;
 }
 
-#lbundneqgb .gt_heading {
+#dagckuzszc .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -5867,13 +5867,13 @@ High RH
   border-right-color: #D3D3D3;
 }
 
-#lbundneqgb .gt_bottom_border {
+#dagckuzszc .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#lbundneqgb .gt_col_headings {
+#dagckuzszc .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -5888,7 +5888,7 @@ High RH
   border-right-color: #D3D3D3;
 }
 
-#lbundneqgb .gt_col_heading {
+#dagckuzszc .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5908,7 +5908,7 @@ High RH
   overflow-x: hidden;
 }
 
-#lbundneqgb .gt_column_spanner_outer {
+#dagckuzszc .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5920,15 +5920,15 @@ High RH
   padding-right: 4px;
 }
 
-#lbundneqgb .gt_column_spanner_outer:first-child {
+#dagckuzszc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#lbundneqgb .gt_column_spanner_outer:last-child {
+#dagckuzszc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#lbundneqgb .gt_column_spanner {
+#dagckuzszc .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -5940,11 +5940,11 @@ High RH
   width: 100%;
 }
 
-#lbundneqgb .gt_spanner_row {
+#dagckuzszc .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#lbundneqgb .gt_group_heading {
+#dagckuzszc .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5970,7 +5970,7 @@ High RH
   text-align: left;
 }
 
-#lbundneqgb .gt_empty_group_heading {
+#dagckuzszc .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -5985,15 +5985,15 @@ High RH
   vertical-align: middle;
 }
 
-#lbundneqgb .gt_from_md > :first-child {
+#dagckuzszc .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#lbundneqgb .gt_from_md > :last-child {
+#dagckuzszc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#lbundneqgb .gt_row {
+#dagckuzszc .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -6012,7 +6012,7 @@ High RH
   overflow-x: hidden;
 }
 
-#lbundneqgb .gt_stub {
+#dagckuzszc .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -6025,7 +6025,7 @@ High RH
   padding-right: 5px;
 }
 
-#lbundneqgb .gt_stub_row_group {
+#dagckuzszc .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -6039,15 +6039,15 @@ High RH
   vertical-align: top;
 }
 
-#lbundneqgb .gt_row_group_first td {
+#dagckuzszc .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#lbundneqgb .gt_row_group_first th {
+#dagckuzszc .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#lbundneqgb .gt_summary_row {
+#dagckuzszc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -6057,16 +6057,16 @@ High RH
   padding-right: 5px;
 }
 
-#lbundneqgb .gt_first_summary_row {
+#dagckuzszc .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#lbundneqgb .gt_first_summary_row.thick {
+#dagckuzszc .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#lbundneqgb .gt_last_summary_row {
+#dagckuzszc .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -6076,7 +6076,7 @@ High RH
   border-bottom-color: #D3D3D3;
 }
 
-#lbundneqgb .gt_grand_summary_row {
+#dagckuzszc .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -6086,7 +6086,7 @@ High RH
   padding-right: 5px;
 }
 
-#lbundneqgb .gt_first_grand_summary_row {
+#dagckuzszc .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -6096,7 +6096,7 @@ High RH
   border-top-color: #D3D3D3;
 }
 
-#lbundneqgb .gt_last_grand_summary_row_top {
+#dagckuzszc .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -6106,11 +6106,11 @@ High RH
   border-bottom-color: #D3D3D3;
 }
 
-#lbundneqgb .gt_striped {
+#dagckuzszc .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#lbundneqgb .gt_table_body {
+#dagckuzszc .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -6119,7 +6119,7 @@ High RH
   border-bottom-color: #D3D3D3;
 }
 
-#lbundneqgb .gt_footnotes {
+#dagckuzszc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -6133,7 +6133,7 @@ High RH
   border-right-color: #D3D3D3;
 }
 
-#lbundneqgb .gt_footnote {
+#dagckuzszc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -6142,7 +6142,7 @@ High RH
   padding-right: 5px;
 }
 
-#lbundneqgb .gt_sourcenotes {
+#dagckuzszc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -6156,7 +6156,7 @@ High RH
   border-right-color: #D3D3D3;
 }
 
-#lbundneqgb .gt_sourcenote {
+#dagckuzszc .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -6164,72 +6164,72 @@ High RH
   padding-right: 5px;
 }
 
-#lbundneqgb .gt_left {
+#dagckuzszc .gt_left {
   text-align: left;
 }
 
-#lbundneqgb .gt_center {
+#dagckuzszc .gt_center {
   text-align: center;
 }
 
-#lbundneqgb .gt_right {
+#dagckuzszc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#lbundneqgb .gt_font_normal {
+#dagckuzszc .gt_font_normal {
   font-weight: normal;
 }
 
-#lbundneqgb .gt_font_bold {
+#dagckuzszc .gt_font_bold {
   font-weight: bold;
 }
 
-#lbundneqgb .gt_font_italic {
+#dagckuzszc .gt_font_italic {
   font-style: italic;
 }
 
-#lbundneqgb .gt_super {
+#dagckuzszc .gt_super {
   font-size: 65%;
 }
 
-#lbundneqgb .gt_footnote_marks {
+#dagckuzszc .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#lbundneqgb .gt_asterisk {
+#dagckuzszc .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#lbundneqgb .gt_indent_1 {
+#dagckuzszc .gt_indent_1 {
   text-indent: 5px;
 }
 
-#lbundneqgb .gt_indent_2 {
+#dagckuzszc .gt_indent_2 {
   text-indent: 10px;
 }
 
-#lbundneqgb .gt_indent_3 {
+#dagckuzszc .gt_indent_3 {
   text-indent: 15px;
 }
 
-#lbundneqgb .gt_indent_4 {
+#dagckuzszc .gt_indent_4 {
   text-indent: 20px;
 }
 
-#lbundneqgb .gt_indent_5 {
+#dagckuzszc .gt_indent_5 {
   text-indent: 25px;
 }
 
-#lbundneqgb .katex-display {
+#dagckuzszc .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#lbundneqgb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#dagckuzszc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -6263,11 +6263,11 @@ High RH
 <td class="gt_row gt_left" headers="Candles  Method">Calibrated</td>
 <td class="gt_row gt_right" headers="Candles  r">0.98</td>
 <td class="gt_row gt_right" headers="Candles  MAE">17.9</td>
-<td class="gt_row gt_right" headers="Candles  RMSE">24.7</td>
-<td class="gt_row gt_right" headers="Candles  err_pct">-20.4499654</td>
+<td class="gt_row gt_right" headers="Candles  RMSE">24.8</td>
+<td class="gt_row gt_right" headers="Candles  err_pct">-20.3897392</td>
 <td class="gt_row gt_right" headers="Candles  Mean Error">-17.3</td>
-<td class="gt_row gt_right" headers="Candles  LoA Low">-52.0</td>
-<td class="gt_row gt_right" headers="Candles  LoA High">17.5</td>
+<td class="gt_row gt_right" headers="Candles  LoA Low">-52.2</td>
+<td class="gt_row gt_right" headers="Candles  LoA High">17.6</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="Candles  Reference">DustTrak</td>
@@ -6283,13 +6283,13 @@ High RH
 <tr class="even">
 <td class="gt_row gt_center" headers="Candles  Reference">SMPS + APS</td>
 <td class="gt_row gt_left" headers="Candles  Method">Calibrated</td>
-<td class="gt_row gt_right" headers="Candles  r">0.78</td>
-<td class="gt_row gt_right" headers="Candles  MAE">124.1</td>
-<td class="gt_row gt_right" headers="Candles  RMSE">181.7</td>
-<td class="gt_row gt_right" headers="Candles  err_pct">-76.7550365</td>
-<td class="gt_row gt_right" headers="Candles  Mean Error">-124.1</td>
-<td class="gt_row gt_right" headers="Candles  LoA Low">-384.4</td>
-<td class="gt_row gt_right" headers="Candles  LoA High">136.2</td>
+<td class="gt_row gt_right" headers="Candles  r">0.76</td>
+<td class="gt_row gt_right" headers="Candles  MAE">130.8</td>
+<td class="gt_row gt_right" headers="Candles  RMSE">192.9</td>
+<td class="gt_row gt_right" headers="Candles  err_pct">-70.9733227</td>
+<td class="gt_row gt_right" headers="Candles  Mean Error">-130.8</td>
+<td class="gt_row gt_right" headers="Candles  LoA Low">-408.8</td>
+<td class="gt_row gt_right" headers="Candles  LoA High">147.2</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="Candles  Reference">SMPS + APS</td>
@@ -6319,22 +6319,22 @@ High RH
 (70 - 80%)  r">0.93</td>
 <td class="gt_row gt_right" headers="Candles
 High RH
-(70 - 80%)  MAE">7.9</td>
+(70 - 80%)  MAE">8.4</td>
 <td class="gt_row gt_right" headers="Candles
 High RH
-(70 - 80%)  RMSE">16.6</td>
+(70 - 80%)  RMSE">16.5</td>
 <td class="gt_row gt_right" headers="Candles
 High RH
-(70 - 80%)  err_pct">3.6946338</td>
+(70 - 80%)  err_pct">4.0942553</td>
 <td class="gt_row gt_right" headers="Candles
 High RH
-(70 - 80%)  Mean Error">-1.3</td>
+(70 - 80%)  Mean Error">-3.3</td>
 <td class="gt_row gt_right" headers="Candles
 High RH
-(70 - 80%)  LoA Low">-33.8</td>
+(70 - 80%)  LoA Low">-35.0</td>
 <td class="gt_row gt_right" headers="Candles
 High RH
-(70 - 80%)  LoA High">31.2</td>
+(70 - 80%)  LoA High">28.4</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="Candles
@@ -6374,25 +6374,25 @@ High RH
 (70 - 80%)  Method">Calibrated</td>
 <td class="gt_row gt_right" headers="Candles
 High RH
-(70 - 80%)  r">0.80</td>
+(70 - 80%)  r">0.81</td>
 <td class="gt_row gt_right" headers="Candles
 High RH
-(70 - 80%)  MAE">43.4</td>
+(70 - 80%)  MAE">56.2</td>
 <td class="gt_row gt_right" headers="Candles
 High RH
-(70 - 80%)  RMSE">75.9</td>
+(70 - 80%)  RMSE">91.8</td>
 <td class="gt_row gt_right" headers="Candles
 High RH
-(70 - 80%)  err_pct">-35.8062006</td>
+(70 - 80%)  err_pct">-37.6677330</td>
 <td class="gt_row gt_right" headers="Candles
 High RH
-(70 - 80%)  Mean Error">-40.4</td>
+(70 - 80%)  Mean Error">-55.0</td>
 <td class="gt_row gt_right" headers="Candles
 High RH
-(70 - 80%)  LoA Low">-166.4</td>
+(70 - 80%)  LoA Low">-199.2</td>
 <td class="gt_row gt_right" headers="Candles
 High RH
-(70 - 80%)  LoA High">85.6</td>
+(70 - 80%)  LoA High">89.2</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="Candles
@@ -6437,15 +6437,15 @@ Smoke  r">0.96</td>
 <td class="gt_row gt_right" headers="Cigarette
 Smoke  MAE">10.1</td>
 <td class="gt_row gt_right" headers="Cigarette
-Smoke  RMSE">15.5</td>
+Smoke  RMSE">16.1</td>
 <td class="gt_row gt_right" headers="Cigarette
-Smoke  err_pct">37.0708162</td>
+Smoke  err_pct">32.0943423</td>
 <td class="gt_row gt_right" headers="Cigarette
 Smoke  Mean Error">8.9</td>
 <td class="gt_row gt_right" headers="Cigarette
-Smoke  LoA Low">-16.0</td>
+Smoke  LoA Low">-17.6</td>
 <td class="gt_row gt_right" headers="Cigarette
-Smoke  LoA High">33.8</td>
+Smoke  LoA High">35.3</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="Cigarette
@@ -6475,17 +6475,17 @@ Smoke  Method">Calibrated</td>
 <td class="gt_row gt_right" headers="Cigarette
 Smoke  r">0.78</td>
 <td class="gt_row gt_right" headers="Cigarette
-Smoke  MAE">69.3</td>
+Smoke  MAE">69.4</td>
 <td class="gt_row gt_right" headers="Cigarette
-Smoke  RMSE">82.8</td>
+Smoke  RMSE">83.2</td>
 <td class="gt_row gt_right" headers="Cigarette
-Smoke  err_pct">398.2980763</td>
+Smoke  err_pct">396.6942937</td>
 <td class="gt_row gt_right" headers="Cigarette
-Smoke  Mean Error">69.3</td>
+Smoke  Mean Error">69.4</td>
 <td class="gt_row gt_right" headers="Cigarette
-Smoke  LoA Low">-19.6</td>
+Smoke  LoA Low">-20.9</td>
 <td class="gt_row gt_right" headers="Cigarette
-Smoke  LoA High">158.2</td>
+Smoke  LoA High">159.7</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="Cigarette
@@ -6514,12 +6514,12 @@ Smoke  LoA High">130.9</td>
 <td class="gt_row gt_center" headers="Cooking  Reference">DustTrak</td>
 <td class="gt_row gt_left" headers="Cooking  Method">Calibrated</td>
 <td class="gt_row gt_right" headers="Cooking  r">0.95</td>
-<td class="gt_row gt_right" headers="Cooking  MAE">14.6</td>
-<td class="gt_row gt_right" headers="Cooking  RMSE">23.2</td>
-<td class="gt_row gt_right" headers="Cooking  err_pct">13.6420811</td>
-<td class="gt_row gt_right" headers="Cooking  Mean Error">10.9</td>
-<td class="gt_row gt_right" headers="Cooking  LoA Low">-29.3</td>
-<td class="gt_row gt_right" headers="Cooking  LoA High">51.2</td>
+<td class="gt_row gt_right" headers="Cooking  MAE">20.0</td>
+<td class="gt_row gt_right" headers="Cooking  RMSE">29.6</td>
+<td class="gt_row gt_right" headers="Cooking  err_pct">19.4611508</td>
+<td class="gt_row gt_right" headers="Cooking  Mean Error">17.9</td>
+<td class="gt_row gt_right" headers="Cooking  LoA Low">-28.3</td>
+<td class="gt_row gt_right" headers="Cooking  LoA High">64.1</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="Cooking  Reference">DustTrak</td>
@@ -6535,13 +6535,13 @@ Smoke  LoA High">130.9</td>
 <tr class="odd">
 <td class="gt_row gt_center" headers="Cooking  Reference">SMPS + APS</td>
 <td class="gt_row gt_left" headers="Cooking  Method">Calibrated</td>
-<td class="gt_row gt_right" headers="Cooking  r">0.92</td>
-<td class="gt_row gt_right" headers="Cooking  MAE">130.2</td>
-<td class="gt_row gt_right" headers="Cooking  RMSE">151.7</td>
-<td class="gt_row gt_right" headers="Cooking  err_pct">223.5316423</td>
-<td class="gt_row gt_right" headers="Cooking  Mean Error">129.3</td>
-<td class="gt_row gt_right" headers="Cooking  LoA Low">-26.4</td>
-<td class="gt_row gt_right" headers="Cooking  LoA High">285.0</td>
+<td class="gt_row gt_right" headers="Cooking  r">0.90</td>
+<td class="gt_row gt_right" headers="Cooking  MAE">162.3</td>
+<td class="gt_row gt_right" headers="Cooking  RMSE">192.6</td>
+<td class="gt_row gt_right" headers="Cooking  err_pct">267.7259201</td>
+<td class="gt_row gt_right" headers="Cooking  Mean Error">160.9</td>
+<td class="gt_row gt_right" headers="Cooking  LoA Low">-47.1</td>
+<td class="gt_row gt_right" headers="Cooking  LoA High">368.9</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="Cooking  Reference">SMPS + APS</td>
@@ -6571,22 +6571,22 @@ High RH
 (70 - 80%)  r">0.97</td>
 <td class="gt_row gt_right" headers="Cooking
 High RH
-(70 - 80%)  MAE">6.2</td>
+(70 - 80%)  MAE">6.4</td>
 <td class="gt_row gt_right" headers="Cooking
 High RH
-(70 - 80%)  RMSE">10.9</td>
+(70 - 80%)  RMSE">10.1</td>
 <td class="gt_row gt_right" headers="Cooking
 High RH
-(70 - 80%)  err_pct">2.3793051</td>
+(70 - 80%)  err_pct">15.5405746</td>
 <td class="gt_row gt_right" headers="Cooking
 High RH
-(70 - 80%)  Mean Error">1.2</td>
+(70 - 80%)  Mean Error">1.6</td>
 <td class="gt_row gt_right" headers="Cooking
 High RH
-(70 - 80%)  LoA Low">-20.0</td>
+(70 - 80%)  LoA Low">-18.1</td>
 <td class="gt_row gt_right" headers="Cooking
 High RH
-(70 - 80%)  LoA High">22.4</td>
+(70 - 80%)  LoA High">21.2</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="Cooking
@@ -6626,25 +6626,25 @@ High RH
 (70 - 80%)  Method">Calibrated</td>
 <td class="gt_row gt_right" headers="Cooking
 High RH
-(70 - 80%)  r">0.92</td>
+(70 - 80%)  r">0.91</td>
 <td class="gt_row gt_right" headers="Cooking
 High RH
-(70 - 80%)  MAE">42.9</td>
+(70 - 80%)  MAE">45.7</td>
 <td class="gt_row gt_right" headers="Cooking
 High RH
-(70 - 80%)  RMSE">51.8</td>
+(70 - 80%)  RMSE">59.6</td>
 <td class="gt_row gt_right" headers="Cooking
 High RH
-(70 - 80%)  err_pct">194.8561778</td>
+(70 - 80%)  err_pct">164.7314142</td>
 <td class="gt_row gt_right" headers="Cooking
 High RH
-(70 - 80%)  Mean Error">42.2</td>
+(70 - 80%)  Mean Error">43.5</td>
 <td class="gt_row gt_right" headers="Cooking
 High RH
-(70 - 80%)  LoA Low">-17.0</td>
+(70 - 80%)  LoA Low">-36.3</td>
 <td class="gt_row gt_right" headers="Cooking
 High RH
-(70 - 80%)  LoA High">101.3</td>
+(70 - 80%)  LoA High">123.4</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="Cooking
@@ -6766,23 +6766,23 @@ High RH
 <span id="cb173-76"><a href="#cb173-76" aria-hidden="true" tabindex="-1"></a><span class="co"># To view in RStudio</span></span>
 <span id="cb173-77"><a href="#cb173-77" aria-hidden="true" tabindex="-1"></a>table3S_gt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="hhwhimjhrc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#hhwhimjhrc table {
+<div id="jmbiqzjych" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jmbiqzjych table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#hhwhimjhrc thead, #hhwhimjhrc tbody, #hhwhimjhrc tfoot, #hhwhimjhrc tr, #hhwhimjhrc td, #hhwhimjhrc th {
+#jmbiqzjych thead, #jmbiqzjych tbody, #jmbiqzjych tfoot, #jmbiqzjych tr, #jmbiqzjych td, #jmbiqzjych th {
   border-style: none;
 }
 
-#hhwhimjhrc p {
+#jmbiqzjych p {
   margin: 0;
   padding: 0;
 }
 
-#hhwhimjhrc .gt_table {
+#jmbiqzjych .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -6808,12 +6808,12 @@ High RH
   border-left-color: #D3D3D3;
 }
 
-#hhwhimjhrc .gt_caption {
+#jmbiqzjych .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#hhwhimjhrc .gt_title {
+#jmbiqzjych .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -6825,7 +6825,7 @@ High RH
   border-bottom-width: 0;
 }
 
-#hhwhimjhrc .gt_subtitle {
+#jmbiqzjych .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -6837,7 +6837,7 @@ High RH
   border-top-width: 0;
 }
 
-#hhwhimjhrc .gt_heading {
+#jmbiqzjych .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -6849,13 +6849,13 @@ High RH
   border-right-color: #D3D3D3;
 }
 
-#hhwhimjhrc .gt_bottom_border {
+#jmbiqzjych .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#hhwhimjhrc .gt_col_headings {
+#jmbiqzjych .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -6870,7 +6870,7 @@ High RH
   border-right-color: #D3D3D3;
 }
 
-#hhwhimjhrc .gt_col_heading {
+#jmbiqzjych .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -6890,7 +6890,7 @@ High RH
   overflow-x: hidden;
 }
 
-#hhwhimjhrc .gt_column_spanner_outer {
+#jmbiqzjych .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -6902,15 +6902,15 @@ High RH
   padding-right: 4px;
 }
 
-#hhwhimjhrc .gt_column_spanner_outer:first-child {
+#jmbiqzjych .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#hhwhimjhrc .gt_column_spanner_outer:last-child {
+#jmbiqzjych .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#hhwhimjhrc .gt_column_spanner {
+#jmbiqzjych .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -6922,11 +6922,11 @@ High RH
   width: 100%;
 }
 
-#hhwhimjhrc .gt_spanner_row {
+#jmbiqzjych .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#hhwhimjhrc .gt_group_heading {
+#jmbiqzjych .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -6952,7 +6952,7 @@ High RH
   text-align: left;
 }
 
-#hhwhimjhrc .gt_empty_group_heading {
+#jmbiqzjych .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -6967,15 +6967,15 @@ High RH
   vertical-align: middle;
 }
 
-#hhwhimjhrc .gt_from_md > :first-child {
+#jmbiqzjych .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#hhwhimjhrc .gt_from_md > :last-child {
+#jmbiqzjych .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#hhwhimjhrc .gt_row {
+#jmbiqzjych .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -6994,7 +6994,7 @@ High RH
   overflow-x: hidden;
 }
 
-#hhwhimjhrc .gt_stub {
+#jmbiqzjych .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -7007,7 +7007,7 @@ High RH
   padding-right: 5px;
 }
 
-#hhwhimjhrc .gt_stub_row_group {
+#jmbiqzjych .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -7021,15 +7021,15 @@ High RH
   vertical-align: top;
 }
 
-#hhwhimjhrc .gt_row_group_first td {
+#jmbiqzjych .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#hhwhimjhrc .gt_row_group_first th {
+#jmbiqzjych .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#hhwhimjhrc .gt_summary_row {
+#jmbiqzjych .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -7039,16 +7039,16 @@ High RH
   padding-right: 5px;
 }
 
-#hhwhimjhrc .gt_first_summary_row {
+#jmbiqzjych .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#hhwhimjhrc .gt_first_summary_row.thick {
+#jmbiqzjych .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#hhwhimjhrc .gt_last_summary_row {
+#jmbiqzjych .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -7058,7 +7058,7 @@ High RH
   border-bottom-color: #D3D3D3;
 }
 
-#hhwhimjhrc .gt_grand_summary_row {
+#jmbiqzjych .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -7068,7 +7068,7 @@ High RH
   padding-right: 5px;
 }
 
-#hhwhimjhrc .gt_first_grand_summary_row {
+#jmbiqzjych .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -7078,7 +7078,7 @@ High RH
   border-top-color: #D3D3D3;
 }
 
-#hhwhimjhrc .gt_last_grand_summary_row_top {
+#jmbiqzjych .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -7088,11 +7088,11 @@ High RH
   border-bottom-color: #D3D3D3;
 }
 
-#hhwhimjhrc .gt_striped {
+#jmbiqzjych .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#hhwhimjhrc .gt_table_body {
+#jmbiqzjych .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -7101,7 +7101,7 @@ High RH
   border-bottom-color: #D3D3D3;
 }
 
-#hhwhimjhrc .gt_footnotes {
+#jmbiqzjych .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -7115,7 +7115,7 @@ High RH
   border-right-color: #D3D3D3;
 }
 
-#hhwhimjhrc .gt_footnote {
+#jmbiqzjych .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -7124,7 +7124,7 @@ High RH
   padding-right: 5px;
 }
 
-#hhwhimjhrc .gt_sourcenotes {
+#jmbiqzjych .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -7138,7 +7138,7 @@ High RH
   border-right-color: #D3D3D3;
 }
 
-#hhwhimjhrc .gt_sourcenote {
+#jmbiqzjych .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -7146,72 +7146,72 @@ High RH
   padding-right: 5px;
 }
 
-#hhwhimjhrc .gt_left {
+#jmbiqzjych .gt_left {
   text-align: left;
 }
 
-#hhwhimjhrc .gt_center {
+#jmbiqzjych .gt_center {
   text-align: center;
 }
 
-#hhwhimjhrc .gt_right {
+#jmbiqzjych .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#hhwhimjhrc .gt_font_normal {
+#jmbiqzjych .gt_font_normal {
   font-weight: normal;
 }
 
-#hhwhimjhrc .gt_font_bold {
+#jmbiqzjych .gt_font_bold {
   font-weight: bold;
 }
 
-#hhwhimjhrc .gt_font_italic {
+#jmbiqzjych .gt_font_italic {
   font-style: italic;
 }
 
-#hhwhimjhrc .gt_super {
+#jmbiqzjych .gt_super {
   font-size: 65%;
 }
 
-#hhwhimjhrc .gt_footnote_marks {
+#jmbiqzjych .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#hhwhimjhrc .gt_asterisk {
+#jmbiqzjych .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#hhwhimjhrc .gt_indent_1 {
+#jmbiqzjych .gt_indent_1 {
   text-indent: 5px;
 }
 
-#hhwhimjhrc .gt_indent_2 {
+#jmbiqzjych .gt_indent_2 {
   text-indent: 10px;
 }
 
-#hhwhimjhrc .gt_indent_3 {
+#jmbiqzjych .gt_indent_3 {
   text-indent: 15px;
 }
 
-#hhwhimjhrc .gt_indent_4 {
+#jmbiqzjych .gt_indent_4 {
   text-indent: 20px;
 }
 
-#hhwhimjhrc .gt_indent_5 {
+#jmbiqzjych .gt_indent_5 {
   text-indent: 25px;
 }
 
-#hhwhimjhrc .katex-display {
+#jmbiqzjych .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#hhwhimjhrc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#jmbiqzjych div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -7244,12 +7244,12 @@ High RH
 <td class="gt_row gt_center" headers="1  Reference">DustTrak</td>
 <td class="gt_row gt_left" headers="1  Method">Calibrated</td>
 <td class="gt_row gt_right" headers="1  r">0.98</td>
-<td class="gt_row gt_right" headers="1  MAE">7.3</td>
-<td class="gt_row gt_right" headers="1  RMSE">11.2</td>
-<td class="gt_row gt_right" headers="1  err_pct">2.917169</td>
-<td class="gt_row gt_right" headers="1  Mean Error">0.5</td>
-<td class="gt_row gt_right" headers="1  LoA Low">-21.5</td>
-<td class="gt_row gt_right" headers="1  LoA High">22.5</td>
+<td class="gt_row gt_right" headers="1  MAE">7.4</td>
+<td class="gt_row gt_right" headers="1  RMSE">11.1</td>
+<td class="gt_row gt_right" headers="1  err_pct">5.471660</td>
+<td class="gt_row gt_right" headers="1  Mean Error">0.1</td>
+<td class="gt_row gt_right" headers="1  LoA Low">-21.7</td>
+<td class="gt_row gt_right" headers="1  LoA High">21.9</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="1  Reference">DustTrak</td>
@@ -7266,12 +7266,12 @@ High RH
 <td class="gt_row gt_center" headers="1  Reference">SMPS + APS</td>
 <td class="gt_row gt_left" headers="1  Method">Calibrated</td>
 <td class="gt_row gt_right" headers="1  r">0.53</td>
-<td class="gt_row gt_right" headers="1  MAE">45.8</td>
-<td class="gt_row gt_right" headers="1  RMSE">73.8</td>
-<td class="gt_row gt_right" headers="1  err_pct">83.054825</td>
-<td class="gt_row gt_right" headers="1  Mean Error">10.9</td>
-<td class="gt_row gt_right" headers="1  LoA Low">-132.6</td>
-<td class="gt_row gt_right" headers="1  LoA High">154.4</td>
+<td class="gt_row gt_right" headers="1  MAE">45.9</td>
+<td class="gt_row gt_right" headers="1  RMSE">74.0</td>
+<td class="gt_row gt_right" headers="1  err_pct">83.467546</td>
+<td class="gt_row gt_right" headers="1  Mean Error">10.7</td>
+<td class="gt_row gt_right" headers="1  LoA Low">-133.2</td>
+<td class="gt_row gt_right" headers="1  LoA High">154.5</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="1  Reference">SMPS + APS</td>
@@ -7291,12 +7291,12 @@ High RH
 <td class="gt_row gt_center" headers="2  Reference">DustTrak</td>
 <td class="gt_row gt_left" headers="2  Method">Calibrated</td>
 <td class="gt_row gt_right" headers="2  r">0.94</td>
-<td class="gt_row gt_right" headers="2  MAE">11.3</td>
-<td class="gt_row gt_right" headers="2  RMSE">20.4</td>
-<td class="gt_row gt_right" headers="2  err_pct">1.924911</td>
+<td class="gt_row gt_right" headers="2  MAE">11.2</td>
+<td class="gt_row gt_right" headers="2  RMSE">20.2</td>
+<td class="gt_row gt_right" headers="2  err_pct">3.375215</td>
 <td class="gt_row gt_right" headers="2  Mean Error">-6.1</td>
-<td class="gt_row gt_right" headers="2  LoA Low">-44.4</td>
-<td class="gt_row gt_right" headers="2  LoA High">32.2</td>
+<td class="gt_row gt_right" headers="2  LoA Low">-44.0</td>
+<td class="gt_row gt_right" headers="2  LoA High">31.8</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="2  Reference">DustTrak</td>
@@ -7315,7 +7315,7 @@ High RH
 <td class="gt_row gt_right" headers="2  r">0.50</td>
 <td class="gt_row gt_right" headers="2  MAE">60.1</td>
 <td class="gt_row gt_right" headers="2  RMSE">101.8</td>
-<td class="gt_row gt_right" headers="2  err_pct">65.839841</td>
+<td class="gt_row gt_right" headers="2  err_pct">65.694826</td>
 <td class="gt_row gt_right" headers="2  Mean Error">-16.0</td>
 <td class="gt_row gt_right" headers="2  LoA Low">-213.5</td>
 <td class="gt_row gt_right" headers="2  LoA High">181.5</td>
@@ -7337,13 +7337,13 @@ High RH
 <tr class="even gt_row_group_first">
 <td class="gt_row gt_center" headers="3  Reference">DustTrak</td>
 <td class="gt_row gt_left" headers="3  Method">Calibrated</td>
-<td class="gt_row gt_right" headers="3  r">0.94</td>
-<td class="gt_row gt_right" headers="3  MAE">10.1</td>
-<td class="gt_row gt_right" headers="3  RMSE">19.4</td>
-<td class="gt_row gt_right" headers="3  err_pct">19.791154</td>
-<td class="gt_row gt_right" headers="3  Mean Error">4.0</td>
-<td class="gt_row gt_right" headers="3  LoA Low">-33.3</td>
-<td class="gt_row gt_right" headers="3  LoA High">41.3</td>
+<td class="gt_row gt_right" headers="3  r">0.95</td>
+<td class="gt_row gt_right" headers="3  MAE">9.9</td>
+<td class="gt_row gt_right" headers="3  RMSE">19.2</td>
+<td class="gt_row gt_right" headers="3  err_pct">20.917273</td>
+<td class="gt_row gt_right" headers="3  Mean Error">4.1</td>
+<td class="gt_row gt_right" headers="3  LoA Low">-32.8</td>
+<td class="gt_row gt_right" headers="3  LoA High">41.1</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="3  Reference">DustTrak</td>
@@ -7362,8 +7362,8 @@ High RH
 <td class="gt_row gt_right" headers="3  r">0.53</td>
 <td class="gt_row gt_right" headers="3  MAE">61.0</td>
 <td class="gt_row gt_right" headers="3  RMSE">100.8</td>
-<td class="gt_row gt_right" headers="3  err_pct">94.856184</td>
-<td class="gt_row gt_right" headers="3  Mean Error">-2.7</td>
+<td class="gt_row gt_right" headers="3  err_pct">94.803680</td>
+<td class="gt_row gt_right" headers="3  Mean Error">-2.8</td>
 <td class="gt_row gt_right" headers="3  LoA Low">-200.7</td>
 <td class="gt_row gt_right" headers="3  LoA High">195.2</td>
 </tr>
@@ -7385,12 +7385,12 @@ High RH
 <td class="gt_row gt_center" headers="4  Reference">DustTrak</td>
 <td class="gt_row gt_left" headers="4  Method">Calibrated</td>
 <td class="gt_row gt_right" headers="4  r">0.95</td>
-<td class="gt_row gt_right" headers="4  MAE">9.5</td>
+<td class="gt_row gt_right" headers="4  MAE">9.3</td>
 <td class="gt_row gt_right" headers="4  RMSE">19.2</td>
-<td class="gt_row gt_right" headers="4  err_pct">-7.397122</td>
-<td class="gt_row gt_right" headers="4  Mean Error">-6.6</td>
+<td class="gt_row gt_right" headers="4  err_pct">-5.221074</td>
+<td class="gt_row gt_right" headers="4  Mean Error">-6.7</td>
 <td class="gt_row gt_right" headers="4  LoA Low">-42.0</td>
-<td class="gt_row gt_right" headers="4  LoA High">28.8</td>
+<td class="gt_row gt_right" headers="4  LoA High">28.5</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="4  Reference">DustTrak</td>
@@ -7409,7 +7409,7 @@ High RH
 <td class="gt_row gt_right" headers="4  r">0.54</td>
 <td class="gt_row gt_right" headers="4  MAE">53.2</td>
 <td class="gt_row gt_right" headers="4  RMSE">90.2</td>
-<td class="gt_row gt_right" headers="4  err_pct">58.798458</td>
+<td class="gt_row gt_right" headers="4  err_pct">58.782100</td>
 <td class="gt_row gt_right" headers="4  Mean Error">-8.1</td>
 <td class="gt_row gt_right" headers="4  LoA Low">-184.7</td>
 <td class="gt_row gt_right" headers="4  LoA High">168.5</td>
@@ -7432,12 +7432,12 @@ High RH
 <td class="gt_row gt_center" headers="5  Reference">DustTrak</td>
 <td class="gt_row gt_left" headers="5  Method">Calibrated</td>
 <td class="gt_row gt_right" headers="5  r">0.95</td>
-<td class="gt_row gt_right" headers="5  MAE">9.1</td>
-<td class="gt_row gt_right" headers="5  RMSE">16.4</td>
-<td class="gt_row gt_right" headers="5  err_pct">1.860639</td>
-<td class="gt_row gt_right" headers="5  Mean Error">-1.6</td>
+<td class="gt_row gt_right" headers="5  MAE">9.2</td>
+<td class="gt_row gt_right" headers="5  RMSE">16.2</td>
+<td class="gt_row gt_right" headers="5  err_pct">3.722185</td>
+<td class="gt_row gt_right" headers="5  Mean Error">-2.0</td>
 <td class="gt_row gt_right" headers="5  LoA Low">-33.6</td>
-<td class="gt_row gt_right" headers="5  LoA High">30.4</td>
+<td class="gt_row gt_right" headers="5  LoA High">29.7</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="5  Reference">DustTrak</td>
@@ -7456,7 +7456,7 @@ High RH
 <td class="gt_row gt_right" headers="5  r">0.52</td>
 <td class="gt_row gt_right" headers="5  MAE">56.6</td>
 <td class="gt_row gt_right" headers="5  RMSE">98.9</td>
-<td class="gt_row gt_right" headers="5  err_pct">59.232014</td>
+<td class="gt_row gt_right" headers="5  err_pct">59.220007</td>
 <td class="gt_row gt_right" headers="5  Mean Error">-10.7</td>
 <td class="gt_row gt_right" headers="5  LoA Low">-203.8</td>
 <td class="gt_row gt_right" headers="5  LoA High">182.3</td>
@@ -7479,12 +7479,12 @@ High RH
 <td class="gt_row gt_center" headers="6  Reference">DustTrak</td>
 <td class="gt_row gt_left" headers="6  Method">Calibrated</td>
 <td class="gt_row gt_right" headers="6  r">0.95</td>
-<td class="gt_row gt_right" headers="6  MAE">10.1</td>
-<td class="gt_row gt_right" headers="6  RMSE">17.6</td>
-<td class="gt_row gt_right" headers="6  err_pct">-3.886903</td>
-<td class="gt_row gt_right" headers="6  Mean Error">-3.8</td>
-<td class="gt_row gt_right" headers="6  LoA Low">-37.5</td>
-<td class="gt_row gt_right" headers="6  LoA High">29.8</td>
+<td class="gt_row gt_right" headers="6  MAE">9.9</td>
+<td class="gt_row gt_right" headers="6  RMSE">17.4</td>
+<td class="gt_row gt_right" headers="6  err_pct">-1.380677</td>
+<td class="gt_row gt_right" headers="6  Mean Error">-3.7</td>
+<td class="gt_row gt_right" headers="6  LoA Low">-37.2</td>
+<td class="gt_row gt_right" headers="6  LoA High">29.7</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="6  Reference">DustTrak</td>
@@ -7503,8 +7503,8 @@ High RH
 <td class="gt_row gt_right" headers="6  r">0.52</td>
 <td class="gt_row gt_right" headers="6  MAE">54.7</td>
 <td class="gt_row gt_right" headers="6  RMSE">98.1</td>
-<td class="gt_row gt_right" headers="6  err_pct">58.149200</td>
-<td class="gt_row gt_right" headers="6  Mean Error">-10.0</td>
+<td class="gt_row gt_right" headers="6  err_pct">57.917424</td>
+<td class="gt_row gt_right" headers="6  Mean Error">-9.9</td>
 <td class="gt_row gt_right" headers="6  LoA Low">-201.7</td>
 <td class="gt_row gt_right" headers="6  LoA High">181.8</td>
 </tr>
@@ -7525,13 +7525,13 @@ High RH
 <tr class="even gt_row_group_first">
 <td class="gt_row gt_center" headers="7  Reference">DustTrak</td>
 <td class="gt_row gt_left" headers="7  Method">Calibrated</td>
-<td class="gt_row gt_right" headers="7  r">0.97</td>
-<td class="gt_row gt_right" headers="7  MAE">10.2</td>
-<td class="gt_row gt_right" headers="7  RMSE">14.5</td>
-<td class="gt_row gt_right" headers="7  err_pct">7.652957</td>
-<td class="gt_row gt_right" headers="7  Mean Error">0.1</td>
+<td class="gt_row gt_right" headers="7  r">0.96</td>
+<td class="gt_row gt_right" headers="7  MAE">10.6</td>
+<td class="gt_row gt_right" headers="7  RMSE">14.8</td>
+<td class="gt_row gt_right" headers="7  err_pct">9.097278</td>
+<td class="gt_row gt_right" headers="7  Mean Error">0.6</td>
 <td class="gt_row gt_right" headers="7  LoA Low">-28.4</td>
-<td class="gt_row gt_right" headers="7  LoA High">28.7</td>
+<td class="gt_row gt_right" headers="7  LoA High">29.6</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="7  Reference">DustTrak</td>
@@ -7550,9 +7550,9 @@ High RH
 <td class="gt_row gt_right" headers="7  r">0.52</td>
 <td class="gt_row gt_right" headers="7  MAE">63.1</td>
 <td class="gt_row gt_right" headers="7  RMSE">101.8</td>
-<td class="gt_row gt_right" headers="7  err_pct">79.735677</td>
+<td class="gt_row gt_right" headers="7  err_pct">79.709459</td>
 <td class="gt_row gt_right" headers="7  Mean Error">-7.6</td>
-<td class="gt_row gt_right" headers="7  LoA Low">-207.0</td>
+<td class="gt_row gt_right" headers="7  LoA Low">-207.1</td>
 <td class="gt_row gt_right" headers="7  LoA High">191.8</td>
 </tr>
 <tr class="odd">
@@ -7572,12 +7572,12 @@ High RH
 <tr class="odd gt_row_group_first">
 <td class="gt_row gt_center" headers="8  Reference">DustTrak</td>
 <td class="gt_row gt_left" headers="8  Method">Calibrated</td>
-<td class="gt_row gt_right" headers="8  r">0.96</td>
+<td class="gt_row gt_right" headers="8  r">0.97</td>
 <td class="gt_row gt_right" headers="8  MAE">10.5</td>
-<td class="gt_row gt_right" headers="8  RMSE">15.2</td>
-<td class="gt_row gt_right" headers="8  err_pct">9.123072</td>
-<td class="gt_row gt_right" headers="8  Mean Error">2.4</td>
-<td class="gt_row gt_right" headers="8  LoA Low">-27.0</td>
+<td class="gt_row gt_right" headers="8  RMSE">15.1</td>
+<td class="gt_row gt_right" headers="8  err_pct">10.610295</td>
+<td class="gt_row gt_right" headers="8  Mean Error">2.7</td>
+<td class="gt_row gt_right" headers="8  LoA Low">-26.4</td>
 <td class="gt_row gt_right" headers="8  LoA High">31.9</td>
 </tr>
 <tr class="even">
@@ -7597,7 +7597,7 @@ High RH
 <td class="gt_row gt_right" headers="8  r">0.53</td>
 <td class="gt_row gt_right" headers="8  MAE">59.1</td>
 <td class="gt_row gt_right" headers="8  RMSE">98.9</td>
-<td class="gt_row gt_right" headers="8  err_pct">80.888555</td>
+<td class="gt_row gt_right" headers="8  err_pct">80.833437</td>
 <td class="gt_row gt_right" headers="8  Mean Error">-3.9</td>
 <td class="gt_row gt_right" headers="8  LoA Low">-198.0</td>
 <td class="gt_row gt_right" headers="8  LoA High">190.2</td>
@@ -7619,13 +7619,13 @@ High RH
 <tr class="even gt_row_group_first">
 <td class="gt_row gt_center" headers="9  Reference">DustTrak</td>
 <td class="gt_row gt_left" headers="9  Method">Calibrated</td>
-<td class="gt_row gt_right" headers="9  r">0.95</td>
-<td class="gt_row gt_right" headers="9  MAE">9.6</td>
-<td class="gt_row gt_right" headers="9  RMSE">16.3</td>
-<td class="gt_row gt_right" headers="9  err_pct">6.632984</td>
-<td class="gt_row gt_right" headers="9  Mean Error">0.4</td>
-<td class="gt_row gt_right" headers="9  LoA Low">-31.7</td>
-<td class="gt_row gt_right" headers="9  LoA High">32.5</td>
+<td class="gt_row gt_right" headers="9  r">0.96</td>
+<td class="gt_row gt_right" headers="9  MAE">9.8</td>
+<td class="gt_row gt_right" headers="9  RMSE">16.0</td>
+<td class="gt_row gt_right" headers="9  err_pct">7.548248</td>
+<td class="gt_row gt_right" headers="9  Mean Error">0.7</td>
+<td class="gt_row gt_right" headers="9  LoA Low">-30.7</td>
+<td class="gt_row gt_right" headers="9  LoA High">32.1</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="9  Reference">DustTrak</td>
@@ -7643,11 +7643,11 @@ High RH
 <td class="gt_row gt_left" headers="9  Method">Calibrated</td>
 <td class="gt_row gt_right" headers="9  r">0.52</td>
 <td class="gt_row gt_right" headers="9  MAE">58.8</td>
-<td class="gt_row gt_right" headers="9  RMSE">97.8</td>
-<td class="gt_row gt_right" headers="9  err_pct">76.449513</td>
-<td class="gt_row gt_right" headers="9  Mean Error">-4.9</td>
-<td class="gt_row gt_right" headers="9  LoA Low">-196.8</td>
-<td class="gt_row gt_right" headers="9  LoA High">187.1</td>
+<td class="gt_row gt_right" headers="9  RMSE">97.9</td>
+<td class="gt_row gt_right" headers="9  err_pct">76.255190</td>
+<td class="gt_row gt_right" headers="9  Mean Error">-5.0</td>
+<td class="gt_row gt_right" headers="9  LoA Low">-196.9</td>
+<td class="gt_row gt_right" headers="9  LoA High">187.0</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="9  Reference">SMPS + APS</td>

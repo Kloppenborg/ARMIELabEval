@@ -98,7 +98,7 @@ prepare_for_modeling <- function(df, ref_col = "PM2.5_ref") {
 # keep your original fit_base_model as-is if you want
 fit_base_model <- function(train, ref_col = "PM2.5_ref",
                            predictor_col = "SPS30_PM2.5") {
-  f <- as.formula(paste(ref_col, "~", predictor_col, "+ SHTC3_RH"))
+  f <- as.formula(paste(ref_col, "~", predictor_col, "* SHTC3_RH"))
   fit <- lm(f, data = train)
   list(
     model = fit,
