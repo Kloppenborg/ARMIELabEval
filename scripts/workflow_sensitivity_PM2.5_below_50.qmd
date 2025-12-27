@@ -692,7 +692,7 @@ figure1 <- ggplot(
   labs(
     # title = "PM2.5 concentrations over time (elapsed minutes per source)",
     x = "Elapsed time (minutes)",
-    y = "PM2.5 (µg/m³)",
+    y = expression(PM[2.5] * "(µg/m³)"),
     color = "Instrument"
   ) +
   scale_color_manual(values = c(
@@ -786,13 +786,13 @@ p_uncal_AE <- by_sensor_data |>
   xlim(0, 850) +
   facet_wrap(~source) +
   labs(
-    title = "ARMIE PM2.5 vs Reference PM2.5 Concentrations",
+    title = expression("ARMIE " * PM[2.5] * " vs Reference PM2.5 Concentrations"),
     subtitle = "Uncalibrated values from the ARMIE sensor",
-    x = "Reference PM2.5 (µg/m³)",
-    y = "ARMIE PM2.5 (µg/m³)",
+    x = expression("Reference " * PM[2.5] * " (µg/m³)"),
+    y = expression("ARMIE " * PM[2.5] * " (µg/m³)"),
     color = "Comparison"
   ) +
-  theme_minimal() +
+  theme_bw() +
   scale_color_manual(values = c(
     "DustTrak" = "#E69F00",
     "SMPS + APS" = "#56B4E9"
@@ -808,13 +808,13 @@ p_cal_AE <- by_sensor_data |>
   xlim(0, 850) +
   facet_wrap(~source) +
   labs(
-    title = "ARMIE PM2.5 vs Reference PM2.5 Concentrations",
+    title = expression("ARMIE " * PM[2.5] * " vs Reference " * PM[2.5] * " Concentrations"),
     subtitle = "Calibrated values from the ARMIE sensor",
-    x = "Reference PM2.5 (µg/m³)",
-    y = "ARMIE PM2.5 (µg/m³)",
+    x = expression("Reference " * PM[2.5] * " (µg/m³)"),
+    y = expression("ARMIE " * PM[2.5] * " (µg/m³)"),
     color = "Comparison"
   ) +
-  theme_minimal() +
+  theme_bw() +
   scale_color_manual(values = c(
     "DustTrak" = "#E69F00",
     "SMPS + APS" = "#56B4E9"
@@ -826,7 +826,7 @@ p_scatter <- (p_uncal_AE | p_cal_AE) +
 
 p_scatter
 # Save them
-ggsave("plots/supplementary/scatter.png", plot = p_scatter, width = 8, height = 6, dpi = 600, bg = "white")
+ggsave("plots/supplementary/scatter.png", plot = p_scatter, width = 8, height = 8, dpi = 600, bg = "white")
 ```
 
 plot figure RE_scatter with relative error between ARMIE and comparison instrument (For supplementary)
@@ -844,13 +844,13 @@ p_uncal_RE <- by_sensor_data |>
   xlim(0, 300) +
   facet_wrap(~source) +
   labs(
-    title = "Relative error of ARMIE PM2.5 vs Reference PM2.5",
+    title = expression("Relative error of ARMIE " * PM[2.5] * " vs Reference " * PM[2.5]),
     subtitle = "Uncalibrated values from the ARMIE sensor",
-    x = "Reference PM2.5 (µg/m³)",
+    x = expression("Reference " * PM[2.5] * " (µg/m³)"),
     y = "Relative error (%)",
     color = "Comparison"
   ) +
-  theme_minimal() +
+  theme_bw() +
   scale_color_manual(values = c(
     "DustTrak" = "#E69F00",
     "SMPS + APS" = "#56B4E9"
@@ -866,13 +866,13 @@ p_cal_RE <- by_sensor_data |>
   xlim(0, 300) +
   facet_wrap(~source) +
   labs(
-    title = "Relative error of ARMIE PM2.5 vs Reference PM2.5",
+    title = expression("Relative error of ARMIE " * PM[2.5] * " vs Reference " * PM[2.5]),
     subtitle = "Calibrated values from the ARMIE sensor",
-    x = "Reference PM2.5 (µg/m³)",
+    x = expression("Reference " * PM[2.5] * " (µg/m³)"),
     y = "Relative error (%)",
     color = "Comparison"
   ) +
-  theme_minimal() +
+  theme_bw() +
   scale_color_manual(values = c(
     "DustTrak" = "#E69F00",
     "SMPS + APS" = "#56B4E9"
@@ -885,7 +885,7 @@ p_scatter_RE <- (p_uncal_RE | p_cal_RE) +
 p_scatter_RE
 
 # Save them
-ggsave("plots/supplementary/RE_scatter.png", plot = p_scatter_RE, width = 8, height = 6, dpi = 600, bg = "white")
+ggsave("plots/supplementary/RE_scatter.png", plot = p_scatter_RE, width = 8, height = 8, dpi = 600, bg = "white")
 
 by_sensor_data %>%
   filter(!is.finite(relative_error))
@@ -962,8 +962,11 @@ gtsave(table_2, "tables/table2.docx", overwrite = TRUE)
 ```{r, Bland altman plot with per-facet stats with loso by sensor without source specific LoA by sensor data}
 bland_altman_data <- by_sensor_data |>
   filter(PM2.5_ref >= 5) |>
-  mutate(sensor = factor(sensor)) |>
-  group_by(reference, method) |>
+  mutate(sensor = factor(sensor),
+         method = factor(method,
+           levels = c("Uncalibrated", "Calibrated"),
+           labels = c("Uncalibrated", "Calibrated"))) |>
+  group_by(reference) |>
   mutate(
     ref_val = PM2.5_ref,
     diff_val = error,
@@ -973,7 +976,7 @@ bland_altman_data <- by_sensor_data |>
   )
 
 BA_plot_uncal <- bland_altman_data |>
-  filter(method == "Uncalibrated") |>
+  filter(reference == "DustTrak") |>
   ggplot(aes(x = ref_val, y = diff_val, color = source)) +
   geom_point(alpha = 0.4) +
   geom_smooth(aes(group = 1), method = "lm", color = "black", se = TRUE, fullrange = TRUE) +
@@ -981,20 +984,18 @@ BA_plot_uncal <- bland_altman_data |>
   geom_hline(aes(yintercept = mean_diff + 1.96 * sd_diff), linetype = 3) +
   geom_hline(aes(yintercept = mean_diff - 1.96 * sd_diff), linetype = 3) +
   geom_hline(yintercept = 0, linetype = 2) +
-  xlim(0, 250) +
+  xlim(0, 400) +
   ylim(-200, 200) +
-  facet_wrap(~reference) +
+  facet_grid(~method) +
   labs(
-    # title = "Bland–Altman Plot of ARMIE vs Reference PM2.5 Concentrations",
-    subtitle = "Uncalibrated",
-    x = "Reference PM2.5 (µg/m³)",
-    y = "ARMIE PM2.5 − Reference PM2.5 (µg/m³)"
-  ) +
-  theme_minimal()
+  # subtitle = "Uncalibrated",
+  x = expression("DustTrak " * PM[2.5] * " (µg/m"^3 * ")"),
+  y = expression("ARMIE " * PM[2.5] * " − DustTrak " * PM[2.5] * " (µg/m"^3 * ")"))+
+  theme_bw()
 
 
 BA_plot_cal <- bland_altman_data |>
-  filter(method == "Calibrated") |>
+  filter(reference == "SMPS + APS") |>
   ggplot(aes(x = ref_val, y = diff_val, color = source)) +
   geom_point(alpha = 0.4) +
   geom_smooth(aes(group = 1), method = "lm", color = "black", se = TRUE, fullrange = TRUE) +
@@ -1002,16 +1003,14 @@ BA_plot_cal <- bland_altman_data |>
   geom_hline(aes(yintercept = mean_diff + 1.96 * sd_diff), linetype = 3, color = "#E69F00") +
   geom_hline(aes(yintercept = mean_diff - 1.96 * sd_diff), linetype = 3, color = "#E69F00") +
   geom_hline(yintercept = 0, linetype = 2) +
-  xlim(0, 250) +
+  xlim(0, 400) +
   ylim(-200, 200) +
-  facet_wrap(~reference) +
+  facet_grid( ~ method) +
   labs(
-    # title = "Bland–Altman Plot of ARMIE vs Reference PM2.5 Concentrations",
-    subtitle = "Calibrated",
-    x = "Reference PM2.5 (µg/m³)",
-    y = "ARMIE PM2.5 − Reference PM2.5 (µg/m³)"
-  ) +
-  theme_minimal()
+  # subtitle = "Uncalibrated",
+  x = expression("SMPS + APS " * PM[2.5] * " (µg/m"^3 * ")"),
+  y = expression("ARMIE " * PM[2.5] * " − SMPS + APS " * PM[2.5] * " (µg/m"^3 * ")"))+
+  theme_bw()
 
 # Cowplot: extract a single legend and glue it under the combined panels
 library(cowplot)
@@ -1025,7 +1024,7 @@ legend <- cowplot::get_legend(
 row <- cowplot::plot_grid(
   BA_plot_uncal + theme(legend.position = "none"),
   BA_plot_cal + theme(legend.position = "none"),
-  ncol = 2, align = "hv"
+  ncol = 1, align = "v"
 )
 
 # 3. Add the shared legend underneath
@@ -1037,8 +1036,7 @@ BA_plot <- cowplot::plot_grid(
 )
 
 BA_plot
-
-ggsave("plots/blandaltman_figure2.png", plot = BA_plot, width = 10, height = 6, dpi = 600, bg = "white")
+ggsave("plots/blandaltman_figure2.png", plot = BA_plot, width = 10, height = 10, dpi = 600, bg = "white")
 ```
 
 # Bland-altman plots for supplementary.
@@ -1066,22 +1064,28 @@ bland_altman_plot_spec_loa_uncal <- bland_altman_data_spec_loa %>%
   ggplot(aes(x = ref_val, y = diff_val, color = reference)) +
   geom_point(alpha = 0.4) +
   geom_smooth(method = "lm", se = TRUE) +
-  geom_hline(aes(yintercept = mean_diff, color = reference), linetype = 1) +
-  geom_hline(aes(yintercept = mean_diff + 1.96 * sd_diff, color = reference), linetype = 3) +
-  geom_hline(aes(yintercept = mean_diff - 1.96 * sd_diff, color = reference), linetype = 3) +
+  geom_hline(aes(yintercept = mean_diff), linetype = 1) +
+  geom_hline(aes(yintercept = mean_diff + 1.96 * sd_diff), linetype = 3) +
+  geom_hline(aes(yintercept = mean_diff - 1.96 * sd_diff), linetype = 3) +
   geom_hline(yintercept = 0, linetype = 2) +
   xlim(0, 400) +
   ylim(-200, 200) +
-  facet_wrap(source ~ method) +
-  labs(
-    #   title = "Bland–Altman Plot of ARMIE vs Reference PM2.5 Concentrations",
-    #   subtitle = "Calibrated ARMIE measurements (Leave one sensor out)",
-    x = "Reference PM2.5 (µg/m³)",
-    y = "ARMIE PM2.5 − Reference PM2.5 (µg/m³)"
+  facet_wrap(~source, ncol = 1, strip.position = "right") +
+  theme_bw() +
+  theme(
+    strip.placement  = "outside",
+    strip.background = element_blank(),
+    strip.text       = element_blank(),        # hide source labels on LEFT plot
+    plot.subtitle    = element_text(hjust = 0.5)
   ) +
-  theme_minimal() +
+  labs(
+    subtitle = "Uncalibrated",
+    x = expression("Reference " * PM[2.5] * " (µg/m³)"),
+    y = expression("ARMIE " * PM[2.5] * " − Reference " * PM[2.5] * " (µg/m³)"),
+    color = "Comparison"
+  ) +
   scale_color_manual(values = c(
-    "DustTrak" = "#E69F00",
+    "DustTrak"   = "#E69F00",
     "SMPS + APS" = "#56B4E9"
   ))
 
@@ -1091,37 +1095,40 @@ bland_altman_plot_spec_loa_cal <- bland_altman_data_spec_loa %>%
   ggplot(aes(x = ref_val, y = diff_val, color = reference)) +
   geom_point(alpha = 0.4) +
   geom_smooth(method = "lm", se = TRUE) +
-  geom_hline(aes(yintercept = mean_diff, color = reference), linetype = 1) +
-  geom_hline(aes(yintercept = mean_diff + 1.96 * sd_diff, color = reference), linetype = 3) +
-  geom_hline(aes(yintercept = mean_diff - 1.96 * sd_diff, color = reference), linetype = 3) +
+  geom_hline(aes(yintercept = mean_diff), linetype = 1) +
+  geom_hline(aes(yintercept = mean_diff + 1.96 * sd_diff), linetype = 3) +
+  geom_hline(aes(yintercept = mean_diff - 1.96 * sd_diff), linetype = 3) +
   geom_hline(yintercept = 0, linetype = 2) +
   xlim(0, 400) +
   ylim(-200, 200) +
-  facet_wrap(source ~ method) +
-  labs(
-    # title = "Bland–Altman Plot of ARMIE vs Reference PM2.5 Concentrations",
-    # subtitle = "Calibrated ARMIE measurements (Leave one sensor out)",
-    x = "Reference PM2.5 (µg/m³)",
-    y = "ARMIE PM2.5 − Reference PM2.5 (µg/m³)"
+  facet_wrap(~source, ncol = 1, strip.position = "right") +
+  theme_bw() +
+  theme(
+    strip.placement  = "outside",
+    strip.background = element_blank(),
+    strip.text.y.right = element_text(angle = 0), # show source labels once (on RIGHT plot)
+    plot.subtitle    = element_text(hjust = 0.5)
   ) +
-  theme_minimal() +
+  labs(
+    subtitle = "Calibrated",
+    x = expression("Reference " * PM[2.5] * " (µg/m³)"),
+    y = expression("ARMIE " * PM[2.5] * " − Reference " * PM[2.5] * " (µg/m³)"),
+    color = "Comparison"
+  ) +
   scale_color_manual(values = c(
-    "DustTrak" = "#E69F00",
+    "DustTrak"   = "#E69F00",
     "SMPS + APS" = "#56B4E9"
   ))
 
-BA_plot_source_by_sensor <- (bland_altman_plot_spec_loa_uncal | bland_altman_plot_spec_loa_cal) +
-  plot_layout(guides = "collect") &
-  theme(legend.position = "bottom") &
-  labs(
-    x = "Reference PM2.5 (µg/m³)",
-    y = "ARMIE PM2.5 − Reference PM2.5 (µg/m³)"
-  )
 
+BA_plot_source_by_sensor <-
+  (bland_altman_plot_spec_loa_uncal | bland_altman_plot_spec_loa_cal) +
+  plot_layout(guides = "collect") &
+  theme(legend.position = "bottom")
 
 BA_plot_source_by_sensor
 # Save them in supplementary
-ggsave("plots/supplementary/bland_altman_source_specific_Loa_by_sensor.png", plot = BA_plot_source_by_sensor, width = 8, height = 6, dpi = 600, bg = "white")
+ggsave("plots/supplementary/bland_altman_source_specific_Loa_by_sensor.png", plot = BA_plot_source_by_sensor, width = 8, height = 12, dpi = 600, bg = "white")
 ```
 
 #Plot boxplot with relative errors (Figure 3) not including clean air and non-finite relative errors
@@ -1133,35 +1140,37 @@ ggsave("plots/supplementary/bland_altman_source_specific_Loa_by_sensor.png", plo
 boxplot_data <- by_sensor_data |>
   filter(source != "Clean Air") |>
   mutate(
-    PM25_group = if_else(PM2.5_pred <= 5, "PM2.5 =< 5 µg/m³", "PM2.5 > 5 µg/m³")
+    method = factor(method, levels = c("Uncalibrated", "Calibrated")),
+    PM25_group = if_else(PM2.5_pred <= 5, "=< 5", "> 5")
   )
 
 # Combined boxplot for uncalibrated and calibrated
 p_box_RE <- boxplot_data |>
   ggplot(aes(x = source, y = relative_error, fill = PM25_group)) +
-  geom_boxplot(outlier.alpha = 0.3) +
+  geom_boxplot(outlier.alpha = 0.5) +
   facet_wrap(reference ~ method) +
   scale_fill_manual(
-    values = c("PM2.5 =< 5 µg/m³" = "#009E73", "PM2.5 > 5 µg/m³" = "#CC79A7")
+    values = c("=< 5" = "#009E73", "> 5" = "#CC79A7")
   ) +
   coord_cartesian(ylim = c(-200, 600)) +
-  theme_minimal() +
+  theme_bw() +
   theme(
     axis.text.x = element_text(hjust = 0.5, vjust = 1),
     legend.position = "bottom",
-    legend.box = "horizontal"
+    legend.box = "horizontal",
+    panel.spacing.x = unit(1, "cm")
   ) +
   labs(
     # title = "Distribution of Relative Error by Source and PM2.5 Concentration Range",
     # subtitle = "Comparison of uncalibrated and calibrated ARMIE measurements",
     x = "Source type",
     y = "Relative error (%)",
-    fill = "ARMIE PM2.5"
+    fill = expression("ARMIE " * PM[2.5] * " µg/m³")
   )
 
 p_box_RE
 # save the combined boxplot
-ggsave("plots/figure3_RE_boxplot_combined.png", plot = p_box_RE, width = 10, height = 8, dpi = 600, bg = "white")
+ggsave("plots/figure3_RE_boxplot_combined.png", plot = p_box_RE, width = 10, height = 10, dpi = 600, bg = "white")
 ```
 
 # Boxplot with relative errors including clean air for supplementary
@@ -1170,7 +1179,7 @@ ggsave("plots/figure3_RE_boxplot_combined.png", plot = p_box_RE, width = 10, hei
 # Create a variable splitting PM2.5_ref into two groups
 boxplot_data <- by_sensor_data |>
   mutate(
-    PM25_group = if_else(PM2.5_pred <= 5, "PM2.5 =< 5 µg/m³", "PM2.5 > 5 µg/m³")
+    PM25_group = if_else(PM2.5_pred <= 5, "=< 5", "> 5")
   )
 
 # Combined boxplot for uncalibrated and calibrated
@@ -1179,7 +1188,7 @@ p_box_RE_sup <- boxplot_data |>
   geom_boxplot(outlier.alpha = 0.3) +
   facet_wrap(reference ~ method) +
   scale_fill_manual(
-    values = c("PM2.5 =< 5 µg/m³" = "#009E73", "PM2.5 > 5 µg/m³" = "#CC79A7")
+    values = c("=< 5" = "#009E73", "> 5" = "#CC79A7")
   ) +
   coord_cartesian(ylim = c(-200, 600)) +
   theme_minimal() +
@@ -1193,12 +1202,12 @@ p_box_RE_sup <- boxplot_data |>
     subtitle = "Comparison of uncalibrated and calibrated ARMIE measurements",
     x = "Source type",
     y = "Relative error (%)",
-    fill = "ARMIE PM2.5"
+    fill = expression("ARMIE " * PM[2.5] * "µg/m³")
   )
 
 p_box_RE_sup
 # save the combined boxplot
-ggsave("plots/supplementary/RE_boxplot_supplementary.png", plot = p_box_RE_sup, width = 10, height = 8, dpi = 600, bg = "white")
+ggsave("plots/supplementary/RE_boxplot_supplementary.png", plot = p_box_RE_sup, width = 10, height = 10, dpi = 600, bg = "white")
 ```
 
 # Supplementary table describing those points of relative error not included in the Box plot
@@ -1399,20 +1408,26 @@ bland_altman_data_spec_loa_by_source_uncal <- bland_altman_data_spec_loa_by_sour
   geom_hline(aes(yintercept = loa_high, color = reference), linetype = 3) +
   geom_hline(aes(yintercept = loa_low, color = reference), linetype = 3) +
   geom_hline(yintercept = 0, linetype = 2) +
-  xlim(0, 400) +
+  xlim(0, 250) +
   ylim(-200, 200) +
-  facet_wrap(~source) +
+  facet_wrap(~source, ncol = 1, strip.position = "right") +
+  theme_bw() +
+  theme(
+    strip.placement = "outside",
+    strip.background = element_blank(),
+    strip.text = element_blank(),
+    plot.subtitle = element_text(hjust = 0.5)
+  ) +
   labs(
     subtitle = "Uncalibrated",
-    x = "Reference PM2.5 (µg/m³)",
-    y = "ARMIE PM2.5 − Reference PM2.5 (µg/m³)",
+    x = expression("Comparison " * PM[2.5] * " (µg/m³)"),
+    y = expression("ARMIE " * PM[2.5] * " − Comparison " * PM[2.5] * " (µg/m³)"),
     color = "Comparison"
   ) +
-  theme_minimal() +
   scale_color_manual(values = c(
     "DustTrak" = "#E69F00",
     "SMPS + APS" = "#56B4E9"
-  ))
+  )) 
 
 bland_altman_data_spec_loa_by_source_cal <- bland_altman_data_spec_loa_by_source %>%
   left_join(summary_stats, by = c("source", "reference", "method")) %>%
@@ -1424,16 +1439,22 @@ bland_altman_data_spec_loa_by_source_cal <- bland_altman_data_spec_loa_by_source
   geom_hline(aes(yintercept = loa_high, color = reference), linetype = 3) +
   geom_hline(aes(yintercept = loa_low, color = reference), linetype = 3) +
   geom_hline(yintercept = 0, linetype = 2) +
-  xlim(0, 400) +
+  xlim(0, 250) +
   ylim(-200, 200) +
-  facet_wrap(~source) +
+  facet_wrap(~source, ncol = 1, strip.position = "right") + 
+  theme_bw() +
+  theme(
+    strip.placement = "outside",
+    strip.background = element_blank(),
+    strip.text.y.right = element_text(angle = 0),
+    plot.subtitle = element_text(hjust = 0.5)
+  ) +
   labs(
     subtitle = "Calibrated",
-    x = "Reference PM2.5 (µg/m³)",
-    y = "ARMIE PM2.5 − Reference PM2.5 (µg/m³)",
+    x = expression("Comparison " * PM[2.5] * " (µg/m³)"),
+    y = expression("ARMIE " * PM[2.5] * " − Comparison " * PM[2.5] * " (µg/m³)"),
     color = "Comparison"
   ) +
-  theme_minimal() +
   scale_color_manual(values = c(
     "DustTrak" = "#E69F00",
     "SMPS + APS" = "#56B4E9"
@@ -1445,14 +1466,13 @@ BA_plot_source <- (
   plot_layout(guides = "collect") &
   theme(legend.position = "bottom") &
   labs(
-    x = "Reference PM2.5 (µg/m³)",
-    y = "ARMIE PM2.5 − Reference PM2.5 (µg/m³)"
+    x = expression("Comparison " * PM[2.5] * " (µg/m³)")
+    # y = expression("ARMIE " * PM[2.5] * " − Reference " * PM[2.5] * " (µg/m³)"),
   )
-
 
 BA_plot_source
 
-ggsave("plots/figure4_bland_altman_source_specific_Loa_by_source.png", plot = BA_plot_source, width = 8, height = 6, dpi = 600, bg = "white")
+ggsave("plots/figure4_bland_altman_source_specific_Loa_by_source.png", plot = BA_plot_source, width = 8, height = 12, dpi = 600, bg = "white")
 ```
 
 ### Supplementary
@@ -1467,7 +1487,8 @@ bland_altman_data |>
   geom_smooth(method = "lm", se = TRUE, color = "#E69F00") +
   labs(
     title = "Data from Bland-Altman Plot: Uncalibrated ARMIE vs DustTrak",
-    x = "Reference PM2.5 (µg/m³)", y = "|Difference| (µg/m³)"
+    x = expression("Reference " * PM[2.5] * " (µg/m³)"), 
+    y = "|Difference| (µg/m³)"
   )
 
 bland_altman_data |>
@@ -1477,7 +1498,8 @@ bland_altman_data |>
   geom_smooth(method = "loess", color = "#E69F00") +
   labs(
     title = "Data from Bland-Altman Plot: Calibrated ARMIE vs DustTrak",
-    x = "Reference PM2.5 (µg/m³)", y = "|Difference| (µg/m³)"
+    x = expression("Reference " * PM[2.5] * " (µg/m³)"), 
+    y = "|Difference| (µg/m³)"
   )
 
 bland_altman_data |>
@@ -1487,7 +1509,8 @@ bland_altman_data |>
   geom_smooth(method = "loess", color = "#56B4E9") +
   labs(
     title = "Data from Bland-Altman Plot: Uncalibrated ARMIE vs SMPS + APS",
-    x = "Reference PM2.5 (µg/m³)", y = "|Difference| (µg/m³)"
+    x = expression("Reference " * PM[2.5] * " (µg/m³)"), 
+    y = "|Difference| (µg/m³)"
   )
 
 bland_altman_data |>
@@ -1497,7 +1520,8 @@ bland_altman_data |>
   geom_smooth(method = "loess", color = "#56B4E9") +
   labs(
     title = "Data from Bland-Altman Plot: Calibrated ARMIE vs SMPS + APS",
-    x = "Reference PM2.5 (µg/m³)", y = "|Difference| (µg/m³)"
+    x = expression("Reference " * PM[2.5] * " (µg/m³)"), 
+    y = "|Difference| (µg/m³)"
   )
 ```
 
