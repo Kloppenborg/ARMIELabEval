@@ -686,11 +686,11 @@ table1_data <- all_data |>
     source = fct_recode(
       source,
       "Candles" = "candles",
-      "Candles High RH\n(70 - 80%)" = "candles_high_RH",
+      "Candles High RH\n(70 − 80%)" = "candles_high_RH",
       "Cigarette Smoke" = "cigarette",
       "Clean Air" = "clean_air",
       "Cooking" = "cooking",
-      "Cooking High RH\n(70 - 80%)" = "cooking_high_RH"
+      "Cooking High RH\n(70 − 80%)" = "cooking_high_RH"
     )
   ) |>
   group_by(source, instrument) |>
@@ -772,11 +772,11 @@ figure1_long <- all_data |>
     source = fct_recode(
       source,
       "Candles" = "candles",
-      "Candles High RH\n(70 - 80%)" = "candles_high_RH",
+      "Candles High RH\n(70 − 80%)" = "candles_high_RH",
       "Cigarette Smoke" = "cigarette",
       "Clean Air" = "clean_air",
       "Cooking" = "cooking",
-      "Cooking High RH\n(70 - 80%)" = "cooking_high_RH"
+      "Cooking High RH\n(70 − 80%)" = "cooking_high_RH"
     )
   )
 ```
@@ -880,11 +880,11 @@ by_sensor_data <- bind_rows(
   source = fct_recode(
     source,
     "Candles" = "candles",
-    "Candles\nHigh RH\n(70 - 80%)" = "candles_high_RH",
+    "Candles\nHigh RH\n(70 − 80%)" = "candles_high_RH",
     "Cigarette\nSmoke" = "cigarette",
     "Clean Air" = "clean_air",
     "Cooking" = "cooking",
-    "Cooking\nHigh RH\n(70 - 80%)" = "cooking_high_RH"
+    "Cooking\nHigh RH\n(70 − 80%)" = "cooking_high_RH"
   ),
   reference = factor(reference),
   reference = fct_recode(
@@ -1419,11 +1419,11 @@ by_source_data <- bind_rows(
   source = fct_recode(
     source,
     "Candles" = "candles",
-    "Candles\nHigh RH\n(70 - 80%)" = "candles_high_RH",
+    "Candles\nHigh RH\n(70 − 80%)" = "candles_high_RH",
     "Cigarette\nSmoke" = "cigarette",
     "Clean Air" = "clean_air",
     "Cooking" = "cooking",
-    "Cooking\nHigh RH\n(70 - 80%)" = "cooking_high_RH"
+    "Cooking\nHigh RH\n(70 − 80%)" = "cooking_high_RH"
   ),
   reference = factor(reference),
   reference = fct_recode(
@@ -1551,7 +1551,7 @@ bland_altman_data_spec_loa_by_source_uncal <- bland_altman_data_spec_loa_by_sour
   labs(
     subtitle = "Uncalibrated",
     x = expression("Comparison " * PM[2.5] * " (µg/m³)"),
-    y = expression("ARMIE " * PM[2.5] * " − Comparison " * PM[2.5] * " (µg/m³)"),
+    y = expression("ARMIE " * PM[2.5] * " - Comparison " * PM[2.5] * " (µg/m³)"),
     color = "Comparison"
   ) +
   scale_color_manual(values = c(
